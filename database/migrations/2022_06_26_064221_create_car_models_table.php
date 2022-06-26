@@ -15,7 +15,8 @@ class CreateCarModelsTable extends Migration
     {
         Schema::create('car_models', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('ar_name');
+            $table->string('en_name');
             $table->longText('image')->nullable();
             $table->timestamps();
         });

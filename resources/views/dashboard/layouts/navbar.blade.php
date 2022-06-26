@@ -36,6 +36,22 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon-directions_car nav-icon"></i>
+                     موديلات السيارات والسيارات
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <li>
+                        <a class="dropdown-item" href="{{ URL::route('dashboard.car-model.create') }}">اضافة موديل سيارة</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ URL::route('dashboard.car-model.index') }}">كل موديلات السيارات</a>
+                    </li>
+
+                </ul>
+            </li>
+
         </ul>
     </div>
 </nav>

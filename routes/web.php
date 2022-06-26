@@ -20,7 +20,12 @@ Route::get('/', function () {
 Route::prefix('/dashboard')->name('dashboard.')->namespace('DASHBOARD')->group(function(){
     Route::resource('/region','RegionController');
     Route::get('/region/delete/all','RegionController@deleteAll')->name('region.delete.all');
+
     Route::resource('/garage','GarageController');
     Route::get('/garage/delete/all','GarageController@deleteAll')->name('garage.delete.all');
     Route::post('/garage/search','GarageController@search')->name('garage.search');
+
+    Route::resource('/car-model','CarModelController');
+    Route::get('/car-model/delete/all','CarModelController@deleteAll')->name('car_model.delete.all');
+    Route::post('/car-model/search','CarModelController@search')->name('car_model.search');
 });

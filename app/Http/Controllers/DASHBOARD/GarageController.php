@@ -32,6 +32,8 @@ class GarageController extends Controller
     }
     public function index()
     {
+        Session::forget('search');
+        Session::forget('search_name');
         $rows =  $this->garageDataResource->getAll();
         return view('dashboard.garage.index',compact('rows'));
     }
@@ -110,6 +112,8 @@ class GarageController extends Controller
     public function search(Request $request)
     {
         $rows = $this->garageDataResource->garageSearch($request->search);
+        Session::flash('search','search');
+        Session::flash('search_name',$request->search);
         return view('dashboard.garage.index',compact('rows'));
     }
 }

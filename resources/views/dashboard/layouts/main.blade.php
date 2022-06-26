@@ -73,8 +73,12 @@
             }
 
 
-            .custom-navbar ul.navbar-nav li.nav-item:hover > a, .custom-navbar ul.navbar-nav li.nav-item.show > a{
-                color: #000 !important;
+            .custom-navbar ul.navbar-nav li.nav-item:hover > a, .custom-navbar ul.navbar-nav li.nav-item.show > a,
+            .custom-navbar ul.navbar-nav li.nav-item .nav-link{
+                color: #000 ;
+            }
+            .active-page{
+                color: #fff !important;
             }
 
             .quick-settings-box .quick-settings-body .quick-setting-list > h6.title{
@@ -82,6 +86,9 @@
             }
             td,th{
                 font-size: .8rem;
+            }
+            .custom-navbar ul.navbar-nav li.nav-item:hover{
+                background-color: #fff !important;
             }
 
         </style>
