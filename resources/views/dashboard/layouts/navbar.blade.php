@@ -57,6 +57,23 @@
 
                 </ul>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon-devices_other nav-icon"></i>
+                    أجهزة تتبع السيارات
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <li>
+                        <a class="dropdown-item" href="{{ URL::route('dashboard.device.create') }}">اضافة جهاز تتبع لسيارة</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ URL::route('dashboard.device.index') }}">كل أجهزة تتبع السيارات</a>
+                    </li>
+
+
+                </ul>
+            </li>
+
 
         </ul>
     </div>

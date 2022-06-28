@@ -35,5 +35,12 @@ Route::prefix('/dashboard')->name('dashboard.')->namespace('DASHBOARD')->group(f
     Route::post('/car/search','CarController@search')->name('car.search');
 
     Route::get('/car/{id}/images','CarImageController@index')->name('car.image');
+    Route::post('/car/{id}/create','CarImageController@store')->name('car.image.store');
+    Route::delete('/car/{id}/destroy','CarImageController@destroy')->name('car.image.destroy');
+
+    Route::resource('/device','CarDeviceController');
+    Route::get('/device/delete/all','CarDeviceController@deleteAll')->name('device.delete.all');
+    Route::post('/device/search','CarDeviceController@search')->name('device.search');
+
 
 });

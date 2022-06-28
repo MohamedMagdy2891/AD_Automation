@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.main')
-@push('title') ماركات السيارات@endpush
-@push('header') كل ماركات السيارات@endpush
+@push('title') كل السيارات @endpush
+@push('header') كل السيارات @endpush
 @section('content')
     <div class="row gutters">
         <div class="container-fluid">
@@ -37,6 +37,7 @@
                                     <th> الموديل </th>
                                     <th> ناقل الحركة </th>
                                     <th> الحراج </th>
+                                    <th> حالة العربية </th>
                                     <th>العمليات</th>
 
                                 </tr>
@@ -54,6 +55,10 @@
                                             <td>{{ $row->car_model_year }}</td>
                                             <td>{{ $transmissions[$row->car_type]['ar_name'] }}</td>
                                             <td>{{ $row->Garage->ar_garage }} ( {{ $row->Garage->Region->ar_name }} )</td>
+                                            <td @if($statuss[$row->status]['id'] == 0) class="bg-info text-light"
+                                                @elseif($statuss[$row->status]['id'] == 1) class="bg-success text-light"
+                                                @else class="bg-danger text-light" @endif>
+                                                {{ $statuss[$row->status]['ar_name'] }}</td>
 
                                             <td>
                                                 <a class="btn btn-warning btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.car.image',$row->id) }}"><span class="w-100 icon-image text-light" style="font-size: .8rem"></span></a>
@@ -72,7 +77,7 @@
                                     @endforeach
                                 @else
                                     <tr class="text-center">
-                                        <td colspan="9" class="text-bold">لا يوجد اى سيارات مضافة حتي الان</td>
+                                        <td colspan="10" class="text-bold">لا يوجد اى سيارات مضافة حتي الان</td>
                                     </tr>
                                 @endif
                             </tbody>
