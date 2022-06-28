@@ -28,4 +28,12 @@ Route::prefix('/dashboard')->name('dashboard.')->namespace('DASHBOARD')->group(f
     Route::resource('/car-model','CarModelController');
     Route::get('/car-model/delete/all','CarModelController@deleteAll')->name('car_model.delete.all');
     Route::post('/car-model/search','CarModelController@search')->name('car_model.search');
+
+
+    Route::resource('/car','CarController');
+    Route::get('/car/delete/all','CarController@deleteAll')->name('car.delete.all');
+    Route::post('/car/search','CarController@search')->name('car.search');
+
+    Route::get('/car/{id}/images','CarImageController@index')->name('car.image');
+
 });

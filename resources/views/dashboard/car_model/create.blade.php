@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.main')
-@push('title') اضافة موديل سيارة@endpush
-@push('header') اضافة موديل سيارة@endpush
+@push('title') اضافة ماركة سيارة@endpush
+@push('header') اضافة ماركة سيارة@endpush
 @section('content')
 
 <div class="row gutters">
@@ -8,7 +8,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header bg-info">
-                <div class="card-title text-center text-light pb-1">اضافة موديل سيارة جديد</div>
+                <div class="card-title text-center text-light pb-1">اضافة ماركة سيارة جديد</div>
             </div>
             <form class="card-body" action="{{ URL::route('dashboard.car-model.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf

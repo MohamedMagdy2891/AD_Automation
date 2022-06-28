@@ -72,7 +72,12 @@
                 color : #543a79 !important;
             }
 
-
+            .custom-navbar ul.navbar-nav li.nav-item .nav-link{
+                border-right: 0px !important;
+            }
+            .custom-navbar ul.navbar-nav li.nav-item .nav-link:hover{
+                background-color: #fbc112 !important;
+            }
             .custom-navbar ul.navbar-nav li.nav-item:hover > a, .custom-navbar ul.navbar-nav li.nav-item.show > a,
             .custom-navbar ul.navbar-nav li.nav-item .nav-link{
                 color: #000 ;

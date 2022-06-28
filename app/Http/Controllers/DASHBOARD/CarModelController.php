@@ -17,12 +17,12 @@ class CarModelController extends Controller
     public function message()
     {
         return [
-            'ar_name.required' => 'اسم موديل السيارة باللغة العربية مطلوب',
-            'ar_name.min' => 'اسم موديل السيارة باللغة العربية يجب ان يجتوى على أكثر من 3 أحرف',
-            'en_name.required' => 'اسم موديل السيارة باللغة الانجليزية مطلوب',
-            'en_name.min' => 'اسم موديل السيارة باللغة الانجليزية يجب ان يجتوى على أكثر من 3 أحرف',
-            'image.required' => 'يجب ارفاق صورة موديل السيارة',
-            'image.mimes' => 'صورة موديل السيارة يجب ان تكون بصيغة png , jpg , jpeg فقط',
+            'ar_name.required' => 'اسم ماركة السيارة باللغة العربية مطلوب',
+            'ar_name.min' => 'اسم ماركة السيارة باللغة العربية يجب ان يجتوى على أكثر من 3 أحرف',
+            'en_name.required' => 'اسم ماركة السيارة باللغة الانجليزية مطلوب',
+            'en_name.min' => 'اسم ماركة السيارة باللغة الانجليزية يجب ان يجتوى على أكثر من 3 أحرف',
+            'image.required' => 'يجب ارفاق صورة ماركة السيارة',
+            'image.mimes' => 'صورة ماركة السيارة يجب ان تكون بصيغة png , jpg , jpeg فقط',
         ];
     }
     public function index()
@@ -46,7 +46,7 @@ class CarModelController extends Controller
         ],$this->message());
 
         $row = $this->carModelDataResource->createOne($request->ar_name,$request->en_name,$request->image);
-        Session::flash('success','تم اضافة موديل السيارة : '.$row->ar_name.' بنجاح');
+        Session::flash('success','تم اضافة ماركة السيارة : '.$row->ar_name.' بنجاح');
         return redirect()->route('dashboard.car-model.index');
 
     }
@@ -72,7 +72,7 @@ class CarModelController extends Controller
             'image' => 'nullable|mimes:png,jpg,jpeg,JPG,JPEG',
         ],$this->message());
         $row = $this->carModelDataResource->updateOne($id,$request->ar_name,$request->en_name,$request->image);
-        $row != null ?  Session::flash('success','تم تعديل موديل السيارة : '.$row->ar_name.' بنجاح') : Session::flash('failed','لم يتم التعديل في موديل السيارة : '.$request->ar_name.' لعدوم التغيير فى البيانات');
+        $row != null ?  Session::flash('success','تم تعديل ماركة السيارة : '.$row->ar_name.' بنجاح') : Session::flash('failed','لم يتم التعديل في موديل السيارة : '.$request->ar_name.' لعدوم التغيير فى البيانات');
         return redirect()->route('dashboard.car-model.edit',$id);
 
     }
@@ -80,14 +80,14 @@ class CarModelController extends Controller
     public function destroy($id)
     {
         $row =  $this->carModelDataResource->deleteOne($id);
-        Session::flash('success','تم حذف بيانات موديل السيارة : '.$row);
+        Session::flash('success','تم حذف بيانات ماركة السيارة : '.$row);
         return redirect()->route('dashboard.car-model.index');
     }
 
     public function deleteAll()
     {
         $row =  $this->carModelDataResource->deleteAllData();
-        Session::flash('success','تم حذف بيانات كل موديلات السيارات');
+        Session::flash('success','تم حذف بيانات كل ماركة السيارات');
         return redirect()->route('dashboard.car-model.index');
     }
 
