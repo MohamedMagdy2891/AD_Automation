@@ -43,4 +43,10 @@ Route::prefix('/dashboard')->name('dashboard.')->namespace('DASHBOARD')->group(f
     Route::post('/device/search','CarDeviceController@search')->name('device.search');
 
     Route::resource('/category','CarDeviceController');
+    Route::resource('/user','UserController');
+    Route::post('/user/search','UserController@search')->name('user.search');
+    Route::get('/user/delete/all','UserController@deleteAll')->name('user.delete.all');
+
+    Route::resource('/carstatuses','CarStatusController');
+    Route::get('/carstatuses/delete/all','CarStatusController@deleteAll')->name('carstatuses.delete.all');
 });
