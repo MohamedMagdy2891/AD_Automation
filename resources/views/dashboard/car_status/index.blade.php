@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.main')
 @push('title')حالات السيارات    @endpush
-@push('header') @endpush
+@push('header')  حالات السيارات@endpush
 @section('content')
     <div class="row gutters">
         <div class="container-fluid">
