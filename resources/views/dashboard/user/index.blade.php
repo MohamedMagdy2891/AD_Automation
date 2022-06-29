@@ -10,15 +10,13 @@
                     <form action="{{ URL::route('dashboard.user.search') }}" method="post" style="display: inline">
                         @csrf
                         @method('POST')
-                        <input  type="text" @if(session()->has('search')) value="{{ session()->get('search_name') }}" @endif name="search" style="border-radius: 50px;display: inline;width:80%" class="form-control p-0 pt-1 text-center" placeholder="ابحث بالإسم  ">
+                        <input  type="text" @if(session()->has('search')) value="{{ session()->get('search_name') }}" @endif name="search" style="border-radius: 50px;display: inline;width:80%" class="form-control p-0 pt-1 text-center" placeholder="ابحث باسم المستخدم">
                         @if(session()->has('search'))
                             <a style="display: inline;border-radius: 100px" class="btn btn-primary pr-2 pl-2 pt-1 pb-0 m-0" href="{{ URL::route('dashboard.user.index') }}" ><span style="font-size: 1rem" class="icon-close"></span></a>
                         @endif
                     </form>
                 </div>
                 <div class="col-md-4 text-right mb-2"  >
-                    <a id="addUser" style="display: inline" class="btn btn-primary btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.user.create') }}">إضافة مستخدم جديد  <span class="w-100  text-light" style="font-size: .8rem"><i class="icon-plus"></i></span></a>
-
                     <a id="delete" style="display: inline" class="btn btn-danger btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.user.delete.all') }}">حذف الكل <span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></a>
 
                 </div>
