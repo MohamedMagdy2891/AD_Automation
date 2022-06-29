@@ -11,8 +11,7 @@ class CarCategory extends Model
 
     protected $fillable = [
         'ar_name',
-        'en_name',
-        'image'
+        'en_name'
     ];
 
     protected $hidden = [

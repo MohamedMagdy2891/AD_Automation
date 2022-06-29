@@ -17,7 +17,6 @@ class CreateCarCategoriesTable extends Migration
             $table->id();
             $table->string('ar_name');
             $table->string('en_name');
-            $table->longText('image');
             $table->timestamps();
         });
     }
