@@ -3,21 +3,25 @@
 namespace App\Http\Controllers\DASHBOARD;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DASHBOARD\DataResources\CarStatusDataResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\CarStatus;
 
 class CarStatusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public $carStatusDataResource;
+    public function __construct()
+    {
+        $this->carStatusDataResource = new CarStatusDataResource();
+    }
+
+
     public function message()
     {
         return [
-            'ar_name.required' =>'حالة السيارةباللغة العربية  مطلوبة',
+            'ar_name.required' =>'حالة السيارة باللغة العربية  مطلوبة',
             'en_name.required' => 'حالة السيارة باللغة الإنجليزية مطلوبة  ',
             'ar_name.min'=>'يجب أن تكون عدد الأحرف 3 أحرف على الأقل',
             'en_name.min'=>'يجب أن تكون عدد الأحرف 3 أحرف على الأقل'
@@ -25,32 +29,22 @@ class CarStatusController extends Controller
     }
     public function index()
     {
-        //
-        $statuses=CarStatus::all();
+
+        $statuses=  $this->carStatusDataResource->getAll();
         return view('dashboard.car_status.index',compact('statuses'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+
         return view('dashboard.car_status.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
     public function store(Request $request)
     {
-        //
+
         $request->validate([
             'ar_name' => 'required|min:3',
             'en_name' => 'required|min:3'
@@ -61,31 +55,17 @@ class CarStatusController extends Controller
         $row->en_name = $request->en_name;
         $row->save();
 
+        $row = $this->carStatusDataResource->createOne($request->ar_name,$request->en_name);
+
         Session::flash('success','تم اضافة حالة السيارة : '.$row->ar_name.' بنجاح');
         return redirect()->route('dashboard.carstatuses.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
-        $carStatuses = CarStatus::where('id',$id)->first();
+
+        $carStatuses = $this->carStatusDataResource->getOne($id);
         return view('dashboard.car_status.edit',compact('carStatuses'));
     }
   /**
