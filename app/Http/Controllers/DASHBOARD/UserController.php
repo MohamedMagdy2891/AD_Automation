@@ -72,8 +72,6 @@ class UserController extends Controller
         $row->email = $email;
         $row->type = $type;
         $row->image=$this->Image($row,$folder,$image);
-
-        $row->password=$password;
         $row->save();
         return $row;
     }
@@ -128,14 +126,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateOne($id,$name,$password,$phone,$email,$type)
+    public function updateOne($id,$name,$password,$phone,$email,$type,$image)
     {
         $row = User::findOrFail($id);
-        if($row->name != $name || $row->phone != $phone || $row->email != $email|| $row->type != $type||$row->password != $password ){
+        $folder= 'assets/users-images';
+        if($row->name != $name || $row->phone != $phone ||$row->password != $password|| $row->email != $email|| $row->type != $type||$row->image != $image ){
             $row->name = $name;
             $row->phone = $phone;
             $row->password = $password;
             $row->email = $email;
+            $row->image=$this->Image($row,$folder,$image);
             $row->type = $type;
             $row->update();
             return $row;
@@ -150,10 +150,11 @@ class UserController extends Controller
             'name' => 'required|min:3',
             'phone' => 'required|min:10',
             'email' => 'required|email',
+            'image' => 'required|mimes:jpg,jpeg,png',
             'type' => 'required'
         ],$this->message());
         $password = Hash::make($request->password);
-        $row = $this->updateOne($id,$request->name,$password,$request->phone,$request->email,$request->type);
+        $row = $this->updateOne($id,$request->name,$password,$request->phone,$request->email,$request->type,$request->image);
 
         $row != null ?  Session::flash('success','تم تعديل  بيانات المستخدم : '.$row->name.' بنجاح') : Session::flash('failed','لم يتم التعديل في بيانات المستخدم : '.$request->name);
         return redirect()->route('dashboard.user.edit',$id);
@@ -170,6 +171,9 @@ class UserController extends Controller
     public function deleteOne($id)
     {
         $row = User::findOrFail($id);
+        if($row->image != null){
+            unlink($row->image);
+        }
         $name = $row->name;
         $row->delete();
         return $name;

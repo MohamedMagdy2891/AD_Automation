@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.main')
 @push('title')حالات السيارات    @endpush
-@push('header') @endpush
+@push('header')  حالات السيارات@endpush
 @section('content')
     <div class="row gutters">
         <div class="container-fluid">
@@ -40,7 +40,6 @@
 
 
                                             <td>
-                                                {{-- <a class="btn btn-success btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.carstatuses.show', $row->id ) }}"><span class="icon-eye text-light" style="font-size: .8rem"></span></a> --}}
                                                 <a class="btn btn-info btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.carstatuses.edit',$row->id) }}"><span class="w-100 icon-pencil text-light" style="font-size: .8rem"></span></a>
                                                 <form  style="display: inline" action="{{ URL::route('dashboard.carstatuses.destroy',$row->id) }}" method="POST">
                                                     @csrf
