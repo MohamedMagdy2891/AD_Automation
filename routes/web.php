@@ -43,5 +43,5 @@ Route::prefix('/dashboard')->name('dashboard.')->namespace('DASHBOARD')->group(f
     Route::post('/device/search','CarDeviceController@search')->name('device.search');
 
     Route::resource('/category','CarDeviceController');
-
+    Route::resource('/category2','CarDeviceController');
 });
