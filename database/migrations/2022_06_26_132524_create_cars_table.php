@@ -19,12 +19,14 @@ class CreateCarsTable extends Migration
             $table->string('en_name');
             $table->string('code');
             $table->integer('color');
-            $table->integer('status');
+            $table->unsignedBigInteger('status_id');
+            $table->foreign('status_id')->on('car_statuses')->references('id')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->unsignedBigInteger('model_id');
             $table->foreign('model_id')->on('car_models')->references('id')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->unsignedBigInteger('garage_id');
             $table->foreign('garage_id')->on('garages')->references('id')->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->string('category'); //القسم (سيدان . اقتصادية . كومابكت)
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->on('car_categories')->references('id')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->string('car_model_year');   //موديل السيارة
             $table->integer('no_doors');    //عدد الابواب
             $table->integer('no_bags'); //عدد الحقائب
