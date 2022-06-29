@@ -8,9 +8,16 @@
     <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
         <div class="form-group">
             <label for="password">كلمة المرور</label>
-            <input value="{{ old('password') }}" type="password" name="password" class="form-control p-0 pt-1 pr-2" id="password" placeholder="كلمة المرور">
+            <input  type="password" name="password" class="form-control p-0 pt-1 pr-2" id="password" placeholder="كلمة المرور">
         </div>
     </div>
+    <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
+        <div class="form-group">
+            <label for="password">تاكيد كلمة المرور</label>
+            <input type="password_confirmation" name="password_confirmation" class="form-control p-0 pt-1 pr-2" id="password" placeholder="تاكيد كلمة المرور">
+        </div>
+    </div>
+
     <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
         <div class="form-group">
             <label for="phone">رقم هاتف المستخدم </label>
@@ -23,8 +30,8 @@
             <input value="{{ old('email') }}" type="text" name="email" class="form-control" id="email" placeholder=" البريد الإلكتروني">
         </div>
     </div>
-
     <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
+
         <div class="form-group">
             <label for="type"> دور المستخدم</label>
             <select name="type" class="form-control p-0 pt-1 pr-2" id="type">
