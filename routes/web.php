@@ -53,4 +53,6 @@ Route::prefix('/dashboard')->name('dashboard.')->namespace('DASHBOARD')->group(f
 
     Route::resource('/carcategories','CarCategoryController');
     Route::get('/carcategories/delete/all','CarCategoryController@deleteAll')->name('carcategories.delete.all');
+
+    Route::resource('/orders','OrderController');
 });
