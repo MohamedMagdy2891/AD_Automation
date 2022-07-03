@@ -103,14 +103,6 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link " href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="icon-directions_car nav-icon"></i>حالة السيارات  </a>
-                    <ul class="dropdown-menu" aria-labelledby="pagesDropdown"><li>
-                    <a class="dropdown-item" href="{{ URL::route('dashboard.carstatuses.index') }}"> عرض  كل الحالات</a>
-                </li></ul>
-
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link " href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-directions_car nav-icon"></i> تصنيفات السيارات </a>
                     <ul class="dropdown-menu" aria-labelledby="pagesDropdown"><li>
                         <a class="dropdown-item" href="{{ URL::route('dashboard.carcategories.index') }}"> عرض  كل التصنيفات</a>
