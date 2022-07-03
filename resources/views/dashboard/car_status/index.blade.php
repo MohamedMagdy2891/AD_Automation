@@ -68,6 +68,9 @@
             </div>
 
         </div>
+        <div class="col-md-12 text-center">
+            {{ $rows->links() }}
+        </div>
 
     </div>
 

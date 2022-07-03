@@ -19,16 +19,16 @@ class CarCategoryController extends Controller
     public function message()
     {
         return [
-            'ar_name.required' =>'حالة السيارة باللغة العربية  مطلوبة',
-            'en_name.required' => 'حالة السيارة باللغة الإنجليزية مطلوبة  ',
+            'ar_name.required' =>'تصنيف السيارة باللغة العربية  مطلوبة',
+            'en_name.required' => 'تصنيف السيارة باللغة الإنجليزية مطلوبة  ',
             'ar_name.min'=>'يجب أن تكون عدد الأحرف 3 أحرف على الأقل',
             'en_name.min'=>'يجب أن تكون عدد الأحرف 3 أحرف على الأقل'
         ];
     }
     public function index()
     {
-        $categories=  $this->CarCategoryDataResource->getAll();
-        return view('dashboard.car_category.index',compact('categories'));
+        $rows=  $this->CarCategoryDataResource->getAll();
+        return view('dashboard.car_category.index',compact('rows'));
     }
 
 
@@ -50,7 +50,7 @@ class CarCategoryController extends Controller
 
         $row = $this->CarCategoryDataResource->createOne($request->ar_name,$request->en_name);
 
-        Session::flash('success','تم اضافة حالة السيارة : '.$request->ar_name.' بنجاح');
+        Session::flash('success','تم اضافة تصنيف السيارة : '.$request->ar_name.' بنجاح');
         return redirect()->route('dashboard.carcategories.index');
     }
 
@@ -58,16 +58,10 @@ class CarCategoryController extends Controller
     public function edit($id)
     {
 
-        $CarCategories = $this->CarCategoryDataResource->getOne($id);
-        return view('dashboard.car_category.edit',compact('CarCategories'));
+        $row = $this->CarCategoryDataResource->getOne($id);
+        return view('dashboard.car_category.edit',compact('row'));
     }
-  /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update($id,Request $request)
     {
         $request->validate([
@@ -82,12 +76,12 @@ class CarCategoryController extends Controller
             $row->ar_name = $request->ar_name;
             $row->en_name = $request->en_name;
             $row->update();
-             Session::flash('success','تم تعديل  بيانات حالة السيارة : '.$row->ar_name.' بنجاح');
-            return redirect()->route('dashboard.carcategories.index');
+             Session::flash('success','تم تعديل  بيانات تصنيف السيارة : '.$row->ar_name.' بنجاح');
+            return redirect()->route('dashboard.carcategories.edit',$id);
 
         }else{
-            Session::flash('failed','لم يتم التعديل في بيانات حالة السيارة : '.$request->ar_name);
-            return redirect()->route('dashboard.carcategories.index');
+            Session::flash('failed','لم يتم التعديل في بيانات تصنيف السيارة : '.$request->ar_name);
+            return redirect()->route('dashboard.carcategories.edit',$id);
 
         }
 
@@ -95,19 +89,13 @@ class CarCategoryController extends Controller
 
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
     public function destroy($id)
     {
         $row = CarCategory::findOrFail($id);
         $name = $row->ar_name;
         $row->delete();
-        Session::flash('success','تم حذف بيانات حالة السيارة : '.$name);
+        Session::flash('success','تم حذف بيانات تصنيف السيارة : '.$name);
         return redirect()->route('dashboard.carcategories.index');
     }
 

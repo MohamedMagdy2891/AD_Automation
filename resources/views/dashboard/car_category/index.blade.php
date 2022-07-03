@@ -10,7 +10,7 @@
 
                 </div>
                 <div class="col-md-4 text-right mb-2"  >
-                    @if(count($categories) != 0)
+                    @if(count($rows) != 0)
                         <a id="delete" style="display: inline" class="btn btn-danger btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.carcategories.delete.all') }}">حذف الكل <span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></a>
                     @endif
                 </div>
@@ -31,9 +31,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(count($categories) > 0)
+                                @if(count($rows) > 0)
                                     @php $i=1; @endphp
-                                    @foreach ($categories as $row)
+                                    @foreach ($rows as $row)
                                         <tr class="text-center">
                                             <td>{{ $i++ }}</td>
                                             <td>{{ $row->ar_name }}</td>
@@ -55,7 +55,7 @@
                                     @endforeach
                                 @else
                                     <tr class="text-center">
-                                        <td colspan="9" class="text-bold">لا يوجد اى تصنيفات للسيارات  حتي الان</td>
+                                        <td colspan="4" class="text-bold">لا يوجد اى تصنيفات للسيارات  حتي الان</td>
                                     </tr>
                                 @endif
                             </tbody>
@@ -67,6 +67,9 @@
 
             </div>
 
+        </div>
+        <div class="col-md-12 text-center">
+            {{ $rows->links() }}
         </div>
 
     </div>
@@ -86,7 +89,7 @@
                 })
         </script>
     @endif
-    @if(count($categories) > 0)
+    @if(count($rows) > 0)
         <script>
             $(document).ready(function(){
                 $("[id=delete]").slideDown();
