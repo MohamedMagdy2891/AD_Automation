@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-
 use App\Http\Controllers\DASHBOARD\Traits\UsersRulesTrait;
 
 
@@ -16,11 +15,23 @@ class UserController extends Controller
 {
     use UsersRulesTrait;
 
-    public $userDataResource;
+    public $UserDataResource;
     public function __construct()
     {
-        $this->userDataResource = new UserDataResource();
+        $this->UserDataResource = new UserDataResource();
     }
+    public function index()
+    {
+        //
+        // $users =  User::all();
+        Session::forget('search');
+        Session::forget('search_name');
+        $roles =$this->usersRules();
+        $rows = $this->UserDataResource->getAll();
+        return view('dashboard.user.index',compact('rows','roles'));
+    }
+
+
 
     public function message()
     {
@@ -41,15 +52,7 @@ class UserController extends Controller
         ];
     }
 
-    public function index()
-    {
 
-        $rows =  $this->userDataResource->getAll();
-        Session::forget('search');
-        Session::forget('search_name');
-        $roles =$this->usersRules();
-        return view('dashboard.user.index',compact('rows','roles'));
-    }
 
 
     public function create()
@@ -131,6 +134,7 @@ class UserController extends Controller
         Session::flash('search_name',$request->search);
         $roles =$this->usersRules();
         return view('dashboard.user.index',compact('rows','roles'));
+
     }
     public function deleteAll()
     {
