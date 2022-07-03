@@ -55,4 +55,7 @@ Route::prefix('/dashboard')->name('dashboard.')->namespace('DASHBOARD')->group(f
     Route::get('/carcategories/delete/all','CarCategoryController@deleteAll')->name('carcategories.delete.all');
 
     Route::resource('/orders','OrderController');
+    Route::post('/orders/search','OrderController@search')->name('orders.search');
+    Route::get('/orders/delete/all','OrderController@deleteAll')->name('orders.delete.all');
+
 });

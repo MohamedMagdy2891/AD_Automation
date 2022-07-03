@@ -1,12 +1,32 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\DASHBOARD;
 
-use App\Models\order;
+use App\Models\Order;
+use App\Models\Garage;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
+use App\Http\Controllers\DASHBOARD\DataResources\OrderDataResource;
 class OrderController extends Controller
 {
+    public $OrderDataResource;
+    public function __construct()
+    {
+        $this->OrderDataResource = new OrderDataResource();
+    }
+    public function message()
+    {
+        return [
+            'clients_id.required' =>'الهوية مطلوبة',
+            'car_id.required' => 'يجب إختيار سيارة',
+            'receive_place.required'=>' يجب إختيار مكان الإستلام',
+            'deliver_place.required'=>'يجب إختيار مكان التسليم',
+            'receive_time.required'=>'يجب إختيار وقت الإستلام',
+            'deliver_time.required'=>'يجب إختيار وقت التسليم'
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +34,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $rows=  $this->OrderDataResource->getAll();
+        $garages=Garage::all();
+        return view('dashboard.order.index',compact('rows'));
     }
 
     /**
@@ -22,6 +44,15 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function search(Request $request)
+    {
+
+        $rows = $this->OrderDataResource->searchByName($request->search);
+        Session::flash('search','search');
+        Session::flash('search_name',$request->search);
+        return view('dashboard.order.index',compact('rows'));
+
+    }
     public function create()
     {
         //
@@ -44,9 +75,10 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(order $order)
+    public function show($id)
     {
-        //
+        $row = $this->OrderDataResource->getOne($id);
+        return view('dashboard.order.show',compact('row'));
     }
 
     /**
@@ -55,7 +87,7 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(order $order)
+    public function edit(Order $order)
     {
         //
     }
@@ -67,7 +99,7 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, order $order)
+    public function update(Request $request, Order $order)
     {
         //
     }
@@ -78,7 +110,7 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(order $order)
+    public function destroy(Order $order)
     {
         //
     }

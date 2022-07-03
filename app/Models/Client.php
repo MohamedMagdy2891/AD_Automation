@@ -46,4 +46,5 @@ class Client extends Authenticatable
             return $this->hasMany(Order::class);
         }
 
+
 }

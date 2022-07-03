@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+// use App\Models\Client;
 class order extends Model
 {
     use HasFactory;
@@ -15,8 +15,20 @@ class order extends Model
         'deliver_place',
         'receive_time',
         'deliver_time',
-        'kilometers'
+        'kilometers_consumed',
+        'hours_consumed',
+        'extra_driver_price',
+        'shield_price',
+        'baby_seat_price',
+        'open_kilometers_price'
     ];
-
-
+    // public function garage(){
+    //     return $this->belongsTo(Garage::class);
+    // }
+    public function Client(){
+        return $this->belongsTo(Client::class);
+    }
+    public function Car(){
+        return $this->belongsTo(Car::class);
+    }
 }

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Order;
 class Garage extends Model
 {
     use HasFactory;
@@ -30,8 +29,6 @@ class Garage extends Model
     public function Region(){
         return $this->belongsTo(Region::class);
     }
-    public function orders()
-        {
-            return $this->hasMany(Order::class);
-        }
+
+
 }
