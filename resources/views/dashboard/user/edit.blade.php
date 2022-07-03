@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.main')
-@push('title') تعديل بيانات {{ $users->name }}@endpush
-@push('header') تعديل بيانات {{ $users->name }}@endpush
+@push('title') تعديل بيانات {{ $row->name }}@endpush
+@push('header') تعديل بيانات {{ $row->name }}@endpush
 @section('content')
 
 <div class="row gutters">
@@ -10,19 +10,35 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header bg-info">
-                <div class="card-title text-center text-light pb-1">تعديل بيانات {{ $users->name }}</div>
+                <div class="card-title text-center text-light pb-1">تعديل بيانات {{ $row->name }}</div>
             </div>
-            <form class="card-body" action="{{ URL::route('dashboard.user.update',$users->id) }}" method="POST" enctype="multipart/form-data">
+            <form class="card-body" action="{{ URL::route('dashboard.user.update',$row->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
-                @include('dashboard.user.form')
+                @include('dashboard.user.form2')
 
 
-                <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-12">
-                    @if($users->image!= null )
-                    <img src="{{asset($users->image) }}" alt=" صورة {{ $users->name }}">
-                    @endif
+                <div class="row gutters">
+                    <div class="col-xl-12 col-lglg-12 col-md-12 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label for="image"> صورة المستخدم</label>
+                            <input type="file" accept=".jpg,.jpeg,.png"  class="form-control p-0 pt-1 pr-2" id="image" name="image">
+
+                        </div>
+                    </div>
+
                 </div>
+                @if($row->image != null)
+
+                    <div class="row gutters">
+                        <div class="col-xl-12 col-lglg-12 col-md-12 col-sm-12 col-12">
+                            <div class="form-group">
+                                <img id="image" style="height:200px" class="img-fluid rounded" alt="Responsive image" src="{{ URL::asset($row->image) }}">
+                            </div>
+                        </div>
+
+                    </div>
+                @endif
 
                 <div class="row gutters">
                     <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-12"></div>
@@ -44,11 +60,11 @@
  <script>
     $(document).ready(function(){
         $('#message').delay(3000).fadeOut('slow');
-        $('#name').val("{{ $users->name }}");
-        $('#password').val("{{ $users->password }}");
-        $('#phone').val("{{ $users->phone }}");
-        $('#email').val("{{ $users->email }}");
-        $('#type').val("{{ $users->type }}");
+        $('#name').val("{{ $row->name }}");
+        $('#password').val("{{ $row->password }}");
+        $('#phone').val("{{ $row->phone }}");
+        $('#email').val("{{ $row->email }}");
+        $('#type').val("{{ $row->type }}");
     });
 
  </script>

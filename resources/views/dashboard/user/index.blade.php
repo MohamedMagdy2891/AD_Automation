@@ -2,20 +2,6 @@
 @push('title')بيانات المستخدمين  @endpush
 @push('header') @endpush
 @section('content')
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> c88d5d403b1e8587616d778d6cd449442e2ca396
-=======
-=======
-
->>>>>>> 128babb790733925ad8c2c1f55db8eaf3b9b6533
->>>>>>> eaff86b4867d798a8b2098d1d003f8988697841a
->>>>>>> 78b78506a52386afe4522c43a9ee63a6a9079f8c
     <div class="row gutters">
         <div class="container-fluid">
             <div class="row">
@@ -54,15 +40,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(count($users) > 0)
+                                @if(count($rows) > 0)
                                     @php $i=1; @endphp
-                                    @foreach ($users as $row)
+                                    @foreach ($rows as $row)
                                         <tr class="text-center">
                                             <td>{{ $i++ }}</td>
                                             <td>{{ $row->name }}</td>
                                             <td>{{ $row->phone }}</td>
                                             <td>{{ $row->email }}</td>
-                                            <td>{{ $row->email }}</td>
+                                            <td>{{ $roles[$row->type]['role'] }}</td>
                                             <td>
 
 
@@ -95,7 +81,7 @@
 
         </div>
         <div class="col-md-12 text-center">
-            {{-- {{ $users->links() }} --}}
+             {{ $rows->links() }}
         </div>
     </div>
 
@@ -114,7 +100,7 @@
                 })
         </script>
     @endif
-    @if(count($users) > 0)
+    @if(count($rows) > 0)
         <script>
             $(document).ready(function(){
                 $("[id=delete]").slideDown();

@@ -3,52 +3,25 @@
 namespace App\Http\Controllers\DASHBOARD;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DASHBOARD\DataResources\UserDataResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 use App\Http\Controllers\DASHBOARD\Traits\UsersRulesTrait;
-use App\Http\Controllers\DASHBOARD\Traits\ImageTrait;
 
-;
 
 class UserController extends Controller
 {
-    use UsersRulesTrait, ImageTrait;
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    use UsersRulesTrait;
+
+    public $userDataResource;
+    public function __construct()
     {
-        //
-        $users =  User::all();
-        Session::forget('search');
-        Session::forget('search_name');
-        $roles =$this->usersRules();
-        // $rows = $this->carDataResource->getAll();
-        return view('dashboard.user.index',compact('users','roles'));
+        $this->userDataResource = new UserDataResource();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $roles =$this->usersRules();
-        return view('dashboard.user.create',compact('roles'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function message()
     {
         return [
@@ -59,22 +32,35 @@ class UserController extends Controller
             'email.required' => 'البريد الإلكتروني مطلوب',
             'email.email' => 'البريد الإلكتروني غير صحيح ',
             'type.required' => 'يجب إختيار نوع المستخدم',
+            'password.required' => 'كلمة المرور مطلوبة',
+            'password.min' => 'كلمة المرور يجب ان تحتوى على 8 أحرف أو أرقام على الاقل',
+            'password.max' => 'كلمة المرور يجب ان لا تتعدى 20 حرفا او رقما',
+            'password_confirmation.required_with' => 'تاكيد كلمة المرور مطلوبة',
+            'password_confirmation.same' => 'يجب تطابق كلمتى المرور',
+
         ];
     }
-    public function createOne($name,$password,$phone,$email,$type,$image)
+
+    public function index()
     {
 
-        $folder= 'assets/users-images';
-        $row = new User();
-        $row->password=$password;
-        $row->name = $name;
-        $row->phone = $phone;
-        $row->email = $email;
-        $row->type = $type;
-        $row->image=$this->Image($row,$folder,$image);
-        $row->save();
-        return $row;
+        $rows =  $this->userDataResource->getAll();
+        Session::forget('search');
+        Session::forget('search_name');
+        $roles =$this->usersRules();
+        return view('dashboard.user.index',compact('rows','roles'));
     }
+
+
+    public function create()
+    {
+        $roles =$this->usersRules();
+        return view('dashboard.user.create',compact('roles'));
+    }
+
+
+
+
     public function store(Request $request)
     {
 
@@ -82,79 +68,46 @@ class UserController extends Controller
             'name' => 'required|min:3',
             'phone' => 'required|numeric|min:10',
             'email' => 'required|email',
-            'image' => 'required|mimes:jpg,jpeg,png',
+            'image' => 'nullable|mimes:jpg,jpeg,png',
             'type' => 'required|numeric',
+            'password' => 'required|min:8|max:20',
+            'password_confirmation' => 'required_with:password|same:password',
         ],$this->message());
-        $password = Hash::make($request->password);
 
-        $row = $this->createOne($request->name,$password,$request->phone,$request->email,$request->type,$request->image);
+        $row = $this->userDataResource->createOne($request->name,$request->email,$request->password,$request->phone,$request->type,$request->image);
         Session::flash('success','تم اضافة المستخدم : '.$row->name.' بنجاح');
         return redirect()->route('dashboard.user.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
     public function show($id)
     {
-        $users = User::where('id',$id)->first();
+        $row = $this->userDataResource->getOne($id);
         $roles=$this->usersRules();
-        return view('dashboard.user.show',compact('users','roles'));
+        return view('dashboard.user.show',compact('row','roles'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $roles=$this->usersRules();
-        $users = User::where('id',$id)->first();
-        return view('dashboard.user.edit',compact('roles','users'));
+        $row = $this->userDataResource->getOne($id);
+        return view('dashboard.user.edit',compact('roles','row'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function updateOne($id,$name,$password,$phone,$email,$type,$image)
-    {
-        $row = User::findOrFail($id);
-        $folder= 'assets/users-images';
-        if($row->name != $name || $row->phone != $phone ||$row->password != $password|| $row->email != $email|| $row->type != $type||$row->image != $image ){
-            $row->name = $name;
-            $row->phone = $phone;
-            $row->password = $password;
-            $row->email = $email;
-            $row->image=$this->Image($row,$folder,$image);
-            $row->type = $type;
-            $row->update();
-            return $row;
-        }else{
-            return null;
-        }
-    }
+
 
     public function update($id,Request $request)
     {
         $request->validate([
             'name' => 'required|min:3',
-            'phone' => 'required|min:10',
+            'phone' => 'required|numeric|min:10',
             'email' => 'required|email',
-            'image' => 'required|mimes:jpg,jpeg,png',
-            'type' => 'required'
+            'image' => 'nullable|mimes:jpg,jpeg,png',
+            'type' => 'required|numeric',
         ],$this->message());
-        $password = Hash::make($request->password);
-        $row = $this->updateOne($id,$request->name,$password,$request->phone,$request->email,$request->type,$request->image);
+
+        $row = $this->userDataResource->updateOne($id,$request->name,$request->email,$request->phone,$request->type,$request->image);
 
         $row != null ?  Session::flash('success','تم تعديل  بيانات المستخدم : '.$row->name.' بنجاح') : Session::flash('failed','لم يتم التعديل في بيانات المستخدم : '.$request->name);
         return redirect()->route('dashboard.user.edit',$id);
@@ -162,44 +115,27 @@ class UserController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function deleteOne($id)
-    {
-        $row = User::findOrFail($id);
-        if($row->image != null){
-            unlink($row->image);
-        }
-        $name = $row->name;
-        $row->delete();
-        return $name;
-    }
+
     public function destroy($id)
     {
-        $row =  $this->deleteOne($id);
+        $row =  $this->userDataResource->deleteOne($id);
         Session::flash('success','تم حذف بيانات المستخدم : '.$row);
         return redirect()->route('dashboard.user.index');
     }
-    public function UserSearch($code)
-    {
-        $rows = User::query()->where('name','LIKE','%'.$code.'%')->paginate(15);
-        return $rows;
-    }
+
     public function search(Request $request)
     {
 
-        $users = $this->UserSearch($request->search);
+        $rows = $this->userDataResource->searchByName($request->search);
         Session::flash('search','search');
         Session::flash('search_name',$request->search);
-        return view('dashboard.user.index',compact('users'));
+        $roles =$this->usersRules();
+        return view('dashboard.user.index',compact('rows','roles'));
     }
     public function deleteAll()
     {
-        $users =  User::whereNotNull('id')->delete();
+        $rows =  $this->userDataResource->deleteAllData();
+        Session::flash('success','تم حذف كل بيانات المستخدمين ');
         return redirect()->route('dashboard.user.index');
     }
 }

@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\DASHBOARD\DataResources;
 
+use App\Http\Controllers\DASHBOARD\Traits\ImageTrait;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserDataResource{
+    use ImageTrait;
+
+
 
     public function getAll()
     {
@@ -12,11 +17,17 @@ class UserDataResource{
         return $rows;
     }
 
-    public function createOne($ar_name,$en_name)
+    public function createOne($name,$email,$password,$phone,$type,$image)
     {
         $row = new User();
-        $row->ar_name = $ar_name;
-        $row->en_name = $en_name;
+        $row->name = $name;
+        $row->email = $email;
+        $row->password = Hash::make($password);
+        $row->phone = $phone;
+        $row->type = $type;
+        if($image != null){
+            $row->image = $this->Image($row,'Users',$image);
+        }
         $row->save();
         return $row;
     }
@@ -27,12 +38,20 @@ class UserDataResource{
         return $row;
     }
 
-    public function updateOne($id,$ar_name,$en_name)
+    public function updateOne($id,$name,$email,$phone,$type,$image)
     {
         $row = User::findOrFail($id);
-        if($row->ar_name != $ar_name || $row->en_name != $en_name){
-            $row->ar_name = $ar_name;
-            $row->en_name = $en_name;
+        if($row->name != $name || $row->email != $email || $row->phone != $phone || $row->type != $type  || $image != null ){
+            $row->name = $name;
+            $row->email = $email;
+            $row->phone = $phone;
+            $row->type = $type;
+            if($image != null){
+                if($row->image != null){
+                    unlink($row->image);
+                }
+                $row->image = $this->Image($row,'Users',$image);
+            }
             $row->update();
             return $row;
         }else{
@@ -44,17 +63,29 @@ class UserDataResource{
     public function deleteOne($id)
     {
         $row = User::findOrFail($id);
-        $ar_name = $row->ar_name;
+        $name = $row->name;
+        if($row->image != null){
+            unlink($row->image);
+        }
         $row->delete();
-        return $ar_name;
+        return $name;
     }
 
     public function deleteAllData()
     {
         $rows = User::get()->all();
         foreach($rows as $row){
+            if($row->image != null){
+                unlink($row->image);
+            }
             $row->delete();
         }
+    }
+
+    public function searchByName($name)
+    {
+        $rows = User::query()->where('name','LIKE','%'.$name.'%')->paginate(15);
+        return $rows;
     }
 
 

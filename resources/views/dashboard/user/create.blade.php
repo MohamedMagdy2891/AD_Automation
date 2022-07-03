@@ -38,8 +38,6 @@
         $('#message').delay(3000).fadeOut('slow');
         $('#message1').delay(3000).fadeOut('slow');
         $('#message2').delay(3000).fadeOut('slow');
-        $('#message3').delay(3000).fadeOut('slow');
-        $('#message5').delay(3000).fadeOut('slow');
     });
 
  </script>
