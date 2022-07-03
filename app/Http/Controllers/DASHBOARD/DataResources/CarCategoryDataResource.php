@@ -13,7 +13,11 @@ class CarCategoryDataResource{
         $rows = CarCategory::latest()->paginate(4);
         return $rows;
     }
-
+    public function getOne($id)
+    {
+        $row = CarCategory::findOrFail($id);
+        return $row;
+    }
     public function createOne($ar_name,$en_name)
     {
         $row = new CarCategory();

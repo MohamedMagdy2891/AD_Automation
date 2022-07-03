@@ -50,4 +50,7 @@ Route::prefix('/dashboard')->name('dashboard.')->namespace('DASHBOARD')->group(f
 
     Route::resource('/carstatuses','CarStatusController');
     Route::get('/carstatuses/delete/all','CarStatusController@deleteAll')->name('carstatuses.delete.all');
+
+    Route::resource('/carcategories','CarCategoryController');
+    Route::get('/carcategories/delete/all','CarCategoryController@deleteAll')->name('carcategories.delete.all');
 });

@@ -2,6 +2,10 @@
 @push('title')بيانات المستخدمين  @endpush
 @push('header') @endpush
 @section('content')
+<<<<<<< HEAD
+=======
+
+>>>>>>> 128babb790733925ad8c2c1f55db8eaf3b9b6533
     <div class="row gutters">
         <div class="container-fluid">
             <div class="row">
