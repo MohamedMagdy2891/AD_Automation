@@ -31,8 +31,10 @@ class CarStatusController extends Controller
     {
         $rows=  $this->carStatusDataResource->getAll();
         return view('dashboard.car_status.index',compact('rows'));
-
     }
+
+
+
     public function create()
     {
         return view('dashboard.car_status.create');
