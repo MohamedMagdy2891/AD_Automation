@@ -10,8 +10,9 @@
 
                 </div>
                 <div class="col-md-4 text-right mb-2"  >
-                    <a id="delete" style="display: inline" class="btn btn-danger btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.carstatuses.delete.all') }}">حذف الكل <span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></a>
-
+                    @if(count($rows) == 0)
+                        <a id="delete" style="display: inline" class="btn btn-danger btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.carstatuses.delete.all') }}">حذف الكل <span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -30,9 +31,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(count($statuses) > 0)
+                                @if(count($rows) > 0)
                                     @php $i=1; @endphp
-                                    @foreach ($statuses as $row)
+                                    @foreach ($rows as $row)
                                         <tr class="text-center">
                                             <td>{{ $i++ }}</td>
                                             <td>{{ $row->ar_name }}</td>
@@ -85,7 +86,7 @@
                 })
         </script>
     @endif
-    @if(count($statuses) > 0)
+    @if(count($rows) > 0)
         <script>
             $(document).ready(function(){
                 $("[id=delete]").slideDown();

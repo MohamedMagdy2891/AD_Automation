@@ -76,6 +76,23 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<<<<<<< HEAD
+=======
+                    <i class="icon-power nav-icon"></i>حالة السيارات  </a>
+                <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <li>
+                        <a class="dropdown-item" href="{{ URL::route('dashboard.carstatuses.create') }}"> اضافة حالة جديدة</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ URL::route('dashboard.carstatuses.index') }}"> كل حالات السيارات</a>
+                    </li>
+
+
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+>>>>>>> c88d5d403b1e8587616d778d6cd449442e2ca396
                     <i class="icon-user nav-icon"></i>المستخدمين</a>
                     <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
                         <li>
