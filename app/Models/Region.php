@@ -14,4 +14,8 @@ class Region extends Model
     ];
 
     protected $hidden = ['created_at' , 'updated_at'];
+
+    public function Area(){
+        return $this->hasMany(Area::class,'region_id','id');
+    }
 }

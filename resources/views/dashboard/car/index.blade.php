@@ -53,16 +53,11 @@
                                             <td>{{ $row->code }}</td>
                                             <td>{{ $row->ar_name }}</td>
                                             <td>{{ $row->CarModel->ar_name }}</td>
-                                            <td>{{ $categories[$row->category]['ar_name'] }}</td>
+                                            <td>{{ $row->Category->ar_name }}</td>
                                             <td>{{ $row->car_model_year }}</td>
                                             <td>{{ $transmissions[$row->car_type]['ar_name'] }}</td>
-                                            <td>{{ $row->Garage->ar_garage }} ( {{ $row->Garage->Region->ar_name }} )</td>
-                                            <td @if($statuss[$row->status]['id'] == 0) class="bg-info text-light"
-                                                @elseif($statuss[$row->status]['id'] == 1) class="bg-success text-light"
-                                                @else class="bg-danger text-light" @endif>
-                                                {{ $statuss[$row->status]['ar_name'] }}</td>
-
-                                            <td>
+                                            <td>{{ $row->Garage->ar_garage }} ( {{ $row->Garage->Area->ar_area - $row->Garage->Area->Region->ar_name }} )</td>
+                                            <td>{{ $row->Status->ar_name }}<td>
                                                 <a class="btn btn-warning btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.car.image',$row->id) }}"><span class="w-100 icon-image text-light" style="font-size: .8rem"></span></a>
                                                 <a class="btn btn-success btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.car.show', $row->id ) }}"><span class="icon-eye text-light" style="font-size: .8rem"></span></a>
                                                 <a class="btn btn-info btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.car.edit',$row->id) }}"><span class="w-100 icon-pencil text-light" style="font-size: .8rem"></span></a>

@@ -15,7 +15,7 @@ use App\Models\Garage;
 
 class CarController extends Controller
 {
-    use ColorsTrait , CategoriesTrait ,TransmissionsTrait , StatusTrait;
+    use ColorsTrait,TransmissionsTrait;
 
     public $carDataResource;
     public function __construct()
@@ -61,20 +61,19 @@ class CarController extends Controller
     }
     public function index()
     {
-        $categories =  $this->getCategories();
+
         $transmissions =  $this->getTransmissions();
-        $statuss =  $this->getStatus();
         Session::forget('search');
         Session::forget('search_name');
         $rows = $this->carDataResource->getAll();
-        return view('dashboard.car.index',compact('rows','categories','transmissions','statuss'));
+        return view('dashboard.car.index',compact('rows','transmissions'));
     }
     public function create()
     {
         $colors =  $this->getColors();
-        $categories =  $this->getCategories();
         $transmissions =  $this->getTransmissions();
-        $statuss =  $this->getStatus();
+        $categories =  $this->carDataResource->getAllCategories();
+        $statuss =  $this->carDataResource->getAllStatus();
         $carModels = CarModel::get()->all();
         $garages = Garage::get()->all();
         return view('dashboard.car.create',compact('colors','carModels','categories','garages','transmissions','statuss'));
@@ -82,6 +81,7 @@ class CarController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'ar_name' => 'required|min:3',
             'en_name' => 'required|min:3',
@@ -130,6 +130,8 @@ class CarController extends Controller
         $shield,$shield_price,
         $baby_seat,$baby_seat_price,
         $open_kilometers,$open_kilometers_price);
+
+
         Session::flash('success','تم اضافة السيارة : '.$row->ar_name.' بنجاح');
         return redirect()->route('dashboard.car.index');
 
@@ -139,9 +141,9 @@ class CarController extends Controller
     public function show($id)
     {
         $colors =  $this->getColors();
-        $categories =  $this->getCategories();
         $transmissions =  $this->getTransmissions();
-        $statuss =  $this->getStatus();
+        $categories =  $this->carDataResource->getAllCategories();
+        $statuss =  $this->carDataResource->getAllStatus();
         $carModels = CarModel::get()->all();
         $garages = Garage::get()->all();
         $row = $this->carDataResource->getOne($id);
@@ -151,9 +153,9 @@ class CarController extends Controller
     public function edit($id)
     {
         $colors =  $this->getColors();
-        $categories =  $this->getCategories();
         $transmissions =  $this->getTransmissions();
-        $statuss =  $this->getStatus();
+        $categories =  $this->carDataResource->getAllCategories();
+        $statuss =  $this->carDataResource->getAllStatus();
         $carModels = CarModel::get()->all();
         $garages = Garage::get()->all();
         $row = $this->carDataResource->getOne($id);

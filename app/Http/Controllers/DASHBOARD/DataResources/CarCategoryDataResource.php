@@ -49,6 +49,14 @@ class CarCategoryDataResource{
         return $name;
     }
 
+    public function deleteAllData()
+    {
+        $rows = CarCategory::get()->all();
+        foreach($rows as $row){
+            $row->delete();
+        }
+    }
+
 
 
 }

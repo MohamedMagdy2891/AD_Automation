@@ -62,10 +62,10 @@
         $('#ar_name').val("{{ $row->ar_name }}");
         $('#en_name').val("{{ $row->en_name }}");
         $('#color').val("{{ $row->color }}");
-        $('#status').val("{{ $row->status }}");
+        $('#status_id').val("{{ $row->status_id }}");
         $('#model_id').val("{{ $row->model_id }}");
         $('#car_model_year').val("{{ $row->car_model_year }}");
-        $('#category').val("{{ $row->category }}");
+        $('#category_id').val("{{ $row->category_id }}");
         $('#garage_id').val("{{ $row->garage_id }}");
         $('#car_type').val("{{ $row->car_type }}");
         $('#no_doors').val("{{ $row->no_doors }}");

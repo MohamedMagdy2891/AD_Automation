@@ -61,5 +61,14 @@ class Car extends Model
         return $this->hasMany(Order::class);
     }
 
+    public function Category()
+    {
+        return $this->hasOne(CarCategory::class,'id','category_id');
+    }
+    public function Status()
+    {
+        return $this->hasOne(CarStatus::class,'id','status_id');
+    }
+
 
 }

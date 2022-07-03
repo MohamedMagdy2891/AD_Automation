@@ -71,7 +71,7 @@ class CarCategoryController extends Controller
         ],$this->message());
 
 
-        $row = CarCategory::findOrFail($id);
+        $row = $this->CarCategoryDataResource->getOne($id);
         if($row->ar_name != $request->ar_name || $row->en_name != $request->en_name ){
             $row->ar_name = $request->ar_name;
             $row->en_name = $request->en_name;
@@ -92,7 +92,7 @@ class CarCategoryController extends Controller
 
     public function destroy($id)
     {
-        $row = CarCategory::findOrFail($id);
+        $row = $this->CarCategoryDataResource->getOne($id);
         $name = $row->ar_name;
         $row->delete();
         Session::flash('success','تم حذف بيانات تصنيف السيارة : '.$name);
@@ -102,7 +102,7 @@ class CarCategoryController extends Controller
 
     public function deleteAll()
     {
-        $status =  CarCategory::whereNotNull('id')->delete();
+        $status =  $row = $this->CarCategoryDataResource->deleteAllData();
         return redirect()->route('dashboard.carcategories.index');
     }
 }

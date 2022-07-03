@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\DASHBOARD\DataResources;
 
 use App\Models\Garage;
-use App\Models\Region;
+use App\Models\Area;
 
 class GarageDataResource{
 
@@ -14,20 +14,18 @@ class GarageDataResource{
         return $rows;
     }
 
-    public function getAllRegions()
+    public function getAllArea()
     {
-        $rows = Region::get()->all();
+        $rows = Area::get()->all();
         return $rows;
     }
 
-    public function createOne($ar_garage,$en_garage,$ar_address,$en_address,$region_id,$lat,$lang)
+    public function createOne($ar_garage,$en_garage,$area_id,$lat,$lang)
     {
         $row = new Garage();
         $row->ar_garage = $ar_garage;
         $row->en_garage = $en_garage;
-        $row->ar_address = $ar_address;
-        $row->en_address = $en_address;
-        $row->region_id = $region_id;
+        $row->area_id = $area_id;
         $row->lat = $lat;
         $row->lang = $lang;
         $row->save();
@@ -40,16 +38,13 @@ class GarageDataResource{
         return $row;
     }
 
-    public function updateOne($id,$ar_garage,$en_garage,$ar_address,$en_address,$region_id,$lat,$lang)
+    public function updateOne($id,$ar_garage,$en_garage,$area_id,$lat,$lang)
     {
         $row = Garage::findOrFail($id);
-        if($row->ar_garage != $ar_garage || $row->en_garage != $en_garage || $row->ar_address !=$ar_address ||
-        $row->en_address != $en_address || $row->region_id != $region_id || $row->lat != $lat || $row->lang != $lang){
+        if($row->ar_garage != $ar_garage || $row->en_garage != $en_garage || $row->area_id != $area_id || $row->lat != $lat || $row->lang != $lang){
             $row->ar_garage = $ar_garage;
             $row->en_garage = $en_garage;
-            $row->ar_address = $ar_address;
-            $row->en_address = $en_address;
-            $row->region_id = $region_id;
+            $row->area_id = $area_id;
             $row->lat = $lat;
             $row->lang = $lang;
             $row->update();

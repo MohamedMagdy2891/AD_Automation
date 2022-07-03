@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\DASHBOARD\DataResources;
 
 use App\Models\Car;
+use App\Models\CarCategory;
+use App\Models\CarStatus;
 
 class CarDataResource{
 
@@ -11,6 +13,18 @@ class CarDataResource{
         $rows = Car::latest()->paginate(15);
         return $rows;
     }
+    public function getAllCategories()
+    {
+        $rows = CarCategory::get()->all();
+        return $rows;
+    }
+
+    public function getAllStatus()
+    {
+        $rows = CarStatus::get()->all();
+        return $rows;
+    }
+
 
 
     public function createOne($ar_name,$en_name,$code,$color,$status_id,$model_id,$garage_id,$category_id,$car_model_year,$no_doors,$no_bags,$car_type,

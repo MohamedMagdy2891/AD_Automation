@@ -84,11 +84,11 @@
     </div>
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
-            <label for="category"> القسم</label>
-            <select name="category" class="form-control p-0 pt-1 pr-2" id="category">
+            <label for="category_id"> القسم</label>
+            <select name="category_id" class="form-control p-0 pt-1 pr-2" id="category_id">
                 <option selected disabled>اختر قسم السيارة</option>
                 @foreach ($categories as $category)
-                    <option value="{{ $category['id'] }}">{{ $category['ar_name'] }}</option>
+                    <option value="{{ $category->id }}">{{ $category->ar_name }}</option>
                 @endforeach
             </select>
         </div>
@@ -100,7 +100,7 @@
             <select name="garage_id" class="form-control p-0 pt-1 pr-2" id="garage_id">
                 <option selected disabled>اختر حراج السيارة</option>
                 @foreach ($garages as $garage)
-                    <option value="{{ $garage->id }}">{{ $garage->ar_garage }} ( {{ $garage->Region->ar_name }} )</option>
+                    <option value="{{ $garage->id }}">{{ $garage->ar_garage }} ( {{ $garage->Area->ar_area }} - {{ $garage->Area->Region->ar_name }} )</option>
                 @endforeach
             </select>
         </div>
@@ -155,11 +155,11 @@
     </div>
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
-            <label for="status"> حالة العربية</label>
-            <select name="status" class="form-control p-0 pt-1 pr-2" id="status">
+            <label for="status_id"> حالة العربية</label>
+            <select name="status_id" class="form-control p-0 pt-1 pr-2" id="status_id">
                 <option selected disabled>اختر حالة العربية</option>
                 @foreach ($statuss as $status)
-                    <option value="{{ $status['id'] }}">{{ $status['ar_name'] }} </option>
+                    <option value="{{ $status->id }}">{{ $status->ar_name }} </option>
                 @endforeach
             </select>
         </div>
