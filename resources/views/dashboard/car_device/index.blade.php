@@ -17,7 +17,9 @@
                     </form>
                 </div>
                 <div class="col-md-4 text-right mb-2"  >
-                    <a id="delete" style="display: none" class="btn btn-danger btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.device.delete.all') }}">حذف الكل <span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></a>
+                    @if(count($rows) == 0)
+                        <a id="delete" style="display: none" class="btn btn-danger btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.device.delete.all') }}">حذف الكل <span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></a>
+                    @endif
                 </div>
             </div>
         </div>

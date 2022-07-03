@@ -30,8 +30,8 @@ class CarStatusController extends Controller
     public function index()
     {
 
-        $statuses=  $this->carStatusDataResource->getAll();
-        return view('dashboard.car_status.index',compact('statuses'));
+        $rows=  $this->carStatusDataResource->getAll();
+        return view('dashboard.car_status.index',compact('rows'));
     }
 
 
@@ -50,10 +50,6 @@ class CarStatusController extends Controller
             'en_name' => 'required|min:3'
         ],$this->message());
 
-        $row = new CarStatus();
-        $row->ar_name=$request->ar_name;
-        $row->en_name = $request->en_name;
-        $row->save();
 
         $row = $this->carStatusDataResource->createOne($request->ar_name,$request->en_name);
 
@@ -64,17 +60,10 @@ class CarStatusController extends Controller
 
     public function edit($id)
     {
-
-        $carStatuses = $this->carStatusDataResource->getOne($id);
-        return view('dashboard.car_status.edit',compact('carStatuses'));
+        $row = $this->carStatusDataResource->getOne($id);
+        return view('dashboard.car_status.edit',compact('row'));
     }
-  /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update($id,Request $request)
     {
         $request->validate([
@@ -84,44 +73,26 @@ class CarStatusController extends Controller
         ],$this->message());
 
 
-        $row = CarStatus::findOrFail($id);
-        if($row->ar_name != $request->ar_name || $row->en_name != $request->en_name ){
-            $row->ar_name = $request->ar_name;
-            $row->en_name = $request->en_name;
-            $row->update();
-             Session::flash('success','تم تعديل  بيانات حالة السيارة : '.$row->ar_name.' بنجاح');
-            return redirect()->route('dashboard.carstatuses.index');
+        $row =  $this->carStatusDataResource->updateOne($id,$request->ar_name,$request->en_name);
+        $row != null ? Session::flash('success', 'تم تعديل بيانات حالة سيارة '.$row->ar_name):Session::flash('failed', 'لم يتم تعديل بيانات حالة السيارة لعدم التغيير فى البيانات');
 
-        }else{
-            Session::flash('failed','لم يتم التعديل في بيانات حالة السيارة : '.$request->ar_name);
-            return redirect()->route('dashboard.carstatuses.index');
 
-        }
-
+        return redirect()->route('dashboard.carstatuses.edit',$id);
     }
 
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
     public function destroy($id)
     {
-        $row = CarStatus::findOrFail($id);
-        $name = $row->ar_name;
-        $row->delete();
-        Session::flash('success','تم حذف بيانات حالة السيارة : '.$name);
+        $row =  $this->carStatusDataResource->deleteOne($id);
+        Session::flash('success','تم حذف بيانات بيانات حالة سيارة '.$row);
         return redirect()->route('dashboard.carstatuses.index');
     }
 
 
     public function deleteAll()
     {
-        $status =  CarStatus::whereNotNull('id')->delete();
+        $row =  $this->carStatusDataResource->deleteAllData();
+        Session::flash('success','تم حذف بيانات كل بيانات حالات السيارات');
         return redirect()->route('dashboard.carstatuses.index');
     }
 }

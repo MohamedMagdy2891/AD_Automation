@@ -76,7 +76,7 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="icon-directions_car nav-icon"></i>حالة السيارات  </a>
+                    <i class="icon-power nav-icon"></i>حالة السيارات  </a>
                 <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
                     <li>
                         <a class="dropdown-item" href="{{ URL::route('dashboard.carstatuses.create') }}"> اضافة حالة جديدة</a>

@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.main')
-@push('title') تعديل بيانات حالة السيارة {{ $carStatuses->ar_name }}@endpush
-@push('header') تعديل بيانات حالة السيارة  {{ $carStatuses->ar_name }}@endpush
+@push('title') تعديل بيانات حالة السيارة {{ $row->ar_name }}@endpush
+@push('header') تعديل بيانات حالة السيارة  {{ $row->ar_name }}@endpush
 @section('content')
 
 <div class="row gutters">
@@ -10,9 +10,9 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header bg-info">
-                <div class="card-title text-center text-light pb-1">تعديل بيانات {{ $carStatuses->ar_name }}</div>
+                <div class="card-title text-center text-light pb-1">تعديل بيانات {{ $row->ar_name }}</div>
             </div>
-            <form class="card-body" action="{{ URL::route('dashboard.carstatuses.update',$carStatuses->id) }}" method="POST" enctype="multipart/form-data">
+            <form class="card-body" action="{{ URL::route('dashboard.carstatuses.update',$row->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 @include('dashboard.car_status.form')
@@ -39,8 +39,8 @@
  <script>
     $(document).ready(function(){
         $('#message').delay(3000).fadeOut('slow');
-        $('#ar_name').val("{{ $carStatuses->ar_name }}");
-        $('#en_name').val("{{ $carStatuses->en_name }}");
+        $('#ar_name').val("{{ $row->ar_name }}");
+        $('#en_name').val("{{ $row->en_name }}");
     });
 
  </script>

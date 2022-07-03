@@ -2,7 +2,6 @@
 @push('title')بيانات المستخدمين  @endpush
 @push('header') @endpush
 @section('content')
-test changes
     <div class="row gutters">
         <div class="container-fluid">
             <div class="row">
@@ -17,9 +16,10 @@ test changes
                         @endif
                     </form>
                 </div>
-                <div class="col-md-4 text-right mb-2"  >
-                    <a id="delete" style="display: inline" class="btn btn-danger btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.user.delete.all') }}">حذف الكل <span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></a>
-
+                <div class="col-md-4 text-right mb-2">
+                    @if(count($rows) == 0)
+                        <a id="delete" style="display: inline" class="btn btn-danger btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.user.delete.all') }}">حذف الكل <span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -33,10 +33,9 @@ test changes
                                 <tr class="text-center">
                                     <th>م</th>
                                     <th> اسم المستخدم</th>
-                                    <th>صورة المستخدم</th>
                                     <th> رقم الهاتف </th>
                                     <th> البريد الإلكتروني </th>
-                                    <th> دور المستخدم</th>
+                                    <th>دور المستخدم</th>
                                     <th>العمليات</th>
                                 </tr>
                             </thead>
@@ -47,14 +46,9 @@ test changes
                                         <tr class="text-center">
                                             <td>{{ $i++ }}</td>
                                             <td>{{ $row->name }}</td>
-                                            <td><img src="{{asset($row->image) }}" width="100"height="100"alt=" صورة {{ $row->name }}"></td>
                                             <td>{{ $row->phone }}</td>
                                             <td>{{ $row->email }}</td>
-                                            @foreach ($roles as $role)
-                                                @if ($role['id']== $row->type)
-                                                   <td>{{ $role['role'] }}</td>
-                                                @endif
-                                             @endforeach
+                                            <td>{{ $row->email }}</td>
                                             <td>
 
 
@@ -73,7 +67,7 @@ test changes
                                     @endforeach
                                 @else
                                     <tr class="text-center">
-                                        <td colspan="9" class="text-bold">لا يوجد اى مستخدمين مضافين حتي الان</td>
+                                        <td colspan="6" class="text-bold">لا يوجد اى مستخدمين مضافين حتي الان</td>
                                     </tr>
                                 @endif
                             </tbody>
