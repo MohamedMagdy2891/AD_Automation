@@ -35,7 +35,7 @@ class CarCategoryController extends Controller
     public function create()
     {
 
-        return view('dashboard.car_status.create');
+        return view('dashboard.car_category.create');
     }
 
 
@@ -47,15 +47,11 @@ class CarCategoryController extends Controller
             'en_name' => 'required|min:3'
         ],$this->message());
 
-        $row = new CarCategory();
-        $row->ar_name=$request->ar_name;
-        $row->en_name = $request->en_name;
-        $row->save();
 
         $row = $this->CarCategoryDataResource->createOne($request->ar_name,$request->en_name);
 
-        Session::flash('success','تم اضافة حالة السيارة : '.$row->ar_name.' بنجاح');
-        return redirect()->route('dashboard.carcategory.index');
+        Session::flash('success','تم اضافة حالة السيارة : '.$request->ar_name.' بنجاح');
+        return redirect()->route('dashboard.carcategories.index');
     }
 
 
@@ -63,7 +59,7 @@ class CarCategoryController extends Controller
     {
 
         $CarCategories = $this->CarCategoryDataResource->getOne($id);
-        return view('dashboard.car_status.edit',compact('carCategories'));
+        return view('dashboard.car_category.edit',compact('CarCategories'));
     }
   /**
      * Update the specified resource in storage.
@@ -87,11 +83,11 @@ class CarCategoryController extends Controller
             $row->en_name = $request->en_name;
             $row->update();
              Session::flash('success','تم تعديل  بيانات حالة السيارة : '.$row->ar_name.' بنجاح');
-            return redirect()->route('dashboard.carcategory.index');
+            return redirect()->route('dashboard.carcategories.index');
 
         }else{
             Session::flash('failed','لم يتم التعديل في بيانات حالة السيارة : '.$request->ar_name);
-            return redirect()->route('dashboard.carcategory.index');
+            return redirect()->route('dashboard.carcategories.index');
 
         }
 
@@ -112,13 +108,13 @@ class CarCategoryController extends Controller
         $name = $row->ar_name;
         $row->delete();
         Session::flash('success','تم حذف بيانات حالة السيارة : '.$name);
-        return redirect()->route('dashboard.carcategory.index');
+        return redirect()->route('dashboard.carcategories.index');
     }
 
 
     public function deleteAll()
     {
         $status =  CarCategory::whereNotNull('id')->delete();
-        return redirect()->route('dashboard.carcategory.index');
+        return redirect()->route('dashboard.carcategories.index');
     }
 }

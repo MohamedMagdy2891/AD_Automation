@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-
+use App\Http\Controllers\DASHBOARD\DataResources\UserDataResource;
 use App\Http\Controllers\DASHBOARD\Traits\UsersRulesTrait;
 use App\Http\Controllers\DASHBOARD\Traits\ImageTrait;
 
@@ -21,15 +21,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $UserDataResource;
+    public function __construct()
+    {
+        $this->UserDataResource = new UserDataResource();
+    }
     public function index()
     {
         //
-        $users =  User::all();
+        // $users =  User::all();
         Session::forget('search');
         Session::forget('search_name');
         $roles =$this->usersRules();
-        // $rows = $this->carDataResource->getAll();
-        return view('dashboard.user.index',compact('users','roles'));
+        $rows = $this->UserDataResource->getAll();
+        return view('dashboard.user.index',compact('rows','roles'));
     }
 
     /**
@@ -192,10 +197,10 @@ class UserController extends Controller
     public function search(Request $request)
     {
 
-        $users = $this->UserSearch($request->search);
+        $rows = $this->UserSearch($request->search);
         Session::flash('search','search');
         Session::flash('search_name',$request->search);
-        return view('dashboard.user.index',compact('users'));
+        return view('dashboard.user.index',compact('rows'));
     }
     public function deleteAll()
     {

@@ -10,7 +10,7 @@ class CarCategoryDataResource{
 
     public function getAll()
     {
-        $rows = CarCategory::latest()->paginate(4);
+        $rows = CarCategory::latest()->paginate(10);
         return $rows;
     }
     public function getOne($id)

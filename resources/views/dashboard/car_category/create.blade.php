@@ -14,7 +14,7 @@
                 @csrf
                 @method('POST')
 
-                @include('dashboard.car_categories.form')
+                @include('dashboard.car_category.form')
 
                 <div class="row gutters">
                     <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-12"></div>
