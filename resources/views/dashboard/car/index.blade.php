@@ -56,7 +56,7 @@
                                             <td>{{ $row->Category->ar_name }}</td>
                                             <td>{{ $row->car_model_year }}</td>
                                             <td>{{ $transmissions[$row->car_type]['ar_name'] }}</td>
-                                            <td>{{ $row->Garage->ar_garage }} ( {{ $row->Garage->Region->ar_name }} )</td>
+                                            <td>{{ $row->Garage->ar_garage }} ( {{ $row->Garage->Area->ar_area - $row->Garage->Area->Region->ar_name }} )</td>
                                             <td>{{ $row->Status->ar_name }}<td>
                                                 <a class="btn btn-warning btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.car.image',$row->id) }}"><span class="w-100 icon-image text-light" style="font-size: .8rem"></span></a>
                                                 <a class="btn btn-success btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.car.show', $row->id ) }}"><span class="icon-eye text-light" style="font-size: .8rem"></span></a>
