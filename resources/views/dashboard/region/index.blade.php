@@ -4,7 +4,7 @@
 @section('content')
     <div class="row gutters">
         <div class="col-md-12 text-right mb-2" id="delete" style="display: none">
-            @if(count($rows) == 0)
+            @if(count($rows) != 0)
                 <a class="btn btn-danger btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.region.delete.all') }}">حذف الكل <span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></a>
             @endif
         </div>

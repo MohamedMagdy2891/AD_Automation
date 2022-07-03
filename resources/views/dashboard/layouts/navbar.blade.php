@@ -76,7 +76,6 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<<<<<<< HEAD
                     <i class="icon-power nav-icon"></i>حالة السيارات  </a>
                 <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
                     <li>
@@ -91,8 +90,6 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-=======
->>>>>>> 128babb790733925ad8c2c1f55db8eaf3b9b6533
                     <i class="icon-user nav-icon"></i>المستخدمين</a>
                     <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
                         <li>

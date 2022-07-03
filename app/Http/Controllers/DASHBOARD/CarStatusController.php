@@ -33,6 +33,11 @@ class CarStatusController extends Controller
         return view('dashboard.car_status.index',compact('rows'));
 
     }
+    public function create()
+    {
+        return view('dashboard.car_status.create');
+
+    }
 
 
     public function store(Request $request)
