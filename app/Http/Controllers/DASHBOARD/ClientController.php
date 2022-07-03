@@ -49,4 +49,13 @@ class ClientController extends Controller
 
         return redirect()->route('dashboard.client.edit',$id);
     }
+
+
+    public function search(Request $request)
+    {
+        Session::flash('search','search');
+        Session::flash('search_name',$request->search);
+        $rows = $this->clientDataResource->search($request->search);
+        return view('dashboard.client.index',compact('rows'));
+    }
 }

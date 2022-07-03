@@ -38,4 +38,14 @@ class ClientDataResource{
         }
     }
 
+    public function search($search)
+    {
+        $rows = Client::where('license_id',$search)->paginate(15);
+        if(count($rows) == 0){
+            $rows = Client::where('full_name','LIKE','%'.$search.'%')->paginate(15);
+        }
+
+        return $rows;
+    }
+
 }

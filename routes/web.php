@@ -66,6 +66,7 @@ Route::prefix('/dashboard')->name('dashboard.')->namespace('DASHBOARD')->group(f
     Route::get('/client/{id}','ClientController@show')->name('client.show');
     Route::get('/client/edit/{id}','ClientController@edit')->name('client.edit');
     Route::put('/client/update/{id}','ClientController@update')->name('client.update');
+    Route::post('/client/search','ClientController@search')->name('client.search');
 
 
 });
