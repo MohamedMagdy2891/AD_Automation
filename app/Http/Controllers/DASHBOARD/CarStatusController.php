@@ -29,14 +29,18 @@ class CarStatusController extends Controller
     }
     public function index()
     {
-<<<<<<< HEAD
-        $statuses=  $this->carStatusDataResource->getAll();
-        return view('dashboard.car_status.index',compact('statuses'));
-=======
+
 
         $rows=  $this->carStatusDataResource->getAll();
         return view('dashboard.car_status.index',compact('rows'));
->>>>>>> c88d5d403b1e8587616d778d6cd449442e2ca396
+
+
+        $rows=  $this->carStatusDataResource->getAll();
+        return view('dashboard.car_status.index',compact('rows'));
+
+        $statuses=  $this->carStatusDataResource->getAll();
+        return view('dashboard.car_status.index',compact('statuses'));
+
     }
 
 

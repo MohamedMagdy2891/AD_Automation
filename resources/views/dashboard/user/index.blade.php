@@ -3,9 +3,15 @@
 @push('header') @endpush
 @section('content')
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> c88d5d403b1e8587616d778d6cd449442e2ca396
+=======
+=======
+
+>>>>>>> 128babb790733925ad8c2c1f55db8eaf3b9b6533
+>>>>>>> eaff86b4867d798a8b2098d1d003f8988697841a
     <div class="row gutters">
         <div class="container-fluid">
             <div class="row">
