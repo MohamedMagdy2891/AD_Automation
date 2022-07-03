@@ -15,15 +15,13 @@ class Client extends Authenticatable
 
 
     protected $fillable = [
-        'fn_name',
-        'ln_name',
-        'address',
-        'phone',
-        'date_of_birth',
-        'country_id',
+        'full_name',
         'email',
-        'password',
+        'phone',
         'photo',
+        'licenese_id',
+        'licenese_image',
+        'password',
         'verification_code',
         'verification_status'
     ];
@@ -37,14 +35,12 @@ class Client extends Authenticatable
     ];
 
 
-    public function getCountry(){
-        return $this->hasOne(Country::class,'country_id','id');
-    }
+
 
     public function orders()
-        {
-            return $this->hasMany(Order::class);
-        }
+    {
+        return $this->hasMany(Order::class);
+    }
 
 
 }

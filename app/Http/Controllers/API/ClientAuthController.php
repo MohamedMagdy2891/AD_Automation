@@ -23,14 +23,12 @@ class ClientAuthController extends Controller
     public function register(Request $request){
 
         $rules = [
-            'fn_name'  => 'required|alpha|min:2|max:20',
-            'ln_name'  => 'required|alpha|min:2|max:20',
-            'phone' => 'required|numeric',
-            'address' => 'required',
-            'date_of_birth' => 'required|date_format:Y/m/d',
-            'country' => 'required',
-            'email' => 'required|regex:/(.+)@(.+)\.(.+)/i|email|unique:users',
+            'full_name'  => 'required|min:2|max:20',
+            'email' => 'required|regex:/(.+)@(.+)\.(.+)/i|email|unique:clients',
+            'phone' => 'required|numeric|unique:clients',
             'password' => 'required|min:8|max:30',
+            'license_id'  => 'required|numeric',
+            'license_image'  => 'required|image|mimes:jpeg,jpg,png,gif|max:2048',
             'photo'  => 'nullable|mimes:jpeg,jpg,png,gif|max:2048'
         ];
 
@@ -41,11 +39,9 @@ class ClientAuthController extends Controller
                 return $this->Data($validation->errors(),'Failed To Register',false,400);
             }
             else{
-                $request->photo != null ? $photo = $request->photo : $photo = null;
-
                 DB::beginTransaction();
-                $data = $this->clientAuth->register($request->fn_name,$request->ln_name,$request->phone,$request->address,
-                $request->date_of_birth,$request->country,$request->email,$request->password,$photo);
+                $data = $this->clientAuth->register($request->full_name,$request->email,$request->phone,$request->password,
+                $request->license_id,$request->license_image);
                 DB::commit();
 
                 return $this->Data($data,'User Register Successfuly',true,200);
