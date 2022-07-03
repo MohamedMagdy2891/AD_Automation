@@ -21,11 +21,7 @@ class GarageController extends Controller
             'ar_garage.min' => 'اسم الجراج باللغة العربية يجب ان يجتوى على أكثر من 3 أحرف',
             'en_garage.required' => 'اسم الجراج باللغة الانجليزية مطلوب',
             'en_garage.min' => 'اسم الجراج باللغة الانجليزية يجب ان يجتوى على أكثر من 3 أحرف',
-            'ar_address.required' => 'عنوان الجراج باللغة العربية مطلوب',
-            'ar_address.min' => 'عنوان الجراج باللغة العربية يجب ان يجتوى على أكثر من 3 أحرف',
-            'en_address.required' => 'عنوان الجراج باللغة الانجليزية مطلوب',
-            'en_address.min' => 'عنوان الجراج باللغة الانجليزية يجب ان يجتوى على أكثر من 3 أحرف',
-            'region_id.required' => 'يجب اختيار المنطقة',
+            'area_id.required' => 'يجب اختيار الموقع',
             'lat.required' => 'خط العرض مطلوب',
             'lang.required' => 'خط الطول مطلوب',
         ];
@@ -39,7 +35,7 @@ class GarageController extends Controller
     }
     public function create()
     {
-        $rows = $this->garageDataResource->getAllRegions();
+        $rows = $this->garageDataResource->getAllArea();
         return view('dashboard.garage.create',compact('rows'));
     }
 
@@ -48,30 +44,27 @@ class GarageController extends Controller
         $request->validate([
             'ar_garage' => 'required|min:3',
             'en_garage' => 'required|min:3',
-            'ar_address' => 'required|min:3',
-            'en_address' => 'required|min:3',
-            'region_id' => 'required',
+            'area_id' => 'required',
             'lat' => 'required',
             'lang' => 'required',
 
         ],$this->Message());
 
-        $row =  $this->garageDataResource->createOne($request->ar_garage,$request->en_garage,$request->ar_address,$request->en_address,
-        $request->region_id,$request->lat,$request->lang);
+        $row =  $this->garageDataResource->createOne($request->ar_garage,$request->en_garage,$request->area_id,$request->lat,$request->lang);
         Session::flash('success', 'تم اضافة '.$row->ar_garage);
         return redirect()->route('dashboard.garage.index');
 
     }
     public function show($id)
     {
-        $rows = $this->garageDataResource->getAllRegions();
+        $rows = $this->garageDataResource->getAllArea();
         $row =  $this->garageDataResource->getOne($id);
         return view('dashboard.garage.show',compact('row','rows'));
     }
     public function edit($id)
     {
         $row =  $this->garageDataResource->getOne($id);
-        $rows = $this->garageDataResource->getAllRegions();
+        $rows = $this->garageDataResource->getAllArea();
         return view('dashboard.garage.edit',compact('row','rows'));
     }
 
@@ -80,16 +73,13 @@ class GarageController extends Controller
         $request->validate([
             'ar_garage' => 'required|min:3',
             'en_garage' => 'required|min:3',
-            'ar_address' => 'required|min:3',
-            'en_address' => 'required|min:3',
-            'region_id' => 'required',
+            'area_id' => 'required',
             'lat' => 'required',
             'lang' => 'required',
 
         ],$this->Message());
 
-        $row =  $this->garageDataResource->updateOne($id,$request->ar_garage,$request->en_garage,$request->ar_address,$request->en_address,
-        $request->region_id,$request->lat,$request->lang);
+        $row =  $this->garageDataResource->updateOne($id,$request->ar_garage,$request->en_garage,$request->area_id,$request->lat,$request->lang);
         $row != null ? Session::flash('success', 'تم تعديل بيانات حراج '.$row->ar_garage):Session::flash('failed', 'لم يتم تعديل بيانات '.$request->ar_garage.' لعدم التغيير فى البيانات');
 
 

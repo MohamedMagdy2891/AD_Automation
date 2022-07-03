@@ -47,10 +47,10 @@
         $('#ar_name').val("{{ $row->ar_name }}").prop('disabled', true);
         $('#en_name').val("{{ $row->en_name }}").prop('disabled', true);
         $('#color').val("{{ $row->color }}").prop('disabled', true);
-        $('#status').val("{{ $row->status }}").prop('disabled', true);
+        $('#status_id').val("{{ $row->status_id }}").prop('disabled', true);
         $('#model_id').val("{{ $row->model_id }}").prop('disabled', true);
         $('#car_model_year').val("{{ $row->car_model_year }}").prop('disabled', true);
-        $('#category').val("{{ $row->category }}").prop('disabled', true);
+        $('#category_id').val("{{ $row->category_id }}").prop('disabled', true);
         $('#garage_id').val("{{ $row->garage_id }}").prop('disabled', true);
         $('#car_type').val("{{ $row->car_type }}").prop('disabled', true);
         $('#no_doors').val("{{ $row->no_doors }}").prop('disabled', true);

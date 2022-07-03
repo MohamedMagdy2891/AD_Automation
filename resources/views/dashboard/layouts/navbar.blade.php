@@ -19,7 +19,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-map nav-icon"></i>
-                    المناطق و الحراجات
+                    المناطق و المواقع
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
                     <li>
@@ -28,6 +28,21 @@
                     <li>
                         <a class="dropdown-item" href="{{ URL::route('dashboard.region.index') }}">كل المناطق</a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ URL::route('dashboard.area.create') }}">اضافة موقع</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ URL::route('dashboard.area.index') }}">كل موقع</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon-directions nav-icon"></i>
+                    الحراجات
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
+
                     <li>
                         <a class="dropdown-item" href="{{ URL::route('dashboard.garage.create') }}">اضافة حراج</a>
                     </li>
