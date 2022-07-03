@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\DASHBOARD\DataResources\UserDataResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\DASHBOARD\Traits\UsersRulesTrait;
 
 
@@ -22,8 +20,7 @@ class UserController extends Controller
     }
     public function index()
     {
-        //
-        // $users =  User::all();
+
         Session::forget('search');
         Session::forget('search_name');
         $roles =$this->usersRules();
@@ -77,7 +74,7 @@ class UserController extends Controller
             'password_confirmation' => 'required_with:password|same:password',
         ],$this->message());
 
-        $row = $this->userDataResource->createOne($request->name,$request->email,$request->password,$request->phone,$request->type,$request->image);
+        $row = $this->UserDataResource->createOne($request->name,$request->email,$request->password,$request->phone,$request->type,$request->image);
         Session::flash('success','تم اضافة المستخدم : '.$row->name.' بنجاح');
         return redirect()->route('dashboard.user.index');
     }
@@ -85,7 +82,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $row = $this->userDataResource->getOne($id);
+        $row = $this->UserDataResource->getOne($id);
         $roles=$this->usersRules();
         return view('dashboard.user.show',compact('row','roles'));
     }
@@ -94,7 +91,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $roles=$this->usersRules();
-        $row = $this->userDataResource->getOne($id);
+        $row = $this->UserDataResource->getOne($id);
         return view('dashboard.user.edit',compact('roles','row'));
     }
 
@@ -110,7 +107,7 @@ class UserController extends Controller
             'type' => 'required|numeric',
         ],$this->message());
 
-        $row = $this->userDataResource->updateOne($id,$request->name,$request->email,$request->phone,$request->type,$request->image);
+        $row = $this->UserDataResource->updateOne($id,$request->name,$request->email,$request->phone,$request->type,$request->image);
 
         $row != null ?  Session::flash('success','تم تعديل  بيانات المستخدم : '.$row->name.' بنجاح') : Session::flash('failed','لم يتم التعديل في بيانات المستخدم : '.$request->name);
         return redirect()->route('dashboard.user.edit',$id);
@@ -121,7 +118,7 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $row =  $this->userDataResource->deleteOne($id);
+        $row =  $this->UserDataResource->deleteOne($id);
         Session::flash('success','تم حذف بيانات المستخدم : '.$row);
         return redirect()->route('dashboard.user.index');
     }
@@ -129,7 +126,7 @@ class UserController extends Controller
     public function search(Request $request)
     {
 
-        $rows = $this->userDataResource->searchByName($request->search);
+        $rows = $this->UserDataResource->searchByName($request->search);
         Session::flash('search','search');
         Session::flash('search_name',$request->search);
         $roles =$this->usersRules();
@@ -138,7 +135,7 @@ class UserController extends Controller
     }
     public function deleteAll()
     {
-        $rows =  $this->userDataResource->deleteAllData();
+        $rows =  $this->UserDataResource->deleteAllData();
         Session::flash('success','تم حذف كل بيانات المستخدمين ');
         return redirect()->route('dashboard.user.index');
     }
