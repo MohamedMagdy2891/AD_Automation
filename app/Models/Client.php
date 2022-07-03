@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use App\Models\Country;
-
+use App\Models\Order;
 class Client extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -41,5 +41,9 @@ class Client extends Authenticatable
         return $this->hasOne(Country::class,'country_id','id');
     }
 
+    public function orders()
+        {
+            return $this->hasMany(Order::class);
+        }
 
 }

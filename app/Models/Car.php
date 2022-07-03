@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Order;
 class Car extends Model
 {
     use HasFactory;
@@ -56,7 +56,10 @@ class Car extends Model
     {
         return $this->hasOne(CarModel::class,'id','model_id');
     }
-
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 
 
 }
