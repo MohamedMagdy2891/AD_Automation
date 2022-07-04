@@ -72,5 +72,9 @@ Route::prefix('/dashboard')->name('dashboard.')->namespace('DASHBOARD')->group(f
     Route::put('/client/update/{id}','ClientController@update')->name('client.update');
     Route::post('/client/search','ClientController@search')->name('client.search');
 
+    Route::get('/sms','SmsController@index')->name('sms.index');
+    Route::get('/sms/edit','SmsController@edit')->name('sms.edit');
+    Route::put('/sms/update','SmsController@update')->name('sms.update');
+
 
 });
