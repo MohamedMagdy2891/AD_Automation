@@ -84,7 +84,7 @@
                                     @endforeach
                                 @else
                                     <tr class="text-center">
-                                        <td colspan="6" class="text-bold">لا يوجد اى مستخدمين مضافين حتي الان</td>
+                                        <td colspan="16" class="text-bold">لا يوجد اى طلبات مضافة حتي الان</td>
                                     </tr>
                                 @endif
                             </tbody>
