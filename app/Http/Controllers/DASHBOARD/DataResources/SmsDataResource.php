@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\DASHBOARD\DataResources;
 
+use App\Http\Controllers\Support\SMS as SupportSMS;
 use App\Models\SMS;
+use App\Models\SmsMessage;
 
 class SmsDataResource{
 
@@ -13,6 +15,11 @@ class SmsDataResource{
         if(count($rows) == 0){
             $this->createOne('alghad');
         }
+        return $rows;
+    }
+    public function getAllMessages()
+    {
+        $rows = SmsMessage::latest()->paginate(15);
         return $rows;
     }
 
@@ -41,6 +48,23 @@ class SmsDataResource{
             return null;
         }
 
+    }
+
+
+    public function sendOneMessage($phone,$message)
+    {
+        $row = new SmsMessage();
+        $row->phone = $phone;
+        $row->message = $message;
+        $row->gateway = $this->getOne()->gateway;
+        $sms = new SupportSMS();
+        if($sms->sendMessage($phone,$message)['status'] == true){
+            $row->save();
+            return $row;
+
+        }else{
+            return null;
+        }
     }
 
 

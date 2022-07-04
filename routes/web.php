@@ -75,6 +75,9 @@ Route::prefix('/dashboard')->name('dashboard.')->namespace('DASHBOARD')->group(f
     Route::get('/sms','SmsController@index')->name('sms.index');
     Route::get('/sms/edit','SmsController@edit')->name('sms.edit');
     Route::put('/sms/update','SmsController@update')->name('sms.update');
+    Route::get('/sms/message','SmsController@message')->name('sms.message.index');
+    Route::get('/sms/message/create','SmsController@create')->name('sms.message.create');
+    Route::post('/sms/message/store','SmsController@store')->name('sms.message.store');
 
 
 });

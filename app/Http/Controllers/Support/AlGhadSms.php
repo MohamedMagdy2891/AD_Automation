@@ -31,16 +31,16 @@ class AlGhadSMS{
             return $result = ['status' => true,'message'=> 'Done'];
         }
         else if ($response->serverError() == true){
-            return $result = ['false' => true,'message'=> 'Server Error'];
+            return $result = ['status' => false,'message'=> 'Server Error'];
         }
         else if($response->clientError() == true){
-            return $result = ['false' => true,'message'=> 'Client Error'];
+            return $result = ['status' => false,'message'=> 'Client Error'];
         }
         else if($response->failed() == true){
-            return $result = ['false' => true,'message'=> 'Response Failed'];
+            return $result = ['status' => false,'message'=> 'Response Failed'];
         }
         else{
-            return $result = ['false' => true,'message'=> 'Failed'];
+            return $result = ['status' => false,'message'=> 'Failed'];
         }
     }
 }

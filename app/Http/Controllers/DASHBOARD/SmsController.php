@@ -35,6 +35,36 @@ class SmsController extends Controller
         return redirect()->route('dashboard.sms.edit');
     }
 
+    public function message()
+    {
+        $rows =  $this->smsDataResource->getAllMessages();
+        return view('dashboard.sms_message.index',compact('rows'));
+    }
+
+    public function create()
+    {
+        return view('dashboard.sms_message.create');
+    }
+
+    public function store(Request $request)
+    {
+        $message = [
+            'phone.required' => 'رقم الجوال مطلوب',
+            'phone.numeric' => 'رقم الجوال يجب ان يحتوى على أرقام فقط',
+            'message.required' => 'يجب كتابة الرسالة'
+        ];
+        $request->validate([
+            'phone' => 'required|numeric',
+            'message' => 'required'
+        ],$message);
+
+        $row = $this->smsDataResource->sendOneMessage($request->phone,$request->message);
+        $row != null ? Session::flash('success', 'تم الرسال الرسالة بنجاح ') : Session::flash('success', 'فشل ارسال الرسالة حاول مجددا ');
+        return redirect()->route('dashboard.sms.message.index');
+
+
+    }
+
 
 
 }

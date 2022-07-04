@@ -148,7 +148,12 @@
                     الاعدادت
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
-
+                    <li>
+                        <a class="dropdown-item" href="{{ URL::route('dashboard.sms.message.create') }}">ارسال رسالة</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ URL::route('dashboard.sms.message.index') }}">كل الرسائل</a>
+                    </li>
                     <li>
                         <a class="dropdown-item" href="{{ URL::route('dashboard.sms.index') }}">اعدادات الرسائل</a>
                     </li>
