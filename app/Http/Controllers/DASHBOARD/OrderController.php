@@ -103,7 +103,6 @@ class OrderController extends Controller
     public function update($id ,Request $request)
     {
 
-        $status=$this->orderStatus();
 
         $request->validate([
             'client_id'=> 'required',
@@ -112,8 +111,6 @@ class OrderController extends Controller
             'deliver_place' => 'required',
             'receive_time' => 'required',
             'deliver_time'=> 'required',
-            'killometers_consumed' => 'required',
-            'support' => 'required',
         ],$this->message());
 
 
@@ -127,9 +124,20 @@ class OrderController extends Controller
         $request->killometers_consumed,
         $request->hours_consumed,
         $request->support
-        ,$request->total,$request->order_status,
+        ,$request->total,
+        $request->order_status,
         $request->reason_of_rejection
         );
+
+        if($request->order_status=="Approved"){
+
+            $checkTime = strtotime($row->deliver_time);
+            $loginTime = strtotime($row->receive_time);
+            $diff = $checkTime - $loginTime;
+            $hours=date("h",$diff);
+            $row->total=$row->Car->price_per_hour *$hours ;
+            return  $row->total;
+        }
 
         $row != null ?  Session::flash('success','تم تعديل  بيانات المستخدم : '.$row->Client->fn_name.' بنجاح') : Session::flash('failed','لم يتم التعديل في بيانات المستخدم : '.$request->client_id);
 
@@ -137,20 +145,7 @@ class OrderController extends Controller
 
     }
 
-        public function updateStatus($id,Request $request)
-        {
-            $row = Order::findOrFail($id);
-            if($request->has('approve')){
-            $row->order_status ='Approved';
-            $row->update();
-            return redirect()->route('dashboard.orders.show',$id);
-        }else{
-            $row->order_status ='Rejected';
-            $row->reason_of_rejection=$request->reason_of_rejection;
-            $row->update();
-            return redirect()->route('dashboard.orders.show',$id);
-        }
-        }
+
 
 
 }
