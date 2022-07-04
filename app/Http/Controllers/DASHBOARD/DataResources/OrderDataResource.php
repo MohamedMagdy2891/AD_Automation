@@ -36,14 +36,14 @@ class OrderDataResource{
         return $row;
     }
 
-    public function updateOne($id,$client_id,$car_id,$receive_place,$deliver_place,$receive_time,$deliver_time,$killometers_consumed,$hours_consumed,$support,$total,$status)
+    public function updateOne($id,$client_id,$car_id,$receive_place,$deliver_place,$receive_time,$deliver_time,$killometers_consumed,$hours_consumed,$support,$total,$status,$rejection_reason)
     {
 
         $row = Order::findOrFail($id);
         if($row->client_id != $client_id || $row->car_id != $car_id ||$row->receive_place != $receive_place ||
             $row->deliver_place != $deliver_place|| $row->receive_time !=$receive_time || $row->deliver_time!=$deliver_time
          || $row->killometers_consumed != $killometers_consumed || $row->hours_consumed!=$hours_consumed||
-         $row->support!= $support || $row->total!= $total || $row->order_status != $status){
+         $row->support!= $support || $row->total!= $total || $row->order_status != $status||$row->reason_of_rejection !=$rejection_reason){
 
             $car = $this->getCar($car_id);
 
@@ -62,6 +62,7 @@ class OrderDataResource{
             $row->support = $support;
             $row->total = $total;
             $row->order_status = $status;
+            $row->reason_of_rejection=$rejection_reason;
             $row->update();
             return $row;
         }else{

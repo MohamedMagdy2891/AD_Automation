@@ -127,7 +127,8 @@ class OrderController extends Controller
         $request->killometers_consumed,
         $request->hours_consumed,
         $request->support
-        ,$request->total,$request->order_status
+        ,$request->total,$request->order_status,
+        $request->reason_of_rejection
         );
 
         $row != null ?  Session::flash('success','تم تعديل  بيانات المستخدم : '.$row->Client->fn_name.' بنجاح') : Session::flash('failed','لم يتم التعديل في بيانات المستخدم : '.$request->client_id);

@@ -27,7 +27,8 @@ class order extends Model
         'extra_driver_checked',
         'shield_checked',
         'baby_seat_checked',
-        'open_kilometers_checked'
+        'open_kilometers_checked',
+        'user_id'
     ];
 
     // public function garage(){

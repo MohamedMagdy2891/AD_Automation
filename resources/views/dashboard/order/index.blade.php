@@ -17,9 +17,6 @@
                     </form>
                 </div>
                 <div class="col-md-4 text-right mb-2">
-                    @if(count($rows) != 0)
-                        {{-- <a id="delete" style="display: inline" class="btn btn-danger btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.orders.delete.all') }}">حذف الكل <span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></a> --}}
-                    @endif
                 </div>
             </div>
         </div>
@@ -58,18 +55,12 @@
                                             <td>{{ $row->deliver_time }}</td>
 
                                             <?php $count=0; ?>
-                                            @if ($row->extra_driver_checked)
-                                               @php $count+=$row->Car->extra_driver_price @endphp
-                                            @endif
-                                            @if ($row->baby_seat_checked)
-                                            @php $count+=$row->Car->baby_seat_price @endphp
-                                            @endif
-                                            @if ($row->shield_checked)
-                                            @php $count+=$row->Car->shield_price @endphp
-                                            @endif
-                                            @if ($row->open_kilometers_checked)
-                                            @php $count+=$row->Car->open_kilometers_price @endphp
-                                                @endif
+                                          @php
+                                           $row->extra_driver_checked ? $count+=$row->Car->extra_driver_price  :$count;
+                                           $row->baby_seat_checked ? $count+=$row->Car->baby_seat_price : $count ;
+                                           $row->shield_checked ? $count+=$row->Car->shield_price : $count ;
+                                           $row->open_kilometers_checked ? $count+=$row->Car->open_kilometers_checked : $count ;
+                                           @endphp
                                             <td>{{ $count }}</td>
                                             <td>{{ $row->total }}</td>
                                              <td>{{ $row->order_status }}</td>
