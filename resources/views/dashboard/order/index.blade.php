@@ -64,26 +64,12 @@
                                             <td>{{ $row->killometers_consumed }}</td>
                                             <td>{{ $row->hours_consumed }}</td>
 
-                                            @if ($row->Car->extra_driver)
-                                            <td>{{ $row->Car->extra_driver_price }}</td>
-                                            @else
-                                            <td> لا يوجد </td>
-                                            @endif
-                                            @if ($row->Car->shield)
-                                            <td>{{ $row->Car->shield_price }}</td>
-                                            @else
-                                            <td> لا يوجد </td>
-                                            @endif
-                                            @if ($row->Car->baby_seat)
-                                            <td>{{ $row->Car->baby_seat_price }}</td>
-                                            @else
-                                            <td> لا يوجد </td>
-                                            @endif
-                                            @if ($row->Car->open_kilometers)
-                                            <td>{{ $row->Car->open_kilometers_price }}</td>
-                                            @else
-                                            <td> لا يوجد </td>
-                                            @endif
+
+                                            <td> @if ($row->extra_driver_checked) نعم @else لا  @endif </td>
+
+                                            <td> @if ($row->baby_seat_checked) نعم @else لا  @endif </td>
+                                            <td> @if ($row->open_kilometers_checked) نعم @else لا  @endif </td>
+                                            <td> @if ($row->shield_checked) نعم @else لا  @endif </td>
                                             <td>{{ $row->total }}</td>
                                              <td>{{ $status[$row->order_status]['status'] }}</td>
                                             <td>

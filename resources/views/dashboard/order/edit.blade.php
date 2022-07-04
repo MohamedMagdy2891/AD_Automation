@@ -49,11 +49,26 @@
         $('#deliver_time').val("{{ $row->deliver_time}}");
         $('#killometers_consumed').val("{{ $row->killometers_consumed}}");
         $('#hours_consumed').val("{{ $row->hours_consumed }}");
-
-        $('#extra_driver_price').val("{{ $row->Car->extra_driver_price }}").prop('disabled', true);
-        $('#shield_price').val("{{ $row->Car->shield_price}}").prop('disabled', true);
-        $('#baby_seat_price').val("{{ $row->Car->baby_seat_price}}").prop('disabled', true);
-        $('#open_kilometers_price').val("{{ $row->Car->open_kilometers_price }}").prop('disabled', true);
+        if ($("#extra_driver_price").hasClass("checked")) {
+            $("#extra_driver_price").val("{{ $row->Car->extra_driver_price}}").prop('disabled', true);
+        }else{
+            $('#extra_driver_price').val("0").prop('disabled', true);
+        }
+        if ($("#shield_price").hasClass("checked")) {
+            $("#shield_price").val("{{ $row->Car->shield_price}}").prop('disabled', true);
+        }else{
+            $('#shield_price').val("0").prop('disabled', true);
+        }
+        if ($("#baby_seat_price").hasClass("checked")) {
+            $("#baby_seat_price").val("{{ $row->Car->baby_seat_price}}").prop('disabled', true);
+        }else{
+            $('#baby_seat_price').val("0").prop('disabled', true);
+        }
+        if ($("#open_kilometers_price").hasClass("checked")) {
+            $("#open_kilometers_price").val("{{ $row->Car->open_kilometers_price}}").prop('disabled', true);
+        }else{
+            $('#open_kilometers_price').val("0").prop('disabled', true);
+        }
         $('#support').val("{{ $row->support}}");
         $('#total').val("{{ $row->total }}");
 

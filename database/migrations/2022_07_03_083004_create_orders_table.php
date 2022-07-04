@@ -23,6 +23,10 @@ class CreateOrdersTable extends Migration
             $table->timestamp('deliver_time');
             $table->unsignedBigInteger('killometers_consumed')->nullable();
             $table->unsignedBigInteger('hours_consumed')->nullable();
+            $table->boolean('extra_driver_checked');
+            $table->boolean('shield_checked');
+            $table->boolean('baby_seat_checked');
+            $table->boolean('open_kilometers_checked');
             $table->double('extra_driver_price')->default(0);
             $table->double('shield_price')->default(0);
             $table->double('baby_seat_price')->default(0);

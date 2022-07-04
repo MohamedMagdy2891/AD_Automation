@@ -23,8 +23,13 @@ class order extends Model
         'open_kilometers_price',
         'order_status',
         'support',
-        'total'
+        'total',
+        'extra_driver_checked',
+        'shield_checked',
+        'baby_seat_checked',
+        'open_kilometers_checked'
     ];
+
     // public function garage(){
     //     return $this->belongsTo(Garage::class);
     // }

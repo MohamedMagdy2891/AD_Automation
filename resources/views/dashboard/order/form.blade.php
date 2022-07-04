@@ -14,7 +14,7 @@
 
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
-            <label for="receive_place">   مكان الإستلام </label>
+            <label for="receive_place">مكان الإستلام </label>
             <input value="{{ old('receive_place') }}" type="text" name="receive_place" class="form-control p-0 pt-1 pr-2" id="receive_place" placeholder="مكان الإستلام ">
         </div>
     </div>
@@ -126,28 +126,28 @@
 <div class="row gutters">
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
-            <label for="extra_driver_price">   سعر خدمة إضافة  سائق </label>
-            <input value="{{ old('extra_driver_price') }}" type="text" name="extra_driver_price" class="form-control p-0 pt-1 pr-2" id="extra_driver_price" placeholder=" سعر خدمة سائق إضافي">
+            <label for="extra_driver_price"> سعر خدمة إضافة  سائق </label>
+            <input  value="{{ old('extra_driver_price')}}"type="text" name="extra_driver_price" class="form-control p-0 pt-1 pr-2 @if($row->extra_driver_checked)checked @endif" id="extra_driver_price" placeholder=" سعر خدمة سائق إضافي">
         </div>
     </div>
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
             <label for="shield_price">  سعر الدرع الإضافي   </label>
-            <input value="{{ old('shield_price') }}" type="text" name="shield_price" class="form-control p-0 pt-1 pr-2" id="shield_price" placeholder="سعر الدرع الإضافي  ">
+            <input value="{{ old('shield_price') }}" type="text" name="shield_price" class="form-control p-0 pt-1 pr-2 @if($row->shield_checked)checked @endif" id="shield_price" placeholder="سعر الدرع الإضافي  ">
         </div>
     </div>
 
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
             <label for="baby_seat_price">  سعر مقعد الأطفال </label>
-            <input value="{{ old('baby_seat_price') }}" type="text" name="baby_seat_price" class="form-control p-0 pt-1 pr-2" id="baby_seat_price" placeholder=" سعر مقعد الأطفال ">
+            <input value="{{ old('baby_seat_price') }}" type="text" name="baby_seat_price" class="form-control p-0 pt-1 pr-2 @if($row->baby_seat_checked)checked @endif" id="baby_seat_price" placeholder=" سعر مقعد الأطفال ">
         </div>
     </div>
 
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
             <label for="open_kilometers_price"> open kilometers price </label>
-            <input value="{{ old('open_kilometers_price') }}" type="text" name="open_kilometers_price" class="form-control p-0 pt-1 pr-2" id="open_kilometers_price" placeholder=" open kilometers ">
+            <input value="{{ old('open_kilometers_price') }}" type="text" name="open_kilometers_price" class="form-control p-0 pt-1 pr-2 @if($row->open_kilometers_checked)checked @endif" id="open_kilometers_price" placeholder=" open kilometers ">
         </div>
     </div>
 </div>

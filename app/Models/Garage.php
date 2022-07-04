@@ -18,7 +18,6 @@ class Garage extends Model
 
    // protected $foreignKey = 'region_id';
 
-
     protected $hidden = [
         'create_at',
         'updated_at'
