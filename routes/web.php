@@ -67,4 +67,11 @@ Route::prefix('/dashboard')->name('dashboard.')->namespace('DASHBOARD')->group(f
     Route::post('/orders/search','OrderController@search')->name('orders.search');
     Route::get('/orders/delete/all','OrderController@deleteAll')->name('orders.delete.all');
 
+    Route::get('/client','ClientController@index')->name('client.index');
+    Route::get('/client/{id}','ClientController@show')->name('client.show');
+    Route::get('/client/edit/{id}','ClientController@edit')->name('client.edit');
+    Route::put('/client/update/{id}','ClientController@update')->name('client.update');
+    Route::post('/client/search','ClientController@search')->name('client.search');
+
+
 });

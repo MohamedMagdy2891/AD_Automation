@@ -15,18 +15,15 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->string('fn_name');
-            $table->string('ln_name');
-            $table->string('phone');
-            $table->date('date_of_birth');
-            $table->unsignedBigInteger('country_id')->index();
-            $table->foreign('country_id')->on('countries')->references('id')->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->longText('address');
-            $table->longText('photo')->nullable();
+            $table->string('full_name');
             $table->string('email')->unique();
+            $table->string('phone')->unique();
+            $table->string('license_id')->unique();
+            $table->longText('license_image')->nullable();
             $table->string('password');
             $table->string('verification_code')->nullable();
             $table->boolean('verification_status')->default(false);
+            $table->longText('photo')->nullable();
             $table->timestamps();
 
         });

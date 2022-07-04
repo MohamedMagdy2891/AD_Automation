@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\Controllers\API\DataResources;
 use App\Models\Client;
-use App\Models\Country;
-use App\Http\Controllers\API\Traits\ImageTrait;
+use App\Http\Controllers\API\Traits\LicenseImageTrait;
+use App\Http\Controllers\API\Traits\PhotoTrait;
 use Illuminate\Support\Facades\Hash;
 
 class ClientAuthResource{
-    use ImageTrait;
+    use PhotoTrait,LicenseImageTrait;
     public $client;
 
     public function __construct()
@@ -15,43 +15,37 @@ class ClientAuthResource{
     }
 
 
-    public function register($fn_name,$ln_name,$phone,$address,$date_of_birth,$country,$email,$password,$photo=null){
+    public function register($full_name,$email,$phone,$password,$license_id,$license_image,$photo=null){
 
-        $photo != null ? $photo = $this->Image($this->client,'clients',$photo) : $photo = null;
+        $photo != null ? $photo = $this->photo($this->client,'Clients',$photo) : $photo = null;
 
 
-        $this->client->fn_name  = $fn_name;
-        $this->client->ln_name  = $ln_name;
-        $this->client->phone = $phone;
-        $this->client->address = $address;
-        $this->client->date_of_birth = $date_of_birth;
-        $this->client->country_id = $country;
+        $this->client->full_name  = $full_name;
         $this->client->email = $email;
+        $this->client->phone = $phone;
         $this->client->password = Hash::make($password);
         $this->client->photo  = $photo;
+        $this->client->license_id  = $license_id;
+        $this->client->license_image  = $this->LicenseImage($this->client,'Clients_Licenses',$license_image);
         $this->client->verification_code = str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
-        $this->client->getCountry($this->client->country_id);
         $this->client->saveOrFail();
 
 
-        $token = $this->client->createToken('Automation this->client Token')->accessToken;
+        $token = $this->client->createToken('Automation - client Token')->accessToken;
 
         $client_find = $this->client::find($this->client->id);
-        $country_find = Country::find($client_find->country_id);
 
         $data = [
             'id' => $this->client->id,
-            'fn_name'  => $this->client->fn_name,
-            'ln_name'  => $this->client->ln_name,
-            'phone' => $this->client->phone,
-            'address' => $this->client->address,
-            'date_of_birth' => $this->client->date_of_birth,
-            'country' => $country_find,
+            'full_name'  => $this->client->full_name,
             'email' => $this->client->email,
+            'phone' => $this->client->phone,
+            'photo'  => $client_find->photo != null ? env('DOMAIN').$client_find->photo : null,
+            'license_id' => $this->client->license_id,
+            'license_image' => env('DOMAIN').$this->client->license_image,
             'verification_code' => $this->client->verification_code,
             'verification_status' => $client_find->verification_status,
-            'photo'  => env('DOMAIN').$client_find->photo,
-            'token' => $token,
+            'token' => $token
 
         ];
         return $data;
@@ -79,7 +73,6 @@ class ClientAuthResource{
         if($check_Auth_login == 1){
             $client_find->tokens()->delete();
             $token = $client_find->createToken('Automation this->client Token')->accessToken;
-            $country_find = Country::find($client_find->country_id);
 
             $data = [
                 'id' => $client_find->id,
@@ -88,11 +81,10 @@ class ClientAuthResource{
                 'phone' => $client_find->phone,
                 'address' => $client_find->address,
                 'date_of_birth' => $client_find->date_of_birth,
-                'country' => $country_find,
                 'email' => $client_find->email,
                 'verification_code' => $client_find->verification_code,
                 'verification_status' => $client_find->verification_status,
-                'photo'  => env('DOMAIN').$client_find->photo,
+                'image'  => env('DOMAIN').$client_find->image,
                 'token' => $token,
             ];
         }
