@@ -129,6 +129,21 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon-shopping-basket nav-icon"></i>
+                    الطلبات
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
+
+                    <li>
+                        <a class="dropdown-item" href="{{ URL::route('dashboard.orders.index') }}">كل الطلبات</a>
+                    </li>
+
+
+
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-user nav-icon"></i>المستخدمين</a>
                     <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
                         <li>
