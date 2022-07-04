@@ -2,7 +2,8 @@
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
             <label for="client_id">   إسم المتأجر</label>
-            <input value="{{ old('client_id') }}" type="text" name="client_id" class="form-control p-0 pt-1 pr-2" id="client_id" placeholder="اسم المستخدم  ">
+            <input value="{{ old('client_id') }}" type="hidden" name="client_id" class="form-control p-0 pt-1 pr-2" id="client_id" >
+            <input value="{{ old('client_id') }}" type="text" name="client_name" class="form-control p-0 pt-1 pr-2" id="client_name" placeholder="اسم المستخدم  ">
         </div>
     </div>
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">

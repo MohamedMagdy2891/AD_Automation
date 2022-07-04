@@ -41,6 +41,7 @@
         $('#message2').delay(3000).fadeOut('slow');
         $('#message3').delay(3000).fadeOut('slow');
         $('#client_id').val("{{ $row->client_id}}");
+        $('#client_name').val("{{ $row->Client->fn_name}}");
         $('#car_id').val("{{ $row->car_id }}");
         $('#receive_place').val("{{ $row->receive_place}}");
         $('#deliver_place').val("{{ $row->deliver_place}}");
