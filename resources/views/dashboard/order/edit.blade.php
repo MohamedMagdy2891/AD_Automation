@@ -41,6 +41,8 @@
         $('#message2').delay(3000).fadeOut('slow');
         $('#message3').delay(3000).fadeOut('slow');
         $('#client_id').val("{{ $row->client_id}}");
+        $('#client_name').val("{{ $row->Client->fn_name}}");
+        $('#car_code').val("{{ $row->Car->code}}");
         $('#car_id').val("{{ $row->car_id }}");
         $('#receive_place').val("{{ $row->receive_place}}");
         $('#deliver_place').val("{{ $row->deliver_place}}");
@@ -72,7 +74,7 @@
         $('#support').val("{{ $row->support}}");
         $('#total').val("{{ $row->total }}");
 
-        $('#order_status').val("{{$status[$row->order_status]['status']}}").prop('disabled', true);
+        $('#order_status').val("{{$row->order_status}}").prop('disabled', true);
     });
 
  </script>

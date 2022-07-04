@@ -134,11 +134,11 @@ class OrderController extends Controller
         {
             $row = Order::findOrFail($id);
             if($request->has('approve')){
-            $row->order_status = 1;
+            $row->order_status ='Approved';
             $row->update();
             return redirect()->route('dashboard.orders.show',$id);
         }else{
-            $row->order_status = 2;
+            $row->order_status ='Rejected';
             $row->update();
             return redirect()->route('dashboard.orders.show',$id);
         }

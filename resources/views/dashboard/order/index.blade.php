@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-md-4 text-right mb-2">
                     @if(count($rows) != 0)
-                        <a id="delete" style="display: inline" class="btn btn-danger btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.orders.delete.all') }}">حذف الكل <span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></a>
+                        {{-- <a id="delete" style="display: inline" class="btn btn-danger btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.orders.delete.all') }}">حذف الكل <span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></a> --}}
                     @endif
                 </div>
             </div>
@@ -71,7 +71,7 @@
                                             <td> @if ($row->open_kilometers_checked) نعم @else لا  @endif </td>
                                             <td> @if ($row->shield_checked) نعم @else لا  @endif </td>
                                             <td>{{ $row->total }}</td>
-                                             <td>{{ $status[$row->order_status]['status'] }}</td>
+                                             <td>{{ $row->order_status }}</td>
                                             <td>
                                                 <a class="btn btn-success btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.orders.show', $row->id ) }}"><span class="icon-eye text-light" style="font-size: .8rem"></span></a>
                                                 <a class="btn btn-info btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.orders.edit',$row->id) }}"><span class="w-100 icon-pencil text-light" style="font-size: .8rem"></span></a>

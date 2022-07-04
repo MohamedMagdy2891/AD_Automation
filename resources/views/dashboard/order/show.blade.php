@@ -30,7 +30,7 @@
                 @include('dashboard.order.form')
 
 
-                    @if ($row->order_status == 0)
+                    @if ($row->order_status == 'Pending')
 
                     <div class="row gutters">
                         <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3"></div>
@@ -89,7 +89,7 @@
         }else{
             $('#open_kilometers_price').val("0").prop('disabled', true);
         }
-        $('#order_status').val("{{$status[$row->order_status]['status']}}").prop('disabled', true);
+        $('#order_status').val("{{$row->order_status}}").prop('disabled', true);
         $('#support').val("{{ $row->support }}").prop('disabled', true);
         $('#total').val("{{$row->total}}").prop('disabled', true);
     });
