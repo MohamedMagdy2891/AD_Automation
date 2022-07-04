@@ -73,8 +73,8 @@
         }
         $('#support').val("{{ $row->support}}");
         $('#total').val("{{ $row->total }}");
-
-        $('#order_status').val("{{$row->order_status}}").prop('disabled', true);
+        $('#reason_of_rejection').val("{{ $row->reason_of_rejection }}");
+        $('#order_status').val("{{$row->order_status}}");
     });
 
  </script>

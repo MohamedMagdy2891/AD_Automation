@@ -5,12 +5,12 @@
     <div class="row gutters">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4 text-right mb-2"  ></div>
-                <div class="col-md-4 text-right mb-2"  >
+                <div class="col-md-4 text-right mb-2"></div>
+                <div class="col-md-4 text-right mb-2">
                     <form action="{{ URL::route('dashboard.orders.search') }}" method="post" style="display: inline">
                         @csrf
                         @method('POST')
-                        <input  type="text" @if(session()->has('search')) value="{{ session()->get('search_name') }}" @endif name="search" style="border-radius: 50px;display: inline;width:80%" class="form-control p-0 pt-1 text-center" placeholder="ابحث  بكود السيارة">
+                        <input  type="text" @if(session()->has('search')) value="{{ session()->get('search_name') }}" @endif name="search" style="border-radius: 50px;display: inline;width:80%" class="form-control p-0 pt-1 text-center" placeholder="ابحث  برقم هوية العميل ">
                         @if(session()->has('search'))
                             <a style="display: inline;border-radius: 100px" class="btn btn-primary pr-2 pl-2 pt-1 pb-0 m-0" href="{{ URL::route('dashboard.orders.index') }}" ><span style="font-size: 1rem" class="icon-close"></span></a>
                         @endif
@@ -38,12 +38,7 @@
                                     <th>وقت الإستلام </th>
                                     <th>مكان التسليم</th>
                                     <th>  وقت التسليم  </th>
-                                    <th>  عدد الكيلومترات المستهلكة  </th>
-                                    <th> عدد ساعات الإستخدام </th>
-                                    <th>سائق إضافي </th>
-                                    <th>مقعد أطفال  </th>
-                                    <th>درع  </th>
-                                    <th>open kilometers</th>
+                                    <th> إضافات</th>
                                     <th>total</th>
                                     <th>حالة الطلب</th>
                                     <th>العمليات</th>
@@ -61,15 +56,21 @@
                                             <td>{{ $row->receive_time }}</td>
                                             <td>{{ $row->deliver_place }}</td>
                                             <td>{{ $row->deliver_time }}</td>
-                                            <td>{{ $row->killometers_consumed }}</td>
-                                            <td>{{ $row->hours_consumed }}</td>
 
-
-                                            <td> @if ($row->extra_driver_checked) نعم @else لا  @endif </td>
-
-                                            <td> @if ($row->baby_seat_checked) نعم @else لا  @endif </td>
-                                            <td> @if ($row->open_kilometers_checked) نعم @else لا  @endif </td>
-                                            <td> @if ($row->shield_checked) نعم @else لا  @endif </td>
+                                            <?php $count=0; ?>
+                                            @if ($row->extra_driver_checked)
+                                               @php $count+=$row->Car->extra_driver_price @endphp
+                                            @endif
+                                            @if ($row->baby_seat_checked)
+                                            @php $count+=$row->Car->baby_seat_price @endphp
+                                            @endif
+                                            @if ($row->shield_checked)
+                                            @php $count+=$row->Car->shield_price @endphp
+                                            @endif
+                                            @if ($row->open_kilometers_checked)
+                                            @php $count+=$row->Car->open_kilometers_price @endphp
+                                                @endif
+                                            <td>{{ $count }}</td>
                                             <td>{{ $row->total }}</td>
                                              <td>{{ $row->order_status }}</td>
                                             <td>

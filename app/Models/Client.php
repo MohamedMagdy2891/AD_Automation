@@ -18,6 +18,7 @@ class Client extends Authenticatable
         'full_name',
         'email',
         'phone',
+        'idCardNumber',
         'photo',
         'licenese_id',
         'licenese_image',

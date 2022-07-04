@@ -7,12 +7,12 @@ use App\Models\Garage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use App\Http\Controllers\DASHBOARD\Traits\OrderStatusTrait;
+use Illuminate\Support\Facades\Schema;
 
 use App\Http\Controllers\DASHBOARD\DataResources\OrderDataResource;
 class OrderController extends Controller
 {
-    use OrderStatusTrait;
+
     public $OrderDataResource;
     public function __construct()
     {
@@ -31,6 +31,13 @@ class OrderController extends Controller
             'support.required'=>'يجب كتابة جهة الدعم الفني  ',
         ];
     }
+    public function orderStatus()
+    {
+        $status=['Pending','Approved','Rejected','Completed'];
+        return $status;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -39,8 +46,7 @@ class OrderController extends Controller
     public function index()
     {
         $rows=  $this->OrderDataResource->getAll();
-        $status=$this->orderStatus();
-        return view('dashboard.order.index',compact('rows','status'));
+        return view('dashboard.order.index',compact('rows'));
     }
 
     /**
@@ -51,11 +57,11 @@ class OrderController extends Controller
     public function search(Request $request)
     {
 
-        $rows = $this->OrderDataResource->searchByName($request->search);
+        $rows = $this->OrderDataResource->searchByIdCard($request->search);
         Session::flash('search','search');
         Session::flash('search_name',$request->search);
-        $status=$this->orderStatus();
-        return view('dashboard.order.index',compact('rows','status'));
+
+        return view('dashboard.order.index',compact('rows'));
 
     }
 
@@ -121,10 +127,10 @@ class OrderController extends Controller
         $request->killometers_consumed,
         $request->hours_consumed,
         $request->support
-        ,$request->total
+        ,$request->total,$request->order_status
         );
 
-        $row != null ?  Session::flash('success','تم تعديل  بيانات المستخدم : '.$row->client_id.' بنجاح') : Session::flash('failed','لم يتم التعديل في بيانات المستخدم : '.$request->client_id);
+        $row != null ?  Session::flash('success','تم تعديل  بيانات المستخدم : '.$row->Client->fn_name.' بنجاح') : Session::flash('failed','لم يتم التعديل في بيانات المستخدم : '.$request->client_id);
 
         return redirect()->route('dashboard.orders.edit',$id);
 
@@ -139,6 +145,7 @@ class OrderController extends Controller
             return redirect()->route('dashboard.orders.show',$id);
         }else{
             $row->order_status ='Rejected';
+            $row->reason_of_rejection=$request->reason_of_rejection;
             $row->update();
             return redirect()->route('dashboard.orders.show',$id);
         }

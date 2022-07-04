@@ -18,6 +18,7 @@ class CreateClientsTable extends Migration
             $table->string('full_name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
+            $table->string('idCardNumber')->unique();
             $table->string('license_id')->unique();
             $table->longText('license_image')->nullable();
             $table->string('password');

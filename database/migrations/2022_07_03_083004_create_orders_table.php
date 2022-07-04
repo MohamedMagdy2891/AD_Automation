@@ -32,6 +32,7 @@ class CreateOrdersTable extends Migration
             $table->double('baby_seat_price')->default(0);
             $table->double('open_kilometers_price')->default(0);
             $table->double('total')->nullable();
+            $table->string('reason_of_rejection')->nullable();
             $table->string('support')->default('web');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->enum('status', ['Pending', 'Approved', 'Rejected','Completed'])->default('Pending');

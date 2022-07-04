@@ -189,10 +189,21 @@
     </div>
 @endif
 <div class="row gutters">
+
+
+
     <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
         <div class="form-group">
             <label for="order_status"> حالة الطلب</label>
-            <input value="{{ old('order_status') }}" type="text" name="order_status" class="form-control p-0 pt-1 pr-2" id="order_status" placeholder="حالة الطلب ">
+            <select class="form-control" id="order_status" name="order_status">
+                @foreach( $status as $s )
+                <option value="{{$s}}" @if($s == $row->order_status) selected @endif >{{$s}}</option>
+                @endforeach
+            </select>
+            {{-- <input value="{{ old('order_status') }}" type="text" name="order_status" class="form-control p-0 pt-1 pr-2" id="order_status" placeholder="حالة الطلب "> --}}
+           @if($row->order_status=="Rejected")
+           <input value="{{ old('reason_of_rejection') }}" type="text" name="reason_of_rejection" class="form-control p-0 pt-1 pr-2" id="reason_of_rejection" placeholder=" سبب رفض الطلب ">
+           @endif
         </div>
     </div>
     <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">

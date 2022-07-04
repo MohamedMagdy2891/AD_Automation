@@ -36,13 +36,14 @@ class OrderDataResource{
         return $row;
     }
 
-    public function updateOne($id,$client_id,$car_id,$receive_place,$deliver_place,$receive_time,$deliver_time,$killometers_consumed,$hours_consumed,$support,$total)
+    public function updateOne($id,$client_id,$car_id,$receive_place,$deliver_place,$receive_time,$deliver_time,$killometers_consumed,$hours_consumed,$support,$total,$status)
     {
 
         $row = Order::findOrFail($id);
         if($row->client_id != $client_id || $row->car_id != $car_id ||$row->receive_place != $receive_place ||
             $row->deliver_place != $deliver_place|| $row->receive_time !=$receive_time || $row->deliver_time!=$deliver_time
-         || $row->killometers_consumed != $killometers_consumed || $row->hours_consumed!=$hours_consumed|| $row->support!= $support || $row->total!= $total){
+         || $row->killometers_consumed != $killometers_consumed || $row->hours_consumed!=$hours_consumed||
+         $row->support!= $support || $row->total!= $total || $row->order_status != $status){
 
             $car = $this->getCar($car_id);
 
@@ -60,6 +61,7 @@ class OrderDataResource{
             $row->open_kilometers_price = $car->open_kilometers_price;
             $row->support = $support;
             $row->total = $total;
+            $row->order_status = $status;
             $row->update();
             return $row;
         }else{
@@ -69,11 +71,11 @@ class OrderDataResource{
     }
 
 
-    public function searchByName($name)
+    public function searchByIdCard($idCard)
     {
         $rows = Order::query()
-        ->join('cars', 'cars.id', '=', 'orders.car_id')
-        ->where('code','LIKE','%'.$name.'%')->paginate(15);
+        ->join('clients', 'clients.id', '=', 'orders.client_id')
+        ->where('clients.idCardNumber','LIKE','%'.$idCard.'%')->paginate(15);
         return $rows;
     }
 

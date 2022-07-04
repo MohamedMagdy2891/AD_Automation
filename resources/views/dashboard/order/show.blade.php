@@ -42,10 +42,12 @@
 
                         <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
                                 <div class="form-group">
-                                <button type="submit" name="decline"class="btn btn-danger mb-2 w-100">رفض الطلب</button>
+                                    <button type="submit" name="decline"class="btn btn-danger mb-2 w-100">رفض الطلب</button>
+                                    <input value="{{ old('reason_of_rejection') }}" type="text" name="reason_of_rejection" class="form-control p-0 pt-1 pr-2" id="reason_of_rejection" placeholder=" سبب رفض الطلب  ">
                             </div>
                         </div>
-                        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3"></div>
+                        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+                        </div>
                     </div>
                     @endif
             </form>
@@ -60,11 +62,11 @@
         $('#message').delay(3000).fadeOut('slow');
         $('#message1').delay(3000).fadeOut('slow');
         $('#message2').delay(3000).fadeOut('slow');
-        $('#client_id').val("{{ $row->Client->fn_name }}").prop('disabled', true);
-        $('#car_id').val("{{ $row->Car->code }}").prop('disabled', true);
+        $('#client_name').val("{{ $row->Client->fn_name }}").prop('disabled', true);
+        $('#car_code').val("{{ $row->Car->code }}").prop('disabled', true);
         $('#receive_place').val("{{ $row->receive_place }}").prop('disabled', true);
         $('#deliver_place').val("{{ $row->deliver_place }}").prop('disabled', true);
-
+        $('#reason_of_rejection').val("{{ $row->reason_of_rejection }}");
         $('#receive_time').val("{{ $row->receive_time }}").prop('disabled', true);
         $('#deliver_time').val("{{ $row->deliver_time}}").prop('disabled', true);
         $('#killometers_consumed').val("{{ $row->killometers_consumed}}").prop('disabled', true);
