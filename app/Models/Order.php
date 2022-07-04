@@ -15,12 +15,15 @@ class order extends Model
         'deliver_place',
         'receive_time',
         'deliver_time',
-        'kilometers_consumed',
+        'killometers_consumed',
         'hours_consumed',
         'extra_driver_price',
         'shield_price',
         'baby_seat_price',
-        'open_kilometers_price'
+        'open_kilometers_price',
+        'order_status',
+        'support',
+        'total'
     ];
     // public function garage(){
     //     return $this->belongsTo(Garage::class);

@@ -1,44 +1,22 @@
 @extends('dashboard.layouts.main')
-@push('title') تعديل بيانات {{ $row->name }}@endpush
-@push('header') تعديل بيانات {{ $row->name }}@endpush
+@push('title')تعديل بيانات {{ $row->Client->fn_name }} - تأجير سيارة {{ $row->Car->code }} @endpush
+@push('header')   تعديل بيانات {{ $row->Client->fn_name }} - تأجير سيارة {{ $row->Car->code }}@endpush
 @section('content')
 
 <div class="row gutters">
     <div class="col-md-12 text-right mb-2">
-        <a class="btn btn-info btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.user.index') }}"><span class="w-100 icon-arrow-left text-light" style="font-size: 1.3rem"></span></a>
+        <a class="btn btn-info btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.orders.index') }}"><span class="w-100 icon-arrow-left text-light" style="font-size: 1.3rem"></span></a>
     </div>
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header bg-info">
-                <div class="card-title text-center text-light pb-1">تعديل بيانات {{ $row->name }}</div>
+                <div class="card-title text-center text-light pb-1">تعديل بيانات {{ $row->Client->fn_name }} - تأجير سيارة {{ $row->Car->code }}</div>
             </div>
-            <form class="card-body" action="{{ URL::route('dashboard.user.update',$row->id) }}" method="POST" enctype="multipart/form-data">
+            <form class="card-body" action="{{ URL::route('dashboard.orders.update',$row->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
-                @include('dashboard.user.form2')
+                @include('dashboard.order.form')
 
-
-                <div class="row gutters">
-                    <div class="col-xl-12 col-lglg-12 col-md-12 col-sm-12 col-12">
-                        <div class="form-group">
-                            <label for="image"> صورة المستخدم</label>
-                            <input type="file" accept=".jpg,.jpeg,.png"  class="form-control p-0 pt-1 pr-2" id="image" name="image">
-
-                        </div>
-                    </div>
-
-                </div>
-                @if($row->image != null)
-
-                    <div class="row gutters">
-                        <div class="col-xl-12 col-lglg-12 col-md-12 col-sm-12 col-12">
-                            <div class="form-group">
-                                <img id="image" style="height:200px" class="img-fluid rounded" alt="Responsive image" src="{{ URL::asset($row->image) }}">
-                            </div>
-                        </div>
-
-                    </div>
-                @endif
 
                 <div class="row gutters">
                     <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-12"></div>
@@ -53,18 +31,33 @@
             </form>
         </div>
     </div>
-
 </div>
 @endsection
 @push('js')
  <script>
     $(document).ready(function(){
         $('#message').delay(3000).fadeOut('slow');
-        $('#name').val("{{ $row->name }}");
-        $('#password').val("{{ $row->password }}");
-        $('#phone').val("{{ $row->phone }}");
-        $('#email').val("{{ $row->email }}");
-        $('#type').val("{{ $row->type }}");
+        $('#message1').delay(3000).fadeOut('slow');
+        $('#message2').delay(3000).fadeOut('slow');
+        $('#message3').delay(3000).fadeOut('slow');
+        $('#client_id').val("{{ $row->client_id}}");
+        $('#car_id').val("{{ $row->car_id }}");
+        $('#receive_place').val("{{ $row->receive_place}}");
+        $('#deliver_place').val("{{ $row->deliver_place}}");
+
+        $('#receive_time').val("{{ $row->receive_time }}");
+        $('#deliver_time').val("{{ $row->deliver_time}}");
+        $('#killometers_consumed').val("{{ $row->killometers_consumed}}");
+        $('#hours_consumed').val("{{ $row->hours_consumed }}");
+
+        $('#extra_driver_price').val("{{ $row->Car->extra_driver_price }}").prop('disabled', true);
+        $('#shield_price').val("{{ $row->Car->shield_price}}").prop('disabled', true);
+        $('#baby_seat_price').val("{{ $row->Car->baby_seat_price}}").prop('disabled', true);
+        $('#open_kilometers_price').val("{{ $row->Car->open_kilometers_price }}").prop('disabled', true);
+        $('#support').val("{{ $row->support}}");
+        $('#total').val("{{ $row->total }}");
+
+        $('#order_status').val("{{$status[$row->order_status]['status']}}").prop('disabled', true);
     });
 
  </script>

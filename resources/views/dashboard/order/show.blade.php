@@ -5,31 +5,49 @@
 
 <div class="row gutters">
     <div class="col-md-12 text-right mb-2">
-        <a class="btn btn-info btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.user.index') }}"><span class="w-100 icon-arrow-left text-light" style="font-size: 1.3rem"></span></a>
+        <a class="btn btn-info btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.orders.index') }}"><span class="w-100 icon-arrow-left text-light" style="font-size: 1.3rem"></span></a>
     </div>
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="row">
             </div>
             <div class="card-header bg-info">
-                <div class="card-title text-center text-light pb-1">عرض بيانات المستخدم {{ $row->name }}</div>
+                <div class="card-title text-center text-light pb-1"> عرض بيانات {{ $row->Client->fn_name }} - تأجير سيارة {{ $row->Car->code }}</div>
             </div>
-            <form class="card-body"enctype="multipart/form-data">
+
+            <div class="row gutters">
+                <div class="col-xl-12 col-lglg-12 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label for="image">  صورة السيارة في الطلب </label>
+                        <img id="image" style="height:200px" class="img-fluid rounded" alt="{{ URL::asset($row->Car->ar_name) }} " src="{{ URL::asset($row->Car->ar_name) }}">
+                    </div>
+                </div>
+
+            </div>
+            <form class="card-body"method="post" action="{{ URL::route('dashboard.orders.updateStatus',$row->id) }}"enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 @include('dashboard.order.form')
 
 
+                    @if ($row->order_status == 0)
+
                     <div class="row gutters">
-                        <div class="col-xl-12 col-lglg-12 col-md-12 col-sm-12 col-12">
+                        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3"></div>
+                        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
                             <div class="form-group">
-                                <label for="image">   </label>
-                                <img id="image" style="height:200px" class="img-fluid rounded" alt="Responsive image" src="{{ URL::asset($row->image) }}">
+                                <button type="submit" name="approve"class="btn btn-success mb-2 w-100">قبول الطلب</button>
                             </div>
                         </div>
 
+                        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+                                <div class="form-group">
+                                <button type="submit" name="decline"class="btn btn-danger mb-2 w-100">رفض الطلب</button>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3"></div>
                     </div>
-
+                    @endif
             </form>
         </div>
     </div>
@@ -40,10 +58,25 @@
  <script>
     $(document).ready(function(){
         $('#message').delay(3000).fadeOut('slow');
-        $('#name').val("{{ $row->name }}").prop('disabled', true);
-        $('#type').val("{{ $row->type }}").prop('disabled', true);
-        $('#phone').val("{{ $row->phone }}").prop('disabled', true);
-        $('#email').val("{{ $row->email }}").prop('disabled', true);
+        $('#message1').delay(3000).fadeOut('slow');
+        $('#message2').delay(3000).fadeOut('slow');
+        $('#client_id').val("{{ $row->Client->fn_name }}").prop('disabled', true);
+        $('#car_id').val("{{ $row->Car->code }}").prop('disabled', true);
+        $('#receive_place').val("{{ $row->receive_place }}").prop('disabled', true);
+        $('#deliver_place').val("{{ $row->deliver_place }}").prop('disabled', true);
+
+        $('#receive_time').val("{{ $row->receive_time }}").prop('disabled', true);
+        $('#deliver_time').val("{{ $row->deliver_time}}").prop('disabled', true);
+        $('#killometers_consumed').val("{{ $row->killometers_consumed}}").prop('disabled', true);
+        $('#hours_consumed').val("{{ $row->hours_consumed }}").prop('disabled', true);
+
+        $('#extra_driver_price').val("{{ $row->Car->extra_driver_price }}").prop('disabled', true);
+        $('#shield_price').val("{{ $row->Car->shield_price}}").prop('disabled', true);
+        $('#baby_seat_price').val("{{ $row->Car->baby_seat_price}}").prop('disabled', true);
+        $('#open_kilometers_price').val("{{ $row->Car->open_kilometers_price }}").prop('disabled', true);
+        $('#order_status').val("{{$status[$row->order_status]['status']}}").prop('disabled', true);
+        $('#support').val("{{ $row->support }}").prop('disabled', true);
+        $('#total').val("{{$row->total}}").prop('disabled', true);
     });
 
  </script>

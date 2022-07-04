@@ -7,10 +7,12 @@ use App\Models\Garage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\DASHBOARD\Traits\OrderStatusTrait;
 
 use App\Http\Controllers\DASHBOARD\DataResources\OrderDataResource;
 class OrderController extends Controller
 {
+    use OrderStatusTrait;
     public $OrderDataResource;
     public function __construct()
     {
@@ -24,7 +26,9 @@ class OrderController extends Controller
             'receive_place.required'=>' يجب إختيار مكان الإستلام',
             'deliver_place.required'=>'يجب إختيار مكان التسليم',
             'receive_time.required'=>'يجب إختيار وقت الإستلام',
-            'deliver_time.required'=>'يجب إختيار وقت التسليم'
+            'deliver_time.required'=>'يجب إختيار وقت التسليم',
+            'killometers_consumed.required' => 'مطلوب عدد الكيلومترات  ',
+            'support.required'=>'يجب كتابة جهة الدعم الفني  ',
         ];
     }
     /**
@@ -35,8 +39,8 @@ class OrderController extends Controller
     public function index()
     {
         $rows=  $this->OrderDataResource->getAll();
-        $garages=Garage::all();
-        return view('dashboard.order.index',compact('rows'));
+        $status=$this->orderStatus();
+        return view('dashboard.order.index',compact('rows','status'));
     }
 
     /**
@@ -50,24 +54,11 @@ class OrderController extends Controller
         $rows = $this->OrderDataResource->searchByName($request->search);
         Session::flash('search','search');
         Session::flash('search_name',$request->search);
-        return view('dashboard.order.index',compact('rows'));
+        $status=$this->orderStatus();
+        return view('dashboard.order.index',compact('rows','status'));
 
     }
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -78,7 +69,8 @@ class OrderController extends Controller
     public function show($id)
     {
         $row = $this->OrderDataResource->getOne($id);
-        return view('dashboard.order.show',compact('row'));
+        $status=$this->orderStatus();
+        return view('dashboard.order.show',compact('row','status'));
     }
 
     /**
@@ -87,9 +79,12 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit($id)
     {
         //
+        $row = $this->OrderDataResource->getOne($id);
+        $status=$this->orderStatus();
+        return view('dashboard.order.edit',compact('status','row'));
     }
 
     /**
@@ -99,19 +94,55 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update($id ,Request $request)
     {
-        //
+
+        $status=$this->orderStatus();
+
+        $request->validate([
+            'client_id'=> 'required',
+            'car_id' => 'required',
+            'receive_place' => 'required',
+            'deliver_place' => 'required',
+            'receive_time' => 'required',
+            'deliver_time'=> 'required',
+            'killometers_consumed' => 'required',
+            'support' => 'required',
+        ],$this->message());
+
+
+        $row = $this->OrderDataResource->updateOne($id,
+        $request->client_id,
+        $request->car_id,
+        $request->receive_place,
+        $request->deliver_place
+        ,$request->receive_time,
+        $request->deliver_time,
+        $request->killometers_consumed,
+        $request->hours_consumed,
+        $request->support
+        ,$request->total
+        );
+
+        $row != null ?  Session::flash('success','تم تعديل  بيانات المستخدم : '.$row->client_id.' بنجاح') : Session::flash('failed','لم يتم التعديل في بيانات المستخدم : '.$request->client_id);
+
+        return redirect()->route('dashboard.orders.edit',$id);
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Order $order)
-    {
-        //
-    }
+        public function updateStatus($id,Request $request)
+        {
+            $row = Order::findOrFail($id);
+            if($request->has('approve')){
+            $row->order_status = 1;
+            $row->update();
+            return redirect()->route('dashboard.orders.show',$id);
+        }else{
+            $row->order_status = 2;
+            $row->update();
+            return redirect()->route('dashboard.orders.show',$id);
+        }
+        }
+
+
 }

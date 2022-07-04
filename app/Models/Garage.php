@@ -27,13 +27,6 @@ class Garage extends Model
     public function Area(){
         return $this->hasOne(Area::class,'id','area_id');
     }
-<<<<<<< HEAD
 
 
-=======
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
->>>>>>> 2a52596f70393934d556b9e5193dcecb8715a757
 }

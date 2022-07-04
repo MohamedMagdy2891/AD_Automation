@@ -1,51 +1,89 @@
 <div class="row gutters">
-    <div class="col-xl-6 col-lglg-6 col-md-6 col-sm-6 col-6">
+    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
-            <label for="name">   إسم المستخدم</label>
-            <input value="{{ old('name') }}" type="text" name="name" class="form-control p-0 pt-1 pr-2" id="name" placeholder="اسم المستخدم  ">
+            <label for="client_id">   إسم المتأجر</label>
+            <input value="{{ old('client_id') }}" type="text" name="client_id" class="form-control p-0 pt-1 pr-2" id="client_id" placeholder="اسم المستخدم  ">
         </div>
     </div>
-    <div class="col-xl-6 col-lglg-6 col-md-6 col-sm-6 col-6">
+    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
-            <label for="email"> البريد الإلكتروني</label>
-            <input value="{{ old('email') }}" type="text" name="email" class="form-control" id="email" placeholder=" البريد الإلكتروني">
+            <label for="car_id">  كود السيارة  </label>
+            <input value="{{ old('car_id') }}" type="text" name="car_id" class="form-control p-0 pt-1 pr-2" id="car_id" placeholder="كود السيارة ">
         </div>
     </div>
 
+    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+        <div class="form-group">
+            <label for="receive_place">   مكان الإستلام </label>
+            <input value="{{ old('receive_place') }}" type="text" name="receive_place" class="form-control p-0 pt-1 pr-2" id="receive_place" placeholder="مكان الإستلام ">
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+        <div class="form-group">
+            <label for="deliver_place">   مكان التسليم </label>
+            <input value="{{ old('deliver_place') }}" type="text" name="deliver_place" class="form-control p-0 pt-1 pr-2" id="deliver_place" placeholder=" مكان التسليم">
+        </div>
+    </div>
 </div>
 @if($errors->any())
 
     <div class="row gutters " id="message">
 
-        <div class="col-xl-6 col-lglg-6 col-md-6 col-sm-6 col-6">
-            @if($errors->has('name'))
+        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+            @if($errors->has('client_id'))
                 <div class="form-group bg-danger text-center pb-2 pt-2">
-                    <p class="text-bold text-light">{{ $errors->first('name') }}</p>
+                    <p class="text-bold text-light">{{ $errors->first('client_id') }}</p>
                 </div>
             @endif
         </div>
-        <div class="col-xl-6 col-lglg-6 col-md-6 col-sm-6 col-6">
-            @if($errors->has('email'))
+        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+            @if($errors->has('car_id'))
                 <div class="form-group bg-danger text-center pb-2 pt-2">
-                    <p class="text-bold text-light">{{ $errors->first('email') }}</p>
+                    <p class="text-bold text-light">{{ $errors->first('car_id') }}</p>
                 </div>
             @endif
         </div>
-
+        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+            @if($errors->has('receive_place'))
+                <div class="form-group bg-danger text-center pb-2 pt-2">
+                    <p class="text-bold text-light">{{ $errors->first('receive_place') }}</p>
+                </div>
+            @endif
+        </div>
+        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+            @if($errors->has('deliver_place'))
+                <div class="form-group bg-danger text-center pb-2 pt-2">
+                    <p class="text-bold text-light">{{ $errors->first('deliver_place') }}</p>
+                </div>
+            @endif
+        </div>
     </div>
 @endif
 <div class="row gutters">
 
-    <div class="col-xl-6 col-lglg-6 col-md-6 col-sm-6 col-6">
+    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
-            <label for="password">كلمة المرور</label>
-            <input  type="password" name="password" class="form-control p-0 pt-1 pr-2" id="password" placeholder="كلمة المرور">
+            <label for="receive_time"> وقت الإستلام</label>
+            <input  type="text"value="{{ old('receive_time') }}" name="receive_time" class="form-control p-0 pt-1 pr-2" id="receive_time" placeholder=" وقت الإستلام">
         </div>
     </div>
-    <div class="col-xl-6 col-lglg-6 col-md-6 col-sm-6 col-6">
+    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
-            <label for="password">تاكيد كلمة المرور</label>
-            <input type="password" name="password_confirmation" class="form-control p-0 pt-1 pr-2" id="password" placeholder="تاكيد كلمة المرور">
+            <label for="deliver_time"> وقت التسليم </label>
+            <input type="text" value="{{ old('deliver_time') }}"name="deliver_time" class="form-control p-0 pt-1 pr-2" id="deliver_time" placeholder=" وقت التسليم ">
+        </div>
+    </div>
+    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+        <div class="form-group">
+            <label for="killometers_consumed">عدد الكيلومترات المستعملة </label>
+            <input  type="text" value="{{ old('killometers_consumed') }}"name="killometers_consumed" class="form-control p-0 pt-1 pr-2" id="killometers_consumed" placeholder=" عدد الكيلومترات المستهلكة">
+        </div>
+    </div>
+    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+        <div class="form-group">
+            <label for="hours_consumed">عدد الساعات المستخدمة  </label>
+            <input type="text" value="{{ old('hours_consumed') }}"name="hours_consumed" class="form-control p-0 pt-1 pr-2" id="hours_consumed" placeholder="  عدد الساعات المستخدمة">
         </div>
     </div>
 </div>
@@ -53,65 +91,148 @@
 
     <div class="row gutters " id="message1">
 
-        <div class="col-xl-6 col-lglg-6 col-md-6 col-sm-6 col-6">
-            @if($errors->has('password'))
+        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+            @if($errors->has('receive_time'))
                 <div class="form-group bg-danger text-center pb-2 pt-2">
-                    <p class="text-bold text-light">{{ $errors->first('password') }}</p>
+                    <p class="text-bold text-light">{{ $errors->first('receive_time') }}</p>
                 </div>
             @endif
         </div>
-        <div class="col-xl-6 col-lglg-6 col-md-6 col-sm-6 col-6">
-            @if($errors->has('password_confirmation'))
+        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+            @if($errors->has('deliver_time'))
                 <div class="form-group bg-danger text-center pb-2 pt-2">
-                    <p class="text-bold text-light">{{ $errors->first('password_confirmation') }}</p>
+                    <p class="text-bold text-light">{{ $errors->first('deliver_time') }}</p>
+                </div>
+            @endif
+        </div>
+        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+            @if($errors->has('killometers_consumed'))
+                <div class="form-group bg-danger text-center pb-2 pt-2">
+                    <p class="text-bold text-light">{{ $errors->first('killometers_consumed') }}</p>
+                </div>
+            @endif
+        </div>
+        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+            @if($errors->has('hours_consumed'))
+                <div class="form-group bg-danger text-center pb-2 pt-2">
+                    <p class="text-bold text-light">{{ $errors->first('hours_consumed') }}</p>
+                </div>
+            @endif
+        </div>
+    </div>
+@endif
+<hr style="color:#543a79">
+
+<div class="row gutters">
+    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+        <div class="form-group">
+            <label for="extra_driver_price">   سعر خدمة إضافة  سائق </label>
+            <input value="{{ old('extra_driver_price') }}" type="text" name="extra_driver_price" class="form-control p-0 pt-1 pr-2" id="extra_driver_price" placeholder=" سعر خدمة سائق إضافي">
+        </div>
+    </div>
+    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+        <div class="form-group">
+            <label for="shield_price">  سعر الدرع الإضافي   </label>
+            <input value="{{ old('shield_price') }}" type="text" name="shield_price" class="form-control p-0 pt-1 pr-2" id="shield_price" placeholder="سعر الدرع الإضافي  ">
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+        <div class="form-group">
+            <label for="baby_seat_price">  سعر مقعد الأطفال </label>
+            <input value="{{ old('baby_seat_price') }}" type="text" name="baby_seat_price" class="form-control p-0 pt-1 pr-2" id="baby_seat_price" placeholder=" سعر مقعد الأطفال ">
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+        <div class="form-group">
+            <label for="open_kilometers_price"> open kilometers price </label>
+            <input value="{{ old('open_kilometers_price') }}" type="text" name="open_kilometers_price" class="form-control p-0 pt-1 pr-2" id="open_kilometers_price" placeholder=" open kilometers ">
+        </div>
+    </div>
+</div>
+@if($errors->any())
+
+    <div class="row gutters " id="message2">
+
+        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+            @if($errors->has('extra_driver_price'))
+                <div class="form-group bg-danger text-center pb-2 pt-2">
+                    <p class="text-bold text-light">{{ $errors->first('extra_driver_price') }}</p>
+                </div>
+            @endif
+        </div>
+        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+            @if($errors->has('shield_price'))
+                <div class="form-group bg-danger text-center pb-2 pt-2">
+                    <p class="text-bold text-light">{{ $errors->first('shield_price') }}</p>
+                </div>
+            @endif
+        </div>
+        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+            @if($errors->has('baby_seat_price'))
+                <div class="form-group bg-danger text-center pb-2 pt-2">
+                    <p class="text-bold text-light">{{ $errors->first('baby_seat_price') }}</p>
+                </div>
+            @endif
+        </div>
+        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+            @if($errors->has('open_kilometers_price'))
+                <div class="form-group bg-danger text-center pb-2 pt-2">
+                    <p class="text-bold text-light">{{ $errors->first('open_kilometers_price') }}</p>
                 </div>
             @endif
         </div>
     </div>
 @endif
 <div class="row gutters">
-    <div class="col-xl-6 col-lglg-6 col-md-6 col-sm-6 col-6">
+    <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
         <div class="form-group">
-            <label for="phone">رقم هاتف المستخدم </label>
-            <input value="{{ old('phone') }}" type="text" name="phone" class="form-control" id="phone" placeholder=" رقم هاتف المستخدم ">
+            <label for="order_status"> حالة الطلب</label>
+            <input value="{{ old('order_status') }}" type="text" name="order_status" class="form-control p-0 pt-1 pr-2" id="order_status" placeholder="حالة الطلب ">
+        </div>
+    </div>
+    <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
+        <div class="form-group">
+            <label for="support">  جهة الدعم الفني</label>
+            <input value="{{ old('support') }}" type="text" name="support" class="form-control p-0 pt-1 pr-2" id="support" placeholder="جهة الدعم الفني  ">
+        </div>
+    </div>
+    <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
+        <div class="form-group">
+            <label for="total">  إجمالي المبلغ</label>
+            <input value="{{ old('total') }}" type="text" name="total" class="form-control p-0 pt-1 pr-2" id="total" placeholder=" إجمالي المبلغ ">
         </div>
     </div>
 
 </div>
 @if($errors->any())
 
-    <div class="row gutters " id="message2">
-        <div class="col-xl-6 col-lglg-6 col-md-6 col-sm-6 col-6">
-            @if($errors->has('phone'))
+    <div class="row gutters " id="message3">
+
+        <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
+            @if($errors->has('order_status'))
                 <div class="form-group bg-danger text-center pb-2 pt-2">
-                    <p class="text-bold text-light">{{ $errors->first('phone') }}</p>
+                    <p class="text-bold text-light">{{ $errors->first('order_status') }}</p>
                 </div>
             @endif
         </div>
-        <div class="col-xl-6 col-lglg-6 col-md-6 col-sm-6 col-6">
-            @if($errors->has('type'))
+        <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
+            @if($errors->has('support'))
                 <div class="form-group bg-danger text-center pb-2 pt-2">
-                    <p class="text-bold text-light">{{ $errors->first('type') }}</p>
+                    <p class="text-bold text-light">{{ $errors->first('support') }}</p>
                 </div>
             @endif
         </div>
-
-
-
-
+        <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
+            @if($errors->has('total'))
+                <div class="form-group bg-danger text-center pb-2 pt-2">
+                    <p class="text-bold text-light">{{ $errors->first('total') }}</p>
+                </div>
+            @endif
+        </div>
     </div>
 @endif
-<div class="row gutters">
-    <div class="col-xl-12 col-lglg-12 col-md-12 col-sm-12 col-12">
-        <div class="form-group">
-            <label for="image"> صورة المستخدم</label>
-            <input type="file" accept=".jpg,.jpeg,.png"  class="form-control p-0 pt-1 pr-2" id="image" name="image">
-
-        </div>
-    </div>
-
-</div>
-
 
 
 
