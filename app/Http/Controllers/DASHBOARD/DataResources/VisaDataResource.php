@@ -15,20 +15,6 @@ class VisaDataResource{
         return $rows;
     }
 
-    public function getOne($id)
-    {
-        $row = Visa::findOrFail($id);
-        return $row;
-    }
-
-
-    public function deleteOne($id)
-    {
-        $row = Visa::findOrFail($id);
-        $number = $row->credit_card_number;
-        $row->delete();
-        return $number;
-    }
 
     public function searchByIdCard($idCard)
     {
