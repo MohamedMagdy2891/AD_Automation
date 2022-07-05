@@ -1,18 +1,18 @@
 @extends('dashboard.layouts.main')
-@push('title')بيانات المستخدمين  @endpush
-@push('header') بيانات المستخدمين @endpush
+@push('title')بيانات بطاقات الائتمان  @endpush
+@push('header') بيانات بطاقات الائتمان @endpush
 @section('content')
     <div class="row gutters">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4 text-right mb-2"  ></div>
                 <div class="col-md-4 text-right mb-2"  >
-                    <form action="{{ URL::route('dashboard.visas.search') }}" method="post" style="display: inline">
+                    <form action="{{ URL::route('dashboard.visa.search') }}" method="post" style="display: inline">
                         @csrf
                         @method('POST')
-                        <input  type="text" @if(session()->has('search')) value="{{ session()->get('search_name') }}" @endif name="search" style="border-radius: 50px;display: inline;width:80%" class="form-control p-0 pt-1 text-center" placeholder="ابحث  برقم هوية المستخدم">
+                        <input  type="text" @if(session()->has('search')) value="{{ session()->get('search_name') }}" @endif name="search" style="border-radius: 50px;display: inline;width:80%" class="form-control p-0 pt-1 text-center" placeholder="ابحث  برقم بطاقة الائتمان">
                         @if(session()->has('search'))
-                            <a style="display: inline;border-radius: 100px" class="btn btn-primary pr-2 pl-2 pt-1 pb-0 m-0" href="{{ URL::route('dashboard.visas.index') }}" ><span style="font-size: 1rem" class="icon-close"></span></a>
+                            <a style="display: inline;border-radius: 100px" class="btn btn-primary pr-2 pl-2 pt-1 pb-0 m-0" href="{{ URL::route('dashboard.visa.index') }}" ><span style="font-size: 1rem" class="icon-close"></span></a>
                         @endif
                     </form>
                 </div>
@@ -38,7 +38,6 @@
                                     <th>تاريخ الإنتهاء </th>
                                     <th> حالة البطاقة</th>
                                     <th>CSV</th>
-                                    <th>العمليات</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,27 +49,17 @@
                                             <td>{{ $row->Client->full_name }}</td>
                                             <td>{{ $row->credit_card_type }}</td>
                                             <td>{{ $row->credit_card_number }}</td>
-                                            <td>{{ $row->exp_date_month }} - 20{{ $row->exp_date_year }}  </td>
+                                            <td>{{ $row->exp_date_month }}-{{ $row->exp_date_year }}  </td>
                                             <td>{{ $row->result}}</td>
                                             <td>{{ $row->csv_number }}</td>
-                                            <td>
 
-
-                                                <a class="btn btn-success btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.visas.show', $row->id ) }}"><span class="icon-eye text-light" style="font-size: .8rem"></span></a>
-                                                <form  style="display: inline" action="{{ URL::route('dashboard.visas.destroy',$row->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button  type="submit" class="btn btn-danger btn-rounded p-1 pr-2 pl-2" ><span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></button>
-                                                </form>
-
-                                            </td>
 
                                         </tr>
 
                                     @endforeach
                                 @else
                                     <tr class="text-center">
-                                        <td colspan="6" class="text-bold">لا يوجد اى مستخدمين مضافين حتي الان</td>
+                                        <td colspan="7" class="text-bold">لا يوجد اى بطاقات ائتمان مضافة حتي الان</td>
                                     </tr>
                                 @endif
                             </tbody>
@@ -103,12 +92,5 @@
                 })
         </script>
     @endif
-    @if(count($rows) > 0)
-        <script>
-            $(document).ready(function(){
-                $("[id=delete]").slideDown();
-            });
 
-        </script>
-    @endif
 @endpush
