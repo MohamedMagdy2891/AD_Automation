@@ -30,6 +30,8 @@ class CarController extends Controller
             'en_name.required' => 'اسم السيارة باللغة الانجليزية مطلوب',
             'en_name.min' => 'اسم السيارة باللغة الانجليزية يجب ان يحتوى على أكثر من 3 أحرف',
             'code.required' => 'كود السيارة مطلوب',
+            'planet_number_1.required' => 'حروف لوحة السيارة مطلوبة',
+            'planet_number_2.required' => 'أرقام لوحة السيارة مطلوبةس',
             'color.required' => 'لون السيارة مطلوب',
             'color.required' => 'حالة السيارة مطلوب',
             'status_id.required' => 'حالة السيارة مطلوب',
@@ -86,6 +88,8 @@ class CarController extends Controller
             'ar_name' => 'required|min:3',
             'en_name' => 'required|min:3',
             'code' => 'required',
+            'planet_number_1' => 'required',
+            'planet_number_2' => 'required',
             'color' => 'required',
             'status_id' => 'required',
             'model_id' => 'required',
@@ -102,6 +106,9 @@ class CarController extends Controller
             'price_per_day' =>'numeric',
             'discount_per_day' => 'numeric',
         ],$this->message());
+
+
+        $planet_number = $request->planet_number_2.' '.$request->planet_number_1;
 
         $discount_price_per_hour  = $request->price_per_hour - ($request->price_per_hour * ($request->discount_per_hour/100));
         $discount_price_per_half_day  = $request->price_per_half_day - ($request->price_per_half_day * ($request->discount_per_half_day/100));
@@ -120,7 +127,7 @@ class CarController extends Controller
         $request->baby_seat_price != null ? $baby_seat_price = $request->baby_seat_price : $baby_seat_price = 0.00;
         $request->open_kilometers_price != null ? $open_kilometers_price = $request->open_kilometers_price : $open_kilometers_price = 0.00;
 
-        $row = $this->carDataResource->createOne($request->ar_name,$request->en_name,$request->code,$request->color,$request->status_id,
+        $row = $this->carDataResource->createOne($request->ar_name,$request->en_name,$request->code,$planet_number,$request->color,$request->status_id,
         $request->model_id,$request->garage_id,$request->category_id,$request->car_model_year,$request->no_doors,$request->no_bags,$request->car_type,
         $request->price_per_hour,$request->discount_per_hour,$discount_price_per_hour,
         $request->price_per_half_day,$request->discount_per_half_day,$discount_price_per_half_day,
@@ -168,6 +175,8 @@ class CarController extends Controller
             'ar_name' => 'required|min:3',
             'en_name' => 'required|min:3',
             'code' => 'required',
+            'planet_number_1' => 'required',
+            'planet_number_2' => 'required',
             'color' => 'required',
             'status_id' => 'required',
             'model_id' => 'required',
@@ -185,6 +194,8 @@ class CarController extends Controller
             'discount_per_day' => 'numeric',
         ],$this->message());
 
+
+        $planet_number = $request->planet_number_2.' '.$request->planet_number_1;
 
         $discount_price_per_hour  = $request->price_per_hour - ($request->price_per_hour * ($request->discount_per_hour/100));
         $discount_price_per_half_day  = $request->price_per_half_day - ($request->price_per_half_day * ($request->discount_per_half_day/100));
@@ -204,7 +215,7 @@ class CarController extends Controller
         $request->open_kilometers_price != null ? $open_kilometers_price = $request->open_kilometers_price : $open_kilometers_price = 0.00;
 
 
-        $row = $this->carDataResource->updateOne($id,$request->ar_name,$request->en_name,$request->code,$request->color,$request->status_id,
+        $row = $this->carDataResource->updateOne($id,$request->ar_name,$request->en_name,$request->code,$planet_number,$request->color,$request->status_id,
         $request->model_id,$request->garage_id,$request->category_id,$request->car_model_year,$request->no_doors,$request->no_bags,$request->car_type,
         $request->price_per_hour,$request->discount_per_hour,$discount_price_per_hour,
         $request->price_per_half_day,$request->discount_per_half_day,$discount_price_per_half_day,

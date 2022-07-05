@@ -12,6 +12,7 @@ class Car extends Model
         'ar_name',
         'en_name',
         'code',
+        'planet_number',
         'color',
         'status_id',
         'model_id',
@@ -39,7 +40,8 @@ class Car extends Model
         'baby_seat',
         'baby_seat_price',
         'open_kilometers',
-        'open_kilometers_price'
+        'open_kilometers_price',
+
     ];
 
     protected $hidden = [

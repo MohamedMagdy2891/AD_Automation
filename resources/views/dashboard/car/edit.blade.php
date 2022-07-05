@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.main')
-@push('title') تعديل بيانات{{ $row->ar_name }}@endpush
+@push('title') تعديل بيانات {{ $row->ar_name }}@endpush
 @push('header') تعديل بيانات {{ $row->ar_name }}@endpush
 @section('content')
 
@@ -50,6 +50,12 @@
 </div>
 @endsection
 @push('js')
+    @php
+
+        $planet_number = explode(' ',$row->planet_number);
+        $planet_number_1 = $planet_number[1];
+        $planet_number_2 = $planet_number[0];
+    @endphp
  <script>
     $(document).ready(function(){
         $('#message').delay(3000).fadeOut('slow');
@@ -62,6 +68,8 @@
         $('#ar_name').val("{{ $row->ar_name }}");
         $('#en_name').val("{{ $row->en_name }}");
         $('#color').val("{{ $row->color }}");
+        $('#planet_number_1').val("{{ $planet_number_1 }}");
+        $('#planet_number_2').val("{{ $planet_number_2 }}");
         $('#status_id').val("{{ $row->status_id }}");
         $('#model_id').val("{{ $row->model_id }}");
         $('#car_model_year').val("{{ $row->car_model_year }}");

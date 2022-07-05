@@ -39,7 +39,8 @@
     $(document).ready(function(){
         $('#message').delay(3000).fadeOut('slow');
         $('#car_id').val("{{ $row->car_id }}");
-        $('#serial_no').val("{{ $row->serial_no }}");
+        $('#iemi').val("{{ $row->iemi }}");
+        $('#vin').val("{{ $row->vin }}");
     })
 
  </script>

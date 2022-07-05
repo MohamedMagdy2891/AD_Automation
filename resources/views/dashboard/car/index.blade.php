@@ -33,6 +33,7 @@
                                 <tr class="text-center">
                                     <th>م</th>
                                     <th>كود السيارة</th>
+                                    <th> لوحة السيارة</th>
                                     <th> اسم السيارة</th>
                                     <th> الماركة </th>
                                     <th> القسم </th>
@@ -46,17 +47,20 @@
                             </thead>
                             <tbody>
                                 @if(count($rows) > 0)
-                                    @php $i=1; @endphp
+                                    @php
+                                    $i=1;
+                                    @endphp
                                     @foreach ($rows as $row)
                                         <tr class="text-center">
                                             <td>{{ $i++ }}</td>
                                             <td>{{ $row->code }}</td>
+                                            <td style="direction: ltr">{{ $row->planet_number }}</td>
                                             <td>{{ $row->ar_name }}</td>
                                             <td>{{ $row->CarModel->ar_name }}</td>
                                             <td>{{ $row->Category->ar_name }}</td>
                                             <td>{{ $row->car_model_year }}</td>
                                             <td>{{ $transmissions[$row->car_type]['ar_name'] }}</td>
-                                            <td>{{ $row->Garage->ar_garage }} ( {{ $row->Garage->Area->ar_area - $row->Garage->Area->Region->ar_name }} )</td>
+                                            <td>{{ $row->Garage->ar_garage }} ( {{ $row->Garage->Area->ar_area }} - {{  $row->Garage->Area->Region->ar_name }} )</td>
                                             <td>{{ $row->Status->ar_name }}<td>
                                                 <a class="btn btn-warning btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.car.image',$row->id) }}"><span class="w-100 icon-image text-light" style="font-size: .8rem"></span></a>
                                                 <a class="btn btn-success btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.car.show', $row->id ) }}"><span class="icon-eye text-light" style="font-size: .8rem"></span></a>
@@ -74,7 +78,7 @@
                                     @endforeach
                                 @else
                                     <tr class="text-center">
-                                        <td colspan="10" class="text-bold">لا يوجد اى سيارات مضافة حتي الان</td>
+                                        <td colspan="11" class="text-bold">لا يوجد اى سيارات مضافة حتي الان</td>
                                     </tr>
                                 @endif
                             </tbody>

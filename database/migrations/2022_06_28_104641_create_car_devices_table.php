@@ -17,7 +17,11 @@ class CreateCarDevicesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('car_id');
             $table->foreign('car_id')->on('cars')->references('id')->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->string('serial_no');
+            $table->string('iemi');
+            $table->string('vin');
+            $table->boolean('status')->default(0);
+            $table->boolean('lock')->default(0);
+            $table->boolean('block')->default(0);
             $table->timestamps();
         });
     }

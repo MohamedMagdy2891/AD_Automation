@@ -19,11 +19,12 @@ class CarDeviceDataResource{
         return $rows;
     }
 
-    public function createOne($car_id,$serial_no)
+    public function createOne($car_id,$iemi,$vin)
     {
         $row = new CarDevice();
         $row->car_id = $car_id;
-        $row->serial_no = $serial_no;
+        $row->iemi = $iemi;
+        $row->vin = $vin;
         $row->save();
         return $row;
     }
@@ -34,12 +35,13 @@ class CarDeviceDataResource{
         return $row;
     }
 
-    public function updateOne($id,$car_id,$serial_no)
+    public function updateOne($id,$car_id,$iemi,$vin)
     {
         $row = CarDevice::findOrFail($id);
-        if($row->car_id != $car_id || $row->serial_no != $serial_no){
+        if($row->car_id != $car_id || $row->iemi != $iemi || $row->vin != $vin){
             $row->car_id = $car_id;
-            $row->serial_no = $serial_no;
+            $row->iemi = $iemi;
+            $row->vin = $vin;
             $row->update();
             return $row;
         }else{
@@ -64,9 +66,9 @@ class CarDeviceDataResource{
         }
     }
 
-    public function CarDeviceSearch($serial_no)
+    public function CarDeviceSearch($vin)
     {
-        $rows = CarDevice::query()->where('serial_no','LIKE','%'.$serial_no.'%')->paginate(15);
+        $rows = CarDevice::query()->where('vin','LIKE','%'.$vin.'%')->paginate(15);
         return $rows;
     }
 

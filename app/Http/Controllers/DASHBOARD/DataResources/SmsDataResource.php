@@ -9,12 +9,17 @@ use App\Models\SmsMessage;
 class SmsDataResource{
 
 
-    public function getAll()
+    public function __construct()
     {
         $rows = SMS::get()->all();
         if(count($rows) == 0){
             $this->createOne('alghad');
         }
+    }
+
+    public function getAll()
+    {
+        $rows = SMS::get()->all();
         return $rows;
     }
     public function getAllMessages()

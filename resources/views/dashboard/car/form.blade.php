@@ -1,8 +1,23 @@
 <div class="row gutters">
-    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+    <div class="col-xl-2 col-lglg-2 col-md-2 col-sm-2 col-2">
         <div class="form-group">
             <label for="code"> كود السيارة</label>
             <input value="{{ old('code') }}" type="text" name="code" class="form-control p-0 pt-1 pr-2" id="code" placeholder="ادخل كود السيارة">
+        </div>
+    </div>
+    <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
+        <div class="form-group">
+            <label for="planet_number_1" class="text-center w-100" style="background-color: #fbc112">  حروف وأرقام لوحة السيارة</label>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <input value="{{ old('planet_number_1') }}" type="text" name="planet_number_1" class="form-control p-0 pt-1 pr-2" id="planet_number_1" placeholder="ادخل حروف لوحة السيارة">
+                </div>
+                <div class="col-md-6">
+                    <input value="{{ old('planet_number_2') }}" type="text" name="planet_number_2" class="form-control p-0 pt-1 pr-2" id="planet_number_2" placeholder="ادخل أرقام لوحة السيارة">
+                </div>
+
+            </div>
         </div>
     </div>
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
@@ -17,26 +32,30 @@
             <input value="{{ old('en_name') }}" type="text" name="en_name" class="form-control" id="en_name" placeholder="ادخل اسم السيارة باللغة الانجليزية">
         </div>
     </div>
-    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
-        <div class="form-group">
-            <label for="color">لون السيارة</label>
-            <select name="color" class="form-control p-0 pt-1 pr-2" id="color">
-                <option selected disabled>اختر لون السيارة</option>
-                @foreach ($colors as $color)
-                    <option value="{{ $color['id'] }}">{{ $color['name'] }}</option>
-                @endforeach
-            </select>
-        </div>
-    </div>
+
 
 </div>
 @if($errors->any())
 
     <div class="row gutters " id="message">
-        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+        <div class="col-xl-2 col-lglg-2 col-md-2 col-sm-2 col-2">
             @if($errors->has('code'))
                 <div class="form-group bg-danger text-center pb-2 pt-2">
                     <p class="text-bold text-light">{{ $errors->first('code') }}</p>
+                </div>
+            @endif
+        </div>
+        <div class="col-xl-2 col-lglg-2 col-md-2 col-sm-2 col-2">
+            @if($errors->has('planet_number_1'))
+                <div class="form-group bg-danger text-center pb-2 pt-2">
+                    <p class="text-bold text-light">{{ $errors->first('planet_number_1') }}</p>
+                </div>
+            @endif
+        </div>
+        <div class="col-xl-2 col-lglg-2 col-md-2 col-sm-2 col-2">
+            @if($errors->has('planet_number_2'))
+                <div class="form-group bg-danger text-center pb-2 pt-2">
+                    <p class="text-bold text-light">{{ $errors->first('planet_number_2') }}</p>
                 </div>
             @endif
         </div>
@@ -54,18 +73,23 @@
                 </div>
             @endif
         </div>
-        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
-            @if($errors->has('color'))
-                <div class="form-group bg-danger text-center pb-2 pt-2">
-                    <p class="text-bold text-light">{{ $errors->first('color') }}</p>
-                </div>
-            @endif
-        </div>
+
 
     </div>
 @endif
 <div class="row gutters">
-    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+    <div class="col-xl-2 col-lglg-2 col-md-2 col-sm-2 col-2">
+        <div class="form-group">
+            <label for="color">لون السيارة</label>
+            <select name="color" class="form-control p-0 pt-1 pr-2" id="color">
+                <option selected disabled>اختر لون السيارة</option>
+                @foreach ($colors as $color)
+                    <option value="{{ $color['id'] }}">{{ $color['name'] }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="col-xl-2 col-lglg-2 col-md-2 col-sm-2 col-2">
         <div class="form-group">
             <label for="model_id"> الماركة</label>
             <select name="model_id" class="form-control p-0 pt-1 pr-2" id="model_id">
@@ -76,7 +100,7 @@
             </select>
         </div>
     </div>
-    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+    <div class="col-xl-2 col-lglg-2 col-md-2 col-sm-2 col-2">
         <div class="form-group">
             <label for="car_model_year">موديل السيارة</label>
             <input  value="{{ old('car_model_year') }}" step="1" type="number" name="car_model_year" class="form-control" id="car_model_year" placeholder="ادخل موديل السيارة">
@@ -110,14 +134,21 @@
 @if($errors->any())
 
     <div class="row gutters " id="message1">
-        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+        <div class="col-xl-2 col-lglg-2 col-md-2 col-sm-2 col-2">
+            @if($errors->has('color'))
+                <div class="form-group bg-danger text-center pb-2 pt-2">
+                    <p class="text-bold text-light">{{ $errors->first('color') }}</p>
+                </div>
+            @endif
+        </div>
+        <div class="col-xl-2 col-lglg-2 col-md-2 col-sm-2 col-2">
             @if($errors->has('model_id'))
                 <div class="form-group bg-danger text-center pb-2 pt-2">
                     <p class="text-bold text-light">{{ $errors->first('model_id') }}</p>
                 </div>
             @endif
         </div>
-        <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+        <div class="col-xl-2 col-lglg-2 col-md-2 col-sm-2 col-2">
             @if($errors->has('car_model_year'))
                 <div class="form-group bg-danger text-center pb-2 pt-2">
                     <p class="text-bold text-light">{{ $errors->first('car_model_year') }}</p>
@@ -142,7 +173,7 @@
     </div>
 @endif
 <div class="row gutters">
-    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+    <div class="col-xl-2 col-lglg-2 col-md-2 col-sm-2 col-2">
         <div class="form-group">
             <label for="car_type"> ناقل الحركة</label>
             <select name="car_type" class="form-control p-0 pt-1 pr-2" id="car_type">
@@ -153,7 +184,7 @@
             </select>
         </div>
     </div>
-    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+    <div class="col-xl-2 col-lglg-2 col-md-2 col-sm-2 col-2">
         <div class="form-group">
             <label for="status_id"> حالة العربية</label>
             <select name="status_id" class="form-control p-0 pt-1 pr-2" id="status_id">
@@ -164,13 +195,13 @@
             </select>
         </div>
     </div>
-    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+    <div class="col-xl-2 col-lglg-2 col-md-2 col-sm-2 col-2">
         <div class="form-group">
             <label for="no_doors">عدد الابواب</label>
             <input value="{{ old('no_doors') == null ? 0 : old('no_doors') }}" step="1"  type="number" name="no_doors" class="form-control" id="no_doors" placeholder="ادخل عدد ابواب السيارة">
         </div>
     </div>
-    <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
+    <div class="col-xl-2 col-lglg-2 col-md-2 col-sm-2 col-2">
         <div class="form-group">
             <label for="no_bags">عدد الحقائب</label>
             <input value="{{ old('no_bags') == null ? 0 : old('no_bags') }}" step="1" type="number" name="no_bags" class="form-control" id="no_bags" placeholder="ادخل عدد شنط السيارة">

@@ -17,8 +17,10 @@ class CarDeviceController extends Controller
 
     public function Message(){
         return [
-            'serial_no.required' => 'رقم سيريال جهاز التتبع مطلوب',
-            'serial_no.unique' => 'رقم سيريال جهاز التتبع مضاف لاحقا ومرتبط بسيارة',
+            'iemi.required' => 'رقم iemi لجهاز التتبع مطلوب',
+            'iemi.unique' => 'رقم iemi لجهاز التتبع مضاف لاحقا ومرتبط بسيارة',
+            'vin.required' => 'رقم vin لجهاز التتبع مطلوب',
+            'vin.unique' => 'رقم vin لجهاز التتبع مضاف لاحقا ومرتبط بسيارة',
             'car_id.required' => 'يجب اختيار السيارة',
 
         ];
@@ -39,12 +41,13 @@ class CarDeviceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'serial_no' => 'required|unique:car_devices,serial_no',
+            'iemi' => 'required|unique:car_devices,iemi',
+            'vin' => 'required|unique:car_devices,vin',
             'car_id' => 'required',
 
         ],$this->Message());
 
-        $row =  $this->carDeviceDataResource->createOne($request->car_id,$request->serial_no);
+        $row =  $this->carDeviceDataResource->createOne($request->car_id,$request->iemi,$request->vin);
         Session::flash('success', 'تم اضافة جهاز التتبع الى السيارة : '.$row->getCar->ar_name);
         return redirect()->route('dashboard.device.index');
 
@@ -65,12 +68,13 @@ class CarDeviceController extends Controller
     public function update($id,Request $request)
     {
         $request->validate([
-            'serial_no' => 'required',
+            'iemi' => 'required|unique:car_devices,iemi',
+            'vin' => 'required|unique:car_devices,vin',
             'car_id' => 'required',
 
         ],$this->Message());
 
-        $row =  $this->carDeviceDataResource->updateOne($id,$request->car_id,$request->serial_no);
+        $row =  $this->carDeviceDataResource->updateOne($id,$request->car_id,$request->iemi,$request->vin);
         $row != null ? Session::flash('success', 'تم تعديل بيانات جهاز التتبع سيارة '.$row->getCar->ar_name):Session::flash('failed', 'لم يتم تعديل بيانات جهاز التتبع لعدم التغيير فى البيانات');
 
 

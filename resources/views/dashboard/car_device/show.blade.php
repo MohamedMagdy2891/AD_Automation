@@ -33,7 +33,8 @@
     $(document).ready(function(){
         $('#message').delay(3000).fadeOut('slow');
 
-        $('#serial_no').val("{{ $row->serial_no }}").prop('disabled', true);
+        $('#iemi').val("{{ $row->iemi }}").prop('disabled', true);
+        $('#vin').val("{{ $row->vin }}").prop('disabled', true);
         $('#car_id').val("{{ $row->car_id }}").prop('disabled', true);
 
     });

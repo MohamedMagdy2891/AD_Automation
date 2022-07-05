@@ -40,10 +40,18 @@
 </div>
 @endsection
 @push('js')
+    @php
+
+        $planet_number = explode(' ',$row->planet_number);
+        $planet_number_1 = $planet_number[1];
+        $planet_number_2 = $planet_number[0];
+    @endphp
  <script>
     $(document).ready(function(){
         $('#message').delay(3000).fadeOut('slow');
         $('#code').val("{{ $row->code }}").prop('disabled', true);
+        $('#planet_number_1').val("{{ $planet_number_1 }}").prop('disabled', true);
+        $('#planet_number_2').val("{{ $planet_number_2 }}").prop('disabled', true);
         $('#ar_name').val("{{ $row->ar_name }}").prop('disabled', true);
         $('#en_name').val("{{ $row->en_name }}").prop('disabled', true);
         $('#color').val("{{ $row->color }}").prop('disabled', true);

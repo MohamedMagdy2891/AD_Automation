@@ -18,6 +18,7 @@ class CreateCarsTable extends Migration
             $table->string('ar_name');
             $table->string('en_name');
             $table->string('code');
+            $table->string('planet_number');
             $table->integer('color');
             $table->unsignedBigInteger('status_id');
             $table->foreign('status_id')->on('car_statuses')->references('id')->onDelete('CASCADE')->onUpdate('CASCADE');

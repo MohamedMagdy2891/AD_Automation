@@ -11,7 +11,11 @@ class CarDevice extends Model
 
     protected $fillable = [
         'car_id',
-        'serial_no'
+        'iemi',
+        'vin',
+        'status',
+        'lock',
+        'block'
     ];
 
     protected $hidden = [

@@ -27,7 +27,7 @@ class CarDataResource{
 
 
 
-    public function createOne($ar_name,$en_name,$code,$color,$status_id,$model_id,$garage_id,$category_id,$car_model_year,$no_doors,$no_bags,$car_type,
+    public function createOne($ar_name,$en_name,$code,$planet_number,$color,$status_id,$model_id,$garage_id,$category_id,$car_model_year,$no_doors,$no_bags,$car_type,
     $price_per_hour,$discount_per_hour,$discount_price_per_hour,
     $price_per_half_day,$discount_per_half_day,$discount_price_per_half_day,
     $price_per_day,$discount_per_day,$discount_price_per_day,
@@ -41,6 +41,7 @@ class CarDataResource{
         $row->ar_name = $ar_name;
         $row->en_name = $en_name;
         $row->code = $code;
+        $row->planet_number = $planet_number;
         $row->color = $color;
         $row->status_id = $status_id;
         $row->model_id = $model_id;
@@ -101,7 +102,7 @@ class CarDataResource{
         return $row;
     }
 
-    public function updateOne($id,$ar_name,$en_name,$code,$color,$status_id,$model_id,$garage_id,$category_id,$car_model_year,$no_doors,$no_bags,$car_type,
+    public function updateOne($id,$ar_name,$en_name,$code,$planet_number,$color,$status_id,$model_id,$garage_id,$category_id,$car_model_year,$no_doors,$no_bags,$car_type,
     $price_per_hour,$discount_per_hour,$discount_price_per_hour,
     $price_per_half_day,$discount_per_half_day,$discount_price_per_half_day,
     $price_per_day,$discount_per_day,$discount_price_per_day,
@@ -112,7 +113,7 @@ class CarDataResource{
     $open_kilometers,$open_kilometers_price)
     {
         $row = Car::findOrFail($id);
-        if($row->ar_name != $ar_name || $row->en_name != $en_name || $row->code != $code || $row->color != $color || $row->status_id != $status_id || $row->model_id != $model_id || $row->garage_id != $garage_id ||
+        if($row->ar_name != $ar_name || $row->en_name != $en_name || $row->code != $code || $row->planet_number != $planet_number|| $row->color != $color || $row->status_id != $status_id || $row->model_id != $model_id || $row->garage_id != $garage_id ||
         $row->category_id != $category_id || $row->car_model_year != $car_model_year || $row->no_doors != $no_doors || $row->no_bags != $no_bags || $row->car_type != $car_type ||
 
         $row->price_per_hour != $price_per_hour || $row->discount_per_hour != $discount_per_hour || $row->discount_price_per_hour != $discount_price_per_hour ||
@@ -127,6 +128,7 @@ class CarDataResource{
             $row->ar_name = $ar_name;
             $row->en_name = $en_name;
             $row->code = $code;
+            $row->planet_number = $planet_number;
             $row->color = $color;
             $row->status_id = $status_id;
             $row->model_id = $model_id;
