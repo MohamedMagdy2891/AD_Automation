@@ -7,8 +7,6 @@ use App\Models\Garage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Schema;
-
 use App\Http\Controllers\DASHBOARD\DataResources\OrderDataResource;
 class OrderController extends Controller
 {
@@ -29,6 +27,9 @@ class OrderController extends Controller
             'deliver_time.required'=>'يجب إختيار وقت التسليم',
             'killometers_consumed.required' => 'مطلوب عدد الكيلومترات  ',
             'support.required'=>'يجب كتابة جهة الدعم الفني  ',
+            'deliver_time.after'=>'تاريخ التسليم يجب أن يكون بعد تاريخ الإستلام',
+            'deliver_time.date_format'=>'التاريخ غير صحيح',
+            'receive_time.date_format'=>'التاريخ غير صحيح'
         ];
     }
     public function orderStatus()
@@ -109,8 +110,8 @@ class OrderController extends Controller
             'car_id' => 'required',
             'receive_place' => 'required',
             'deliver_place' => 'required',
-            'receive_time' => 'required',
-            'deliver_time'=> 'required',
+            'receive_time' => 'required|date_format:Y-m-d H:i:s',
+            'deliver_time'=> 'required|after:receive_time|date_format:Y-m-d H:i:s',
         ],$this->message());
 
 
@@ -129,15 +130,7 @@ class OrderController extends Controller
         $request->reason_of_rejection
         );
 
-        if($request->order_status=="Approved"){
 
-            $checkTime = strtotime($row->deliver_time);
-            $loginTime = strtotime($row->receive_time);
-            $diff = $checkTime - $loginTime;
-            $hours=date("h",$diff);
-            $row->total=$row->Car->price_per_hour *$hours ;
-            return  $row->total;
-        }
 
         $row != null ?  Session::flash('success','تم تعديل  بيانات المستخدم : '.$row->Client->fn_name.' بنجاح') : Session::flash('failed','لم يتم التعديل في بيانات المستخدم : '.$request->client_id);
 

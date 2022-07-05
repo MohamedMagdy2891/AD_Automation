@@ -85,13 +85,13 @@
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
             <label for="receive_time"> وقت الإستلام</label>
-            <input  type="text"value="{{ old('receive_time') }}" name="receive_time" class="form-control p-0 pt-1 pr-2" id="receive_time" placeholder=" وقت الإستلام">
+            <input  type="text"  value="{{ old('receive_time') }}" name="receive_time" class="form-control p-0 pt-1 pr-2" id="receive_time" placeholder=" وقت الإستلام">
         </div>
     </div>
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
             <label for="deliver_time"> وقت التسليم </label>
-            <input type="text" value="{{ old('deliver_time') }}"name="deliver_time" class="form-control p-0 pt-1 pr-2" id="deliver_time" placeholder=" وقت التسليم ">
+            <input type="text"  value="{{ old('deliver_time') }}"name="deliver_time" class="form-control p-0 pt-1 pr-2" id="deliver_time" placeholder=" وقت التسليم ">
         </div>
     </div>
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
