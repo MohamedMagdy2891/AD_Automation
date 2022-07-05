@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use App\Models\Country;
 use App\Models\Order;
+use App\Models\Visa;
 class Client extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -42,6 +43,9 @@ class Client extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
-
+    public function visas()
+    {
+        return $this->hasMany(Visa::class);
+    }
 
 }

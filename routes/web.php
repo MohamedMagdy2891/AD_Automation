@@ -78,6 +78,11 @@ Route::prefix('/dashboard')->name('dashboard.')->namespace('DASHBOARD')->group(f
     Route::get('/sms/message','SmsController@message')->name('sms.message.index');
     Route::get('/sms/message/create','SmsController@create')->name('sms.message.create');
     Route::post('/sms/message/store','SmsController@store')->name('sms.message.store');
-
+    Route::prefix('/visas')->group(function(){
+        Route::get('/','VisaController@index')->name('visas.index');
+        Route::get('/{visa}/show','VisaController@show')->name('visas.show');
+        Route::post('/search','VisaController@search')->name('visas.search');
+        Route::delete('/{visa}/destroy','VisaController@destroy')->name('visas.destroy');
+    });
 
 });

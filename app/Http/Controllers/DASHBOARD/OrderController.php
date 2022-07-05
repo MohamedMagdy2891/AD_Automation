@@ -4,6 +4,7 @@ namespace App\Http\Controllers\DASHBOARD;
 
 use App\Models\Order;
 use App\Models\Garage;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -124,8 +125,7 @@ class OrderController extends Controller
         $request->deliver_time,
         $request->killometers_consumed,
         $request->hours_consumed,
-        $request->support
-        ,$request->total,
+        $request->total,
         $request->order_status,
         $request->reason_of_rejection
         );

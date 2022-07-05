@@ -49,14 +49,14 @@ class OrderDataResource{
             $price=($row->price_per_hour * $hours)+($row->insurance ? $row->insurance_price : 0 ) ;
             return $price;
         }
-    public function updateOne($id,$client_id,$car_id,$receive_place,$deliver_place,$receive_time,$deliver_time,$killometers_consumed,$hours_consumed,$support,$total,$status,$rejection_reason)
+    public function updateOne($id,$client_id,$car_id,$receive_place,$deliver_place,$receive_time,$deliver_time,$killometers_consumed,$hours_consumed,$total,$status,$rejection_reason)
     {
 
         $row = Order::findOrFail($id);
         if($row->client_id != $client_id || $row->car_id != $car_id ||$row->receive_place != $receive_place ||
             $row->deliver_place != $deliver_place|| $row->receive_time !=$receive_time || $row->deliver_time!=$deliver_time
          || $row->killometers_consumed != $killometers_consumed || $row->hours_consumed!=$hours_consumed||
-         $row->support!= $support || $row->total!= $total || $row->order_status != $status||$row->reason_of_rejection !=$rejection_reason){
+           $row->total!= $total || $row->order_status != $status||$row->reason_of_rejection !=$rejection_reason){
 
             $car = $this->getCar($car_id);
             $hours=$this->calculateTimeDateDifference($receive_time,$deliver_time);
@@ -73,7 +73,6 @@ class OrderDataResource{
             // $row->shield_price = $car->shield_price;
             // $row->baby_seat_price = $car->baby_seat_price;
             // $row->open_kilometers_price = $car->open_kilometers_price;
-            $row->support = $support;
             $row->total = $total;
             $row->order_status = $status;
             $row->reason_of_rejection=$rejection_reason;

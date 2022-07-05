@@ -35,7 +35,7 @@ class CreateOrdersTable extends Migration
             $table->string('reason_of_rejection')->nullable();
             $table->string('support')->default('web');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->enum('status', ['Pending', 'Approved', 'Rejected','Completed'])->default('Pending');
+            $table->enum('order_status', ['Pending', 'Approved', 'Rejected','Completed'])->default('Pending');
             $table->timestamps();
         });
     }
