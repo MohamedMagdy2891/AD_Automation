@@ -133,7 +133,7 @@
                     <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
 
                         <li>
-                            <a class="dropdown-item" href="{{ URL::route('dashboard.visa.index') }}"> كل بطاقات الائتمان</a>
+                            <a class="dropdown-item" href="{{ URL::route('dashboard.visas.index') }}"> كل بطاقات الائتمان</a>
                         </li>
 
                     </ul>

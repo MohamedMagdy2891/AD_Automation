@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.main')
-@push('title')تعديل بيانات {{ $row->Client->fn_name }} - تأجير سيارة {{ $row->Car->code }} @endpush
-@push('header')   تعديل بيانات {{ $row->Client->fn_name }} - تأجير سيارة {{ $row->Car->code }}@endpush
+@push('title')تعديل بيانات {{ $row->Client->full_name }} - تأجير سيارة {{ $row->Car->code }} @endpush
+@push('header')   تعديل بيانات {{ $row->Client->full_name}} - تأجير سيارة {{ $row->Car->code }}@endpush
 @section('content')
 
 <div class="row gutters">
@@ -10,7 +10,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header bg-info">
-                <div class="card-title text-center text-light pb-1">تعديل بيانات {{ $row->Client->fn_name }} - تأجير سيارة {{ $row->Car->code }}</div>
+                <div class="card-title text-center text-light pb-1">تعديل بيانات {{ $row->Client->full_name }} - تأجير سيارة {{ $row->Car->code }}</div>
             </div>
             <form class="card-body" action="{{ URL::route('dashboard.orders.update',$row->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -41,7 +41,7 @@
         $('#message2').delay(3000).fadeOut('slow');
         $('#message3').delay(3000).fadeOut('slow');
         $('#client_id').val("{{ $row->client_id}}");
-        $('#client_name').val("{{ $row->Client->fn_name}}");
+        $('#client_name').val("{{ $row->Client->full_name}}");
         $('#car_code').val("{{ $row->Car->code}}");
         $('#car_id').val("{{ $row->car_id }}");
         $('#receive_place').val("{{ $row->receive_place}}");
@@ -55,7 +55,7 @@
         $("#shield_price").hasClass("checked")? $("#shield_price").val("{{ $row->Car->shield_price}}").prop('disabled', true) : $('#shield_price').val("0").prop('disabled', true);
         $("#baby_seat_price").hasClass("checked")? $("#baby_seat_price").val("{{ $row->Car->baby_seat_price}}").prop('disabled', true) : $('#baby_seat_price').val("0").prop('disabled', true);
         $("#open_kilometers_price").hasClass("checked")? $("#open_kilometers_price").val("{{ $row->Car->open_kilometers_price}}").prop('disabled', true) : $('#open_kilometers_price').val("0").prop('disabled', true);
-        $('#support').val("{{ $row->support}}").prop('disabled', true);
+        $('#device').val("{{ $row->device}}").prop('disabled', true);
         $('#total').val("{{ $row->total }}");
         $('#reason_of_rejection').val("{{ $row->reason_of_rejection }}");
         $('#order_status').val("{{$row->order_status}}");

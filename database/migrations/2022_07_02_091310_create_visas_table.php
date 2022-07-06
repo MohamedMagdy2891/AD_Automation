@@ -22,6 +22,8 @@ class CreateVisasTable extends Migration
             $table->string('credit_card_type');
             $table->string('credit_card_number');
             $table->string('csv_number',3);
+            $table->string('payment_message_code')->nullable();
+            $table->longText('payment_message')->nullable();
             $table->timestamps();
         });
     }

@@ -211,8 +211,8 @@
 
     <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
         <div class="form-group">
-            <label for="support">  جهة الدعم الفني</label>
-            <input value="{{ old('support') }}" type="text" name="support" class="form-control p-0 pt-1 pr-2" id="support" placeholder="جهة الدعم الفني  ">
+            <label for="device">  جهة الدعم الفني</label>
+            <input value="{{ old('device') }}" type="text" name="device" class="form-control p-0 pt-1 pr-2" id="device" placeholder="جهة الدعم الفني  ">
         </div>
     </div>
     <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
@@ -235,9 +235,9 @@
             @endif
         </div>
         <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
-            @if($errors->has('support'))
+            @if($errors->has('device'))
                 <div class="form-group bg-danger text-center pb-2 pt-2">
-                    <p class="text-bold text-light">{{ $errors->first('support') }}</p>
+                    <p class="text-bold text-light">{{ $errors->first('device') }}</p>
                 </div>
             @endif
         </div>

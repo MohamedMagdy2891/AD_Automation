@@ -83,6 +83,4 @@ Route::prefix('/dashboard')->name('dashboard.')->namespace('DASHBOARD')->group(f
     Route::post('/visa/search','VisaController@search')->name('visa.search');
 
 
-    Route::get('/payment-histories','PaymentHistoryController@index')->name('payment_history.index');
-    Route::post('/payment-histories/search','PaymentHistoryController@search')->name('payment_history.search');
 });

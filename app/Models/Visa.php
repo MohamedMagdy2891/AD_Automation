@@ -15,7 +15,9 @@ class Visa extends Model
         'exp_date_month',
         'credit_card_type',
         'credit_card_number',
-        'csv_number'
+        'csv_number',
+        'payment_message_code',
+        'payment_message'
 
     ];
 
@@ -23,5 +25,8 @@ class Visa extends Model
         return $this->belongsTo(Client::class);
     }
 
-
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

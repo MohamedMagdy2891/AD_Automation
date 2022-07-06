@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.main')
-@push('title')   طلب   {{ $row->Client->fn_name  }} تأجير سيارة -  {{$row->Car->code }} @endpush
-@push('header')     طلب   {{ $row->Client->fn_name  }} تأجير سيارة -  {{$row->Car->code }}@endpush
+@push('title')   طلب   {{ $row->Client->full_name  }} تأجير سيارة -  {{$row->Car->code }} @endpush
+@push('header')     طلب   {{ $row->Client->full_name  }} تأجير سيارة -  {{$row->Car->code }}@endpush
 @section('content')
 
 <div class="row gutters">
@@ -12,7 +12,7 @@
             <div class="row">
             </div>
             <div class="card-header bg-info">
-                <div class="card-title text-center text-light pb-1"> عرض بيانات {{ $row->Client->fn_name }} - تأجير سيارة {{ $row->Car->code }}</div>
+                <div class="card-title text-center text-light pb-1"> عرض بيانات {{ $row->Client->full_name }} - تأجير سيارة {{ $row->Car->code }}</div>
             </div>
 
 
@@ -43,7 +43,7 @@
         $('#message').delay(3000).fadeOut('slow');
         $('#message1').delay(3000).fadeOut('slow');
         $('#message2').delay(3000).fadeOut('slow');
-        $('#client_name').val("{{ $row->Client->fn_name }}").prop('disabled', true);
+        $('#client_name').val("{{ $row->Client->full_name }}").prop('disabled', true);
         $('#car_code').val("{{ $row->Car->code }}").prop('disabled', true);
         $('#receive_place').val("{{ $row->receive_place }}").prop('disabled', true);
         $('#deliver_place').val("{{ $row->deliver_place }}").prop('disabled', true);
@@ -57,7 +57,7 @@
         $("#baby_seat_price").hasClass("checked")? $("#baby_seat_price").val("{{ $row->Car->baby_seat_price}}").prop('disabled', true) : $('#baby_seat_price').val("0").prop('disabled', true);
         $("#open_kilometers_price").hasClass("checked")? $("#open_kilometers_price").val("{{ $row->Car->open_kilometers_price}}").prop('disabled', true) : $('#open_kilometers_price').val("0").prop('disabled', true);
         $('#order_status').val("{{$row->order_status}}").prop('disabled', true);
-        $('#support').val("{{ $row->support }}").prop('disabled', true);
+        $('#device').val("{{ $row->device }}").prop('disabled', true);
         $('#total').val("{{$row->total}}").prop('disabled', true);
     });
     function orderStatusCheck(that){
