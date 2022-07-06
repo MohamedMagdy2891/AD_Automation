@@ -40,4 +40,8 @@ class order extends Model
     public function Car(){
         return $this->belongsTo(Car::class);
     }
+    public function payment_histories()
+    {
+        return $this->hasMany(PaymentHistory::class);
+    }
 }
