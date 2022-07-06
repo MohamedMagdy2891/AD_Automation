@@ -16,7 +16,7 @@ class CreateVisasTable extends Migration
         Schema::create('visas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->references('id')->on('clients')->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->enum('result', ['Pending', 'Approved', 'Rejected'])->default('Approved');
+            $table->enum('result', ['Pending', 'Approved', 'Rejected'])->default('Pending');
             $table->string('exp_date_year',2);
             $table->string('exp_date_month',2);
             $table->string('credit_card_type');

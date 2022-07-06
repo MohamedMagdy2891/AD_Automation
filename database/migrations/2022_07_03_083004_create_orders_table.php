@@ -16,6 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->references('id')->on('clients')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreignId('visa_id')->references('id')->on('visas')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreignId('car_id')->references('id')->on('cars')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreignId('receive_place')->references('id')->on('garages')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreignId('deliver_place')->references('id')->on('garages')->onDelete('CASCADE')->onUpdate('CASCADE');
@@ -23,17 +24,13 @@ class CreateOrdersTable extends Migration
             $table->timestamp('deliver_time');
             $table->unsignedBigInteger('killometers_consumed')->nullable();
             $table->unsignedBigInteger('hours_consumed')->nullable();
-            $table->boolean('extra_driver_checked');
-            $table->boolean('shield_checked');
-            $table->boolean('baby_seat_checked');
-            $table->boolean('open_kilometers_checked');
             $table->double('extra_driver_price')->default(0);
             $table->double('shield_price')->default(0);
             $table->double('baby_seat_price')->default(0);
             $table->double('open_kilometers_price')->default(0);
-            $table->double('total')->nullable();
+            $table->double('total')->default(0);
             $table->string('reason_of_rejection')->nullable();
-            $table->string('support')->default('web');
+            $table->string('device')->default('mobile');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->enum('order_status', ['Pending', 'Approved', 'Rejected','Completed'])->default('Pending');
             $table->timestamps();
