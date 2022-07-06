@@ -47,7 +47,7 @@
                                     @foreach ($rows as $row)
                                         <tr class="text-center">
                                             <td>{{ $i++ }}</td>
-                                            <td>{{ $row->Client->fn_name }}</td>
+                                            <td>{{ $row->Client->full_name }}</td>
                                             <td>{{ $row->Car->code }}</td>
                                             <td>{{ $row->receive_place}}</td>
                                             <td>{{ $row->receive_time }}</td>
