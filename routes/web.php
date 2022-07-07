@@ -17,7 +17,13 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::prefix('/dashboard')->name('dashboard.')->namespace('DASHBOARD')->group(function(){
+Route::middleware('guest')->group(function(){
+    Route::get('/login','Auth\LoginController@login')->name('auth.login');
+    Route::post('/signin','Auth\LoginController@signin')->name('auth.signin');
+});
+
+Route::prefix('/dashboard')->middleware('checkAuthLogin')->name('dashboard.')->namespace('DASHBOARD')->group(function(){
+    Route::get('/','HomeController@index')->name('index');
     Route::resource('/region','RegionController');
     Route::get('/region/delete/all','RegionController@deleteAll')->name('region.delete.all');
 
