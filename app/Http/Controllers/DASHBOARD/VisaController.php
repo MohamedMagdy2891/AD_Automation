@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\DASHBOARD\DataResources\VisaDataResource;
-use App\Models\Visa;
+
 
 class VisaController extends Controller
 {

@@ -40,6 +40,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @if(count($rows) > 0)
                                     @php $i=1; @endphp
                                     @foreach ($rows as $row)
@@ -54,11 +55,11 @@
 
                                                 <a class="btn btn-success btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.user.show', $row->id ) }}"><span class="icon-eye text-light" style="font-size: .8rem"></span></a>
                                                 <a class="btn btn-info btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.user.edit',$row->id) }}"><span class="w-100 icon-pencil text-light" style="font-size: .8rem"></span></a>
-                                                <form  style="display: inline" action="{{ URL::route('dashboard.user.destroy',$row->id) }}" method="POST">
+                                                {{-- <form  style="display: inline" action="{{ URL::route('dashboard.user.destroy',$row->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button  type="submit" class="btn btn-danger btn-rounded p-1 pr-2 pl-2" ><span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></button>
-                                                </form>
+                                                </form> --}}
 
                                             </td>
 

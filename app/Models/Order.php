@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-// use App\Models\Client;
+
 class order extends Model
 {
     use HasFactory;
@@ -31,9 +31,12 @@ class order extends Model
         'user_id'
     ];
 
-    // public function garage(){
-    //     return $this->belongsTo(Garage::class);
-    // }
+    public function Garage1(){
+        return $this->belongsTo(Garage::class,'receive_place');
+    }
+    public function Garage2(){
+        return $this->belongsTo(Garage::class,'deliver_place');
+    }
     public function Client(){
         return $this->belongsTo(Client::class);
     }
