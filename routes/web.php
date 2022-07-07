@@ -65,10 +65,10 @@ Route::prefix('/dashboard')->middleware('checkAuthLogin')->name('dashboard.')->n
     Route::get('/carcategories/delete/all','CarCategoryController@deleteAll')->name('carcategories.delete.all');
 
     Route::resource('/orders','OrderController',
-    [
-        'only' => ['index', 'edit', 'update','show']
-    ]
-);
+        [
+            'only' => ['index', 'edit', 'update','show']
+        ]
+    );
     Route::post('/orders/{id}/updateStatus','OrderController@updateStatus')->name('orders.updateStatus');
     Route::post('/orders/search','OrderController@search')->name('orders.search');
 

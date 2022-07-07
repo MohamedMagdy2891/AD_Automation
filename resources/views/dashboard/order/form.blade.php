@@ -36,14 +36,16 @@
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
             <label for="receive_place">مكان الإستلام </label>
-            <input value="{{ old('receive_place') }}" type="text" name="receive_place" class="form-control p-0 pt-1 pr-2" id="receive_place" placeholder="مكان الإستلام ">
+            <input value="{{ old('receive_place') }}" type="hidden" name="receive_place" class="form-control p-0 pt-1 pr-2" id="receive_place" placeholder="مكان الإستلام ">
+            <input value="{{ old('receive_place') }}" type="text" name="receive_place_name" class="form-control p-0 pt-1 pr-2" id="receive_place_name" placeholder="مكان الإستلام ">
         </div>
     </div>
 
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
             <label for="deliver_place">   مكان التسليم </label>
-            <input value="{{ old('deliver_place') }}" type="text" name="deliver_place" class="form-control p-0 pt-1 pr-2" id="deliver_place" placeholder=" مكان التسليم">
+            <input value="{{ old('deliver_place') }}" type="hidden" name="deliver_place" class="form-control p-0 pt-1 pr-2" id="deliver_place" placeholder=" مكان التسليم">
+            <input value="{{ old('deliver_place') }}" type="text" name="deliver_place_name" class="form-control p-0 pt-1 pr-2" id="deliver_place_name" placeholder=" مكان التسليم">
         </div>
     </div>
 </div>

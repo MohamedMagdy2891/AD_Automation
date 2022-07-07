@@ -42,20 +42,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(count($rows) > 0)
-                                    @php $i=1; @endphp
-                                    @foreach ($rows as $row)
-                                        <tr class="text-center">
+
+
+                                    @php
+                                    $i=1;
+                                    @endphp
+                                    @forelse ($rows as $row)
+                                    <tr class="text-center">
                                             <td>{{ $i++ }}</td>
                                             <td>{{ $row->Client->full_name }}</td>
                                             <td>{{ $row->Car->code }}</td>
-                                            <td>{{ $row->receive_place}}</td>
+                                            <td>{{ $row->Garage1->ar_garage}}</td>
                                             <td>{{ $row->receive_time }}</td>
-                                            <td>{{ $row->deliver_place }}</td>
+                                            <td>{{ $row->Garage2->ar_garage }}</td>
                                             <td>{{ $row->deliver_time }}</td>
 
-                                            <?php $count=0; ?>
+
                                           @php
+                                          $count=0;
                                            $row->extra_driver_checked ? $count+=$row->Car->extra_driver_price  :$count;
                                            $row->baby_seat_checked ? $count+=$row->Car->baby_seat_price : $count ;
                                            $row->shield_checked ? $count+=$row->Car->shield_price : $count ;
@@ -73,12 +77,12 @@
 
                                         </tr>
 
-                                    @endforeach
-                                @else
+
+                            @empty
                                     <tr class="text-center">
                                         <td colspan="16" class="text-bold">لا يوجد اى طلبات مضافة حتي الان</td>
                                     </tr>
-                                @endif
+                             @endforelse
                             </tbody>
 
                         </table>
