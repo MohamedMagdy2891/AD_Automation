@@ -8,7 +8,6 @@
                 <option value="{{$s}}" @if($s == $row->order_status) selected @endif >{{$s}}</option>
                 @endforeach
             </select>
-            {{-- <input value="{{ old('order_status') }}" type="text" name="order_status" class="form-control p-0 pt-1 pr-2" id="order_status" placeholder="حالة الطلب "> --}}
            @if($row->order_status=="Rejected")
            <input value="{{ old('reason_of_rejection') }}" type="text" name="reason_of_rejection" class="form-control p-0 pt-1 pr-2" id="reason_of_rejection" placeholder=" سبب رفض الطلب ">
            @endif
@@ -36,16 +35,24 @@
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
             <label for="receive_place">مكان الإستلام </label>
-            <input value="{{ old('receive_place') }}" type="hidden" name="receive_place" class="form-control p-0 pt-1 pr-2" id="receive_place" placeholder="مكان الإستلام ">
-            <input value="{{ old('receive_place') }}" type="text" name="receive_place_name" class="form-control p-0 pt-1 pr-2" id="receive_place_name" placeholder="مكان الإستلام ">
+
+            <select class="form-control" id="receive_place" name="receive_place">
+                @foreach( $garages as $garage )
+                  <option value="{{$garage->id}}" @if($garage->id == $row->receive_place ) selected @endif >{{$garage->ar_garage}}</option>
+                @endforeach
+            </select>
         </div>
     </div>
 
     <div class="col-xl-3 col-lglg-3 col-md-3 col-sm-3 col-3">
         <div class="form-group">
             <label for="deliver_place">   مكان التسليم </label>
-            <input value="{{ old('deliver_place') }}" type="hidden" name="deliver_place" class="form-control p-0 pt-1 pr-2" id="deliver_place" placeholder=" مكان التسليم">
-            <input value="{{ old('deliver_place') }}" type="text" name="deliver_place_name" class="form-control p-0 pt-1 pr-2" id="deliver_place_name" placeholder=" مكان التسليم">
+
+            <select class="form-control" id="deliver_place" name="deliver_place">
+                @foreach( $garages as $garage )
+                  <option value="{{$garage->id}}" @if($garage->id == $row->deliver_place ) selected @endif >{{$garage->ar_garage}}</option>
+                @endforeach
+            </select>
         </div>
     </div>
 </div>

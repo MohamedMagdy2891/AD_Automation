@@ -44,8 +44,6 @@
         $('#client_name').val("{{ $row->Client->full_name}}");
         $('#car_code').val("{{ $row->Car->code}}");
         $('#car_id').val("{{ $row->car_id }}");
-        $('#receive_place_name').val("{{ $row->Garage1->ar_garage}}");
-        $('#deliver_place_name').val("{{ $row->Garage2->ar_garage}}");
         $('#receive_place').val("{{ $row->receive_place}}");
         $('#deliver_place').val("{{ $row->deliver_place}}");
         $('#receive_time').val("{{ $row->receive_time }}");
