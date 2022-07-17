@@ -20,7 +20,7 @@ class AlGhadSMS{
     }
 
     public function sendMessage(){
-        $response = Http::post('https://alghaddm.com/sms/api.php', [
+        $response = Http::get('https://alghaddm.com/sms/api.php', [
             'username' => $this->username,
             'key' => $this->key,
             'sender' => $this->senderId,

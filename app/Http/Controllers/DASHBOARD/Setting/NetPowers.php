@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Setting;
+namespace App\Http\Controllers\Support;
 
 use Illuminate\Support\Facades\Http;
 
@@ -19,7 +19,7 @@ class NetPowersSMS{
     }
 
     public function sendMessage(){
-        $response = Http::post('http://sms.netpowers.net/http/api.php', [
+        $response = Http::get('http://sms.netpowers.net/http/api.php', [
             'id' => $this->id,
             'password' => $this->password,
             'to' => $this->recepientNumber,
@@ -43,3 +43,4 @@ class NetPowersSMS{
         }
     }
 }
+
