@@ -78,7 +78,8 @@ class OrderController extends Controller
     {
         $row = $this->OrderDataResource->getOne($id);
         $status=$this->orderStatus();
-        return view('dashboard.order.show',compact('row','status'));
+        $garages=Garage::select('id','ar_garage')->get();
+        return view('dashboard.order.show',compact('row','status','garages'));
     }
 
     /**
@@ -92,7 +93,8 @@ class OrderController extends Controller
         //
         $row = $this->OrderDataResource->getOne($id);
         $status=$this->orderStatus();
-        return view('dashboard.order.edit',compact('status','row'));
+        $garages=Garage::select('id','ar_garage')->get();
+        return view('dashboard.order.edit',compact('status','row','garages'));
     }
 
     /**
@@ -110,7 +112,7 @@ class OrderController extends Controller
             'client_id'=> 'required',
             'car_id' => 'required',
             'receive_place' => 'required',
-            'deliver_place' => 'required',
+            'deliver_place' => 'required|exists:garages,id',
             'receive_time' => 'required|date_format:Y-m-d H:i:s',
             'deliver_time'=> 'required|after:receive_time|date_format:Y-m-d H:i:s',
         ],$this->message());

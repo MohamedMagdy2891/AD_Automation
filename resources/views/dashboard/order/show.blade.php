@@ -45,8 +45,6 @@
         $('#message2').delay(3000).fadeOut('slow');
         $('#client_name').val("{{ $row->Client->full_name }}").prop('disabled', true);
         $('#car_code').val("{{ $row->Car->code }}").prop('disabled', true);
-        $('#receive_place_name').val("{{ $row->Garage1->ar_garage }}").prop('disabled', true);
-        $('#deliver_place_name').val("{{ $row->Garage2->ar_garage }}").prop('disabled', true);
         $('#receive_place').val("{{ $row->receive_place }}").prop('disabled', true);
         $('#deliver_place').val("{{ $row->deliver_place }}").prop('disabled', true);
         $('#reason_of_rejection').val("{{ $row->reason_of_rejection }}").prop('disabled', true);
