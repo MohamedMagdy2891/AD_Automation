@@ -21,31 +21,30 @@ class CarSharing{
         return $response['access_token'];
     }
 
-    public function create(Request $request){
+    public function create($name,$plateNumber,$iemi,$vin){
 
         $response = Http::withToken($this->login())->post('https://carsharing.ruptela.com/fleets/vehicles?version=2', [
-            'name' =>$request->input('name'),
-            'imei' => $request->input('imei'),
-            'vin'=>$request->input('vin'),
-            'plateNumber'=>$request->input('plateNumber')
+            'name' =>$name,
+            'imei' => $iemi,
+            'vin'=>$vin,
+            'plateNumber'=>$plateNumber
         ]);
 
-        // if(($response->status() == 200 ||$response->status() == 201  ) && $response->ok() == true &&$response->successful() == true){
-        //     return $result = ['status' => true,'message'=> 'Done'];
-        // }
-        // else if ($response->serverError() == true){
-        //     return $result = ['status' => false,'message'=> 'Server Error'];
-        // }
-        // else if($response->clientError() == true){
-        //     return $result = ['status' => false,'message'=> 'Client Error'];
-        // }
-        // else if($response->failed() == true){
-        //     return $result = ['status' => false,'message'=> 'Response Failed'];
-        // }
-        // else{
-        //     return $result = ['status' => false,'message'=> 'Failed'];
-        // }
-        return $response;
+        if(($response->status() == 200 ||$response->status() == 201  ) && $response->ok() == true &&$response->successful() == true){
+            return $result = ['status' => true,'message'=> 'Done'];
+        }
+        else if ($response->serverError() == true){
+            return $result = ['status' => false,'message'=> 'Server Error'];
+        }
+        else if($response->clientError() == true){
+            return $result = ['status' => false,'message'=> 'Client Error'];
+        }
+        else if($response->failed() == true){
+            return $result = ['status' => false,'message'=> 'Response Failed'];
+        }
+        else{
+            return $result = ['status' => false,'message'=> 'Failed'];
+        }
     }
 
 }

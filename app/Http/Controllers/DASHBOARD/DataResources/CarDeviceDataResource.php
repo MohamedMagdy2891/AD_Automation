@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\DASHBOARD\DataResources;
 
+use App\Http\Controllers\Setting\CarSharing;
 use App\Models\CarDevice;
 use App\Models\Car;
 
@@ -21,12 +22,13 @@ class CarDeviceDataResource{
 
     public function createOne($car_id,$iemi,$vin)
     {
-        $row = new CarDevice();
-        $row->car_id = $car_id;
-        $row->iemi = $iemi;
-        $row->vin = $vin;
-        $row->save();
-        return $row;
+        $car = Car::find($car_id);
+        $planet_number = $car->planet_number;
+        $name = $car->en_name;
+
+        $carSharing = new CarSharing();
+        $data = $carSharing->create($name,$planet_number,$iemi,$vin);
+        return $data;
     }
 
     public function getOne($id)
