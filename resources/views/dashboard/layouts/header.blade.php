@@ -63,21 +63,36 @@
             </li>
             <li class="dropdown">
                 <a href="#" id="userSettings" class="user-settings" data-toggle="dropdown" aria-haspopup="true">
-                    <span class="user-name">محمد مجدي</span>
-                    <span class="avatar">MG<span class="status busy"></span></span>
+                    <span class="user-name">{{ Auth::user()->name }}</span>
+                        <span class="avatar">
+                            @if(Auth::user()->image != null)
+                                <img src="{{ URL::asset(Auth::user()->image)}}" alt="{{ Auth::user()->name }}" />
+                            @else
+                                <img src="{{ URL::asset('assets/img/profile.jpg')}}" alt="{{ Auth::user()->name }}" />
+                            @endif
+                        <span class="status busy"></span>
+                    </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userSettings">
                     <div class="header-profile-actions">
                         <div class="header-user-profile">
                             <div class="header-user">
-                                <img src="{{ URL::asset('assets/img/user.png')}}" alt="محمد مجدي" />
+                                @if(Auth::user()->image != null)
+                                    <img src="{{ URL::asset(Auth::user()->image)}}" alt="{{ Auth::user()->name }}" />
+                                @else
+                                    <img src="{{ URL::asset('assets/img/profile.jpg')}}" alt="{{ Auth::user()->name }}" />
+                                @endif
                             </div>
-                            <h5>محمد مجدي</h5>
-                            <p>مدير</p>
+                            <h5>{{ Auth::user()->name }}</h5>
+                            <p>{{ Auth::user()->getRule() }}</p>
                         </div>
-                        <a href="user-profile.html"><i class="icon-user1"></i>الصفحة الشخصية</a>
-                        <a href="account-settings.html"><i class="icon-settings1"></i> تغيير كلمة المرور</a>
-                        <a href="login.html"><i class="icon-log-out1"></i> تسجيل الخروج</a>
+                        <a href="{{ URL::route('dashboard.profile') }}"><i class="icon-user1"></i>الصفحة الشخصية</a>
+                        <a href="{{ URL::route('dashboard.changePassword') }}"><i class="icon-settings1"></i> تغيير كلمة المرور</a>
+                        <a onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"><i class="icon-log-out1"></i> تسجيل الخروج</a>
+                        <form id="frm-logout" action="{{ URL::route('dashboard.logout') }}" method="POST" style="display: none;">
+                            @csrf
+                            @method('POST')
+                        </form>
                     </div>
                 </div>
             </li>

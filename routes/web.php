@@ -17,13 +17,19 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware('guest')->group(function(){
     Route::get('/login','Auth\LoginController@login')->name('auth.login');
     Route::post('/signin','Auth\LoginController@signin')->name('auth.signin');
-});
 
 Route::prefix('/dashboard')->middleware('checkAuthLogin')->name('dashboard.')->namespace('DASHBOARD')->group(function(){
     Route::get('/','HomeController@index')->name('index');
+    Route::get('/profile','HomeController@profile')->name('profile');
+    Route::put('/profile','HomeController@updateProfile')->name('profile.update');
+    Route::get('/changePassword','HomeController@changePassword')->name('changePassword');
+    Route::put('/changePassword','HomeController@updateChangePassword')->name('changePassword.update');
+    Route::post('/logout','HomeController@logout')->name('logout');
+
+
+
     Route::resource('/region','RegionController');
     Route::get('/region/delete/all','RegionController@deleteAll')->name('region.delete.all');
 

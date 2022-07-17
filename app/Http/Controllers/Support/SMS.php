@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Support;
 
+use App\Http\Controllers\Setting\AlGhadSMS;
+use App\Http\Controllers\Setting\NetPowersSMS;
 use App\Models\SMS as ModelsSMS;
 
 class SMS{

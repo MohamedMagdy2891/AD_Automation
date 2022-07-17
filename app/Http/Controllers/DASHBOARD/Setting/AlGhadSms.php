@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Support;
+namespace App\Http\Controllers\Setting;
 
 use Illuminate\Support\Facades\Http;
 
