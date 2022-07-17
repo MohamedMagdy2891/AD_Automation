@@ -8,10 +8,7 @@ use Illuminate\Support\Facades\Http;
 class SMS{
     public function sendMessage($number,$message){
         $row = ModelsSMS::take(1)->first();
-        if($row == 'alghad'){
-            $sms = new AlGhadSMS($number,$message);
-            return $sms->sendMessage();
-        }else if($row == 'netpowers'){
+        if($row == 'netpowers'){
             $sms = new NetPowersSMS($number,$message);
             return $sms->sendMessage();
         }
