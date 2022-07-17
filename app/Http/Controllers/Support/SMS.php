@@ -38,7 +38,7 @@ class AlGhadSMS{
     }
 
     public function sendMessage(){
-        $response = Http::post('https://alghaddm.com/sms/api.php', [
+        $response = Http::get('https://alghaddm.com/sms/api.php', [
             'username' => $this->username,
             'key' => $this->key,
             'sender' => $this->senderId,
@@ -78,7 +78,7 @@ class NetPowersSMS{
     }
 
     public function sendMessage(){
-        $response = Http::post('http://sms.netpowers.net/http/api.php', [
+        $response = Http::get('http://sms.netpowers.net/http/api.php', [
             'id' => $this->id,
             'password' => $this->password,
             'to' => $this->recepientNumber,
