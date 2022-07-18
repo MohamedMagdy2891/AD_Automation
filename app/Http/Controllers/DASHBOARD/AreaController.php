@@ -4,7 +4,9 @@ namespace App\Http\Controllers\DASHBOARD;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DASHBOARD\DataResources\AreaDataResource;
+
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Session;
 
 class AreaController extends Controller
@@ -12,10 +14,12 @@ class AreaController extends Controller
     public $areaDataResource;
     public function __construct()
     {
+
         $this->areaDataResource = new AreaDataResource();
     }
 
     public function Message(){
+
         return [
             'ar_area.required' => 'اسم الموقع باللغة العربية مطلوب',
             'ar_area.min' => 'اسم الموقع باللغة العربية يجب ان يجتوى على أكثر من 3 أحرف',

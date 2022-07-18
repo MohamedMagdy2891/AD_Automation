@@ -18,14 +18,14 @@ class CreateClientsTable extends Migration
             $table->string('full_name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->string('idCardNumber')->unique();
+            $table->string('password');
             $table->string('license_id')->unique();
             $table->longText('license_image')->nullable();
-            $table->string('password');
+            $table->unsignedBigInteger('ccountry_id');
+            $table->foreign('ccountry_id')->on('countries')->references('id')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->string('verification_code')->nullable();
             $table->boolean('verification_status')->default(false);
             $table->longText('photo')->nullable();
-            $table->timestamps();
 
         });
     }
