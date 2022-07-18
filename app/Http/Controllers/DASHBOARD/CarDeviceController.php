@@ -27,8 +27,9 @@ class CarDeviceController extends Controller
     }
     public function index()
     {
-        $rows =  $this->carDeviceDataResource->getAll();
-        return view('dashboard.car_device.index',compact('rows'));
+        $rows =  $this->carDeviceDataResource->getAll()[0];
+        $accessToken = $this->carDeviceDataResource->getAll()[1];
+        return view('dashboard.car_device.index',compact('rows','accessToken'));
     }
     public function create()
     {

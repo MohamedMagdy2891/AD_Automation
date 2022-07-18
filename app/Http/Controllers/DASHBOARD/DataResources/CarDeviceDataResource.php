@@ -16,7 +16,7 @@ class CarDeviceDataResource{
         }else{
             $rows = [];
         }
-        return $rows;
+        return [$rows,$carSharing->getAll()['accessToken']];
     }
 
     public function getAllCars()

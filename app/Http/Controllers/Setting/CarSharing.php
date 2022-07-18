@@ -52,19 +52,19 @@ class CarSharing{
         $response = Http::withToken($this->login())->get('https://carsharing.ruptela.com/fleets/vehicles?version=2');
 
         if(($response->status() == 200 ||$response->status() == 201  ) && $response->ok() == true &&$response->successful() == true){
-            return $result = ['status' => true,'message'=> 'Done','data'=> $response];
+            return $result = ['status' => true,'message'=> 'Done','data'=> $response,'accessToken' => $this->login()];
         }
         else if ($response->serverError() == true){
-            return $result = ['status' => false,'message'=> 'Server Error','data'=>null];
+            return $result = ['status' => false,'message'=> 'Server Error','data'=>null,'accessToken' =>null];
         }
         else if($response->clientError() == true){
-            return $result = ['status' => false,'message'=> 'Client Error','data'=>null];
+            return $result = ['status' => false,'message'=> 'Client Error','data'=>null,'accessToken' =>null];
         }
         else if($response->failed() == true){
-            return $result = ['status' => false,'message'=> 'Response Failed','data'=>null];
+            return $result = ['status' => false,'message'=> 'Response Failed','data'=>null,'accessToken' =>null];
         }
         else{
-            return $result = ['status' => false,'message'=> 'Failed','data'=>null];
+            return $result = ['status' => false,'message'=> 'Failed','data'=>null,'accessToken' =>null];
         }
     }
 
