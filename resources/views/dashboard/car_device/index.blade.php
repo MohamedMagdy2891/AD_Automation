@@ -48,23 +48,14 @@
                                     @foreach ($rows as $row)
                                         <tr class="text-center">
                                             <td>{{ $i++ }}</td>
-                                            <td>{{ $row->iemi }}</td>
-                                            <td>{{ $row->vin }}</td>
-                                            <td>{{ $row->getCar->code }}</td>
-                                            <td>{{ $row->getCar->ar_name }}</td>
-                                            <td @if($row->status == 0) class="bg-danger text-light" @else class="bg-success text-light" @endif>{{ $row->status == 0 ? 'لا يعمل':'يعمل' }}</td>
-                                            <td>{{ $row->lock == 0 ? 'lock' : 'unlock' }}</td>
-                                            <td>{{ $row->block == 0 ? 'block' : 'unblock'}}</td>
-                                            <td>
-                                                <a class="btn btn-success btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.device.show', $row->id ) }}"><span class="icon-eye text-light" style="font-size: .8rem"></span></a>
-                                                <a class="btn btn-info btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.device.edit',$row->id) }}"><span class="w-100 icon-pencil text-light" style="font-size: .8rem"></span></a>
-                                                <form  style="display: inline" action="{{ URL::route('dashboard.device.destroy',$row->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button  type="submit" class="btn btn-danger btn-rounded p-1 pr-2 pl-2" ><span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></button>
-                                                </form>
+                                            <td>{{ $row['imei'] }}</td>
+                                            <td>{{ $row['vin'] }}</td>
+                                            <td>{{ $row['plateNumber'] }}</td>
+                                            <td>{{ $row['name'] }}</td>
+                                            {{-- <td @if($row->status == 0) class="bg-danger text-light" @else class="bg-success text-light" @endif>{{ $row->status == 0 ? 'لا يعمل':'يعمل' }}</td> --}}
+                                            {{-- <td>{{ $row->lock == 0 ? 'lock' : 'unlock' }}</td>
+                                            <td>{{ $row->block == 0 ? 'block' : 'unblock'}}</td> --}}
 
-                                            </td>
 
                                         </tr>
 
@@ -84,9 +75,7 @@
             </div>
 
         </div>
-        <div class="col-md-12 text-center">
-            {{ $rows->links() }}
-        </div>
+
     </div>
 
 @endsection

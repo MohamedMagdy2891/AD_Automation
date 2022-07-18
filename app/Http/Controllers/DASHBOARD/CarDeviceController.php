@@ -27,8 +27,6 @@ class CarDeviceController extends Controller
     }
     public function index()
     {
-        Session::forget('search');
-        Session::forget('search_name');
         $rows =  $this->carDeviceDataResource->getAll();
         return view('dashboard.car_device.index',compact('rows'));
     }
@@ -48,7 +46,7 @@ class CarDeviceController extends Controller
         ],$this->Message());
 
         $row =  $this->carDeviceDataResource->createOne($request->car_id,$request->iemi,$request->vin);
-        Session::flash('success', 'تم اضافة جهاز التتبع الى السيارة : '.$row->getCar->ar_name);
+        Session::flash('success', 'تم اضافة جهاز التتبع الى السيارة  ');
         return redirect()->route('dashboard.device.index');
 
     }

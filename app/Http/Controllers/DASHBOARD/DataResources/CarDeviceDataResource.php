@@ -10,7 +10,12 @@ class CarDeviceDataResource{
 
     public function getAll()
     {
-        $rows = CarDevice::latest()->paginate(15);
+        $carSharing = new CarSharing();
+        if($carSharing->getAll()['status'] == true){
+            $rows = $carSharing->getAll()['data']['content'];
+        }else{
+            $rows = [];
+        }
         return $rows;
     }
 
