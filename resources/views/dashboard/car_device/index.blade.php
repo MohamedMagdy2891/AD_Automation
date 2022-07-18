@@ -34,11 +34,8 @@
                                     <th>م</th>
                                     <th> رقم iemi</th>
                                     <th> رقم vin</th>
-                                    <th>كود السيارة</th>
-                                    <th>اسم السيارة ( باللغة العربية )</th>
-                                    <th> حالة الجهاز</th>
-                                    <th>وحدة LOCK</th>
-                                    <th>وحدة BLOCK</th>
+                                    <th>رقم لوحة السيارة</th>
+                                    <th>اسم السيارة</th>
                                     <th>العمليات</th>
                                 </tr>
                             </thead>
@@ -52,17 +49,14 @@
                                             <td>{{ $row['vin'] }}</td>
                                             <td>{{ $row['plateNumber'] }}</td>
                                             <td>{{ $row['name'] }}</td>
-                                            {{-- <td @if($row->status == 0) class="bg-danger text-light" @else class="bg-success text-light" @endif>{{ $row->status == 0 ? 'لا يعمل':'يعمل' }}</td> --}}
-                                            {{-- <td>{{ $row->lock == 0 ? 'lock' : 'unlock' }}</td>
-                                            <td>{{ $row->block == 0 ? 'block' : 'unblock'}}</td> --}}
-
+                                            <td  class="btn btn-primary text-light">المزيد من المعلومات</td>
 
                                         </tr>
 
                                     @endforeach
                                 @else
                                     <tr class="text-center">
-                                        <td colspan="8" class="text-bold">لا يوجد اى أجهزة تتبع للسيارات مضافة حتي الان</td>
+                                        <td colspan="6" class="text-bold">لا يوجد اى أجهزة تتبع للسيارات مضافة حتي الان</td>
                                     </tr>
                                 @endif
                             </tbody>
