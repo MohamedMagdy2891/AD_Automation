@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.main')
-@push('title') عرض بيانات جهاز تتبع سيارة {{ $row->getCar->ar_name }}@endpush
-@push('header') عرض بيانات جهاز تتبع سيارة {{ $row->getCar->ar_name }}@endpush
+{{-- @push('title') عرض بيانات جهاز تتبع سيارة {{ $row->vin }}@endpush --}}
+{{-- @push('header') عرض بيانات جهاز تتبع سيارة {{ $row->getCar->ar_name }}@endpush --}}
 @section('content')
 
 <div class="row gutters">
@@ -12,13 +12,22 @@
             <div class="row">
             </div>
             <div class="card-header bg-info">
-                <div class="card-title text-center text-light pb-1">عرض بيانات جهاز تتبع سيارة {{ $row->getCar->ar_name }}</div>
+                {{-- <div class="card-title text-center text-light pb-1">عرض بيانات جهاز تتبع سيارة {{ $row->getCar->ar_name }}</div> --}}
             </div>
             <form class="card-body">
                 @csrf
                 @method('POST')
 
+                @if ( $row['status'])
                 @include('dashboard.car_device.form')
+                @else
+                <div class="row gutters " id="message">
+                    لا يوجد بيانات لهذا الجهاز
+
+
+                </div>
+
+                @endif
 
 
 
@@ -28,17 +37,19 @@
 
 </div>
 @endsection
+@if( $row['status'])
+
 @push('js')
  <script>
     $(document).ready(function(){
-        $('#message').delay(3000).fadeOut('slow');
 
-        $('#iemi').val("{{ $row->iemi }}").prop('disabled', true);
-        $('#vin').val("{{ $row->vin }}").prop('disabled', true);
-        $('#car_id').val("{{ $row->car_id }}").prop('disabled', true);
+        $('#vin').val("{{ $row['data']['vin'] }}").prop('disabled', true);
+        $('#type').val("{{ $row['data']['type'] }}").prop('disabled', true);
+        $('#state').val("{{ $row['data']['state'] }}").prop('disabled', true);
 
-    });
+    })
 
  </script>
+ @endpush
+@endif
 
-@endpush

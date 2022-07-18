@@ -36,10 +36,13 @@ class CarDeviceDataResource{
         return $data;
     }
 
-    public function getOne($id)
+    public function getOne($vin)
     {
-        $row = CarDevice::findOrFail($id);
-        return $row;
+        $carSharing = new CarSharing();
+        $data= $carSharing->getSingleCarDevice($vin);
+
+        return $data;
+
     }
 
     public function updateOne($id,$car_id,$iemi,$vin)

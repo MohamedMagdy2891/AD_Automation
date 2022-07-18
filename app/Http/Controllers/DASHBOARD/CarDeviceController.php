@@ -51,11 +51,10 @@ class CarDeviceController extends Controller
         return redirect()->route('dashboard.device.index');
 
     }
-    public function show($id)
+    public function show($vin)
     {
-        $cars = $this->carDeviceDataResource->getAllCars();
-        $row =  $this->carDeviceDataResource->getOne($id);
-        return view('dashboard.car_device.show',compact('row','cars'));
+        $row =  $this->carDeviceDataResource->getOne($vin);
+        return view('dashboard.car_device.show',compact('row'));
     }
     public function edit($id)
     {

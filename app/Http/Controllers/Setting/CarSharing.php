@@ -67,5 +67,29 @@ class CarSharing{
             return $result = ['status' => false,'message'=> 'Failed','data'=>null,'accessToken' =>null];
         }
     }
+    public function getSingleCarDevice($vin){
+        // $car_commandID=$car->commandID;
+        $response = Http::withToken($this->login())->get("https://carsharing.ruptela.com/fleets/vehicles/$vin/commands/test-command-0019?version=1");
 
+        if(($response->status() == 200 ||$response->status() == 201  ) && $response->ok() == true &&$response->successful() == true){
+
+            return $result = ['status' => true,'message'=> 'Done','data'=> $response,'accessToken' => $this->login()];
+        }
+        else if ($response->serverError() == true){
+            return "server";
+            return $result = ['status' => false,'message'=> 'Server Error','data'=>null,'accessToken' =>null];
+        }
+        else if($response->clientError() == true){
+
+            return $result = ['status' => false,'message'=> 'Client Error','data'=>null,'accessToken' =>null];
+        }
+        else if($response->failed() == true){
+            return "failed";
+            return $result = ['status' => false,'message'=> 'Response Failed','data'=>null,'accessToken' =>null];
+        }
+        else{
+            return "other";
+            return $result = ['status' => false,'message'=> 'Failed','data'=>null,'accessToken' =>null];
+        }
+    }
 }
