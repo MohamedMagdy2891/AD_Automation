@@ -3,26 +3,7 @@
 @push('header') كل اجهزة السيارات@endpush
 @section('content')
     <div class="row gutters">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4 text-right mb-2" ></div>
-                <div class="col-md-4 text-right mb-2"  >
-                    <form action="{{ URL::route('dashboard.device.search') }}" method="post" style="display: inline">
-                        @csrf
-                        @method('POST')
-                        <input  type="text" @if(session()->has('search')) value="{{ session()->get('search_name') }}" @endif name="search" style="border-radius: 50px;display: inline;width:80%" class="form-control p-0 pt-1 text-center" placeholder="ابحث برقم vin لجهاز تتبع السيارة">
-                        @if(session()->has('search'))
-                            <a style="display: inline;border-radius: 100px" class="btn btn-primary pr-2 pl-2 pt-1 pb-0 m-0" href="{{ URL::route('dashboard.device.index') }}" ><span style="font-size: 1rem" class="icon-close"></span></a>
-                        @endif
-                    </form>
-                </div>
-                <div class="col-md-4 text-right mb-2"  >
-                    @if(count($rows) != 0)
-                        <a id="delete" style="display: none" class="btn btn-danger btn-rounded p-1 pr-2 pl-2" href="{{ URL::route('dashboard.device.delete.all') }}">حذف الكل <span class="w-100 icon-trash-2 text-light" style="font-size: .8rem"></span></a>
-                    @endif
-                </div>
-            </div>
-        </div>
+
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
             <div class="card">
