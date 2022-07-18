@@ -55,6 +55,7 @@ Route::prefix('/dashboard')->middleware('checkAuthLogin')->name('dashboard.')->n
     Route::delete('/car/{id}/destroy','CarImageController@destroy')->name('car.image.destroy');
 
     Route::resource('/device','CarDeviceController');
+    Route::put('/device/updateType/{vin}/{commandId}','CarDeviceController@update')->name('device.updateType');
     Route::get('/device/delete/all','CarDeviceController@deleteAll')->name('device.delete.all');
     Route::post('/device/search','CarDeviceController@search')->name('device.search');
 

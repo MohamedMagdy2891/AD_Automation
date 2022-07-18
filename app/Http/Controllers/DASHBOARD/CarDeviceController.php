@@ -56,27 +56,13 @@ class CarDeviceController extends Controller
         $row =  $this->carDeviceDataResource->getOne($vin);
         return view('dashboard.car_device.show',compact('row'));
     }
-    public function edit($id)
+
+    public function update($vin,$commandID)
     {
-        $row =  $this->carDeviceDataResource->getOne($id);
-        $cars = $this->carDeviceDataResource->getAllCars();
-        return view('dashboard.car_device.edit',compact('row','cars'));
-    }
 
-    public function update($id,Request $request)
-    {
-        $request->validate([
-            'iemi' => 'required|unique:car_devices,iemi',
-            'vin' => 'required|unique:car_devices,vin',
-            'car_id' => 'required',
-
-        ],$this->Message());
-
-        $row =  $this->carDeviceDataResource->updateOne($id,$request->car_id,$request->iemi,$request->vin);
-        $row != null ? Session::flash('success', 'تم تعديل بيانات جهاز التتبع سيارة '.$row->getCar->ar_name):Session::flash('failed', 'لم يتم تعديل بيانات جهاز التتبع لعدم التغيير فى البيانات');
-
-
-        return redirect()->route('dashboard.device.edit',$id);
+        $row=$this->carDeviceDataResource->updateOne($vin,$commandID);
+        $row != null ? Session::flash('success', 'تم تعديل بيانات جهاز التتبع سيارة '):Session::flash('failed', 'لم يتم تعديل بيانات جهاز التتبع لعدم التغيير فى البيانات');
+        return redirect()->route('dashboard.device.show',$vin);
 
     }
     public function destroy($id)

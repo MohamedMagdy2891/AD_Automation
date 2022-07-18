@@ -45,18 +45,11 @@ class CarDeviceDataResource{
 
     }
 
-    public function updateOne($id,$car_id,$iemi,$vin)
+    public function updateOne($vin,$commandID)
     {
-        $row = CarDevice::findOrFail($id);
-        if($row->car_id != $car_id || $row->iemi != $iemi || $row->vin != $vin){
-            $row->car_id = $car_id;
-            $row->iemi = $iemi;
-            $row->vin = $vin;
-            $row->update();
-            return $row;
-        }else{
-            return null;
-        }
+        $carSharing = new CarSharing();
+        $data= $carSharing->updateCarDeviceCommandStatus($vin,$commandID);
+        return $data;
 
     }
 
