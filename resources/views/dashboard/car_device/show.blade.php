@@ -3,10 +3,8 @@
 @push('header') عرض بيانات جهاز تتبع سيارة {{ $name }}@endpush
 @section('content')
 @php
-$lock=true;
-$unlock=false;
-$block=false;
-$unblock=false;
+
+$block=$row['data']['type'];
 @endphp
 <div class="row gutters">
     <div class="col-md-12 text-right mb-2">
@@ -59,6 +57,29 @@ $unblock=false;
     })
 
  </script>
+ @if(session()->has('success'))
+ <script>
+         $.toast({
+             heading: 'نجحت العملية',
+             text: "<span>{{ session()->get('success') }}</span>",
+             showHideTransition: 'slide',
+             icon: 'success',
+             textAlign:'right'
+
+         })
+ </script>
+@endif
+@if(session()->has('failed'))
+    <script>
+            $.toast({
+                heading: 'فشلت العملية',
+                text: "<span>{{ session()->get('failed') }}</span>",
+                showHideTransition: 'slide',
+                icon: 'error',
+                textAlign:'right'
+
+            })
+    </script>
+ @endif
  @endpush
 @endif
-

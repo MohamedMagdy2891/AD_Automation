@@ -29,7 +29,6 @@ class CarSharing{
             'vin'=>$vin,
             'plateNumber'=>$plateNumber
         ]);
-
         if(($response->status() == 200 ||$response->status() == 201  ) && $response->ok() == true &&$response->successful() == true){
             return $result = ['status' => true,'message'=> 'Done'];
         }
@@ -95,7 +94,7 @@ class CarSharing{
     public function updateCarDeviceCommandStatus($vin,$type,$commandId){
 
         $response = Http::withToken($this->login())
-        ->post("https://carsharing.ruptela.com/fleets/vehicles/$vin/commandss/$type?version=1", [
+        ->post("https://carsharing.ruptela.com/fleets/vehicles/$vin/commands/$type?version=1", [
             'commandId' =>$commandId
         ]);
         if(($response->status() == 200 ||$response->status() == 201  ) && $response->ok() == true &&$response->successful() == true){
@@ -104,15 +103,15 @@ class CarSharing{
         }
         else if ($response->serverError() == true){
 
-            return $result = ['status' => false,'message'=> 'Server Error','data'=>null,'accessToken' =>null];
+            return $result = ['status' => false,'message'=> 'مشكلة في السيرفر','data'=>null,'accessToken' =>null];
         }
         else if($response->clientError() == true){
 
-            return $result = ['status' => false,'message'=> 'Client Error','data'=>null,'accessToken' =>null];
+            return $result = ['status' => false,'message'=> '  مشكلة في البيانات  ' ,'data'=>null,'accessToken' =>null];
         }
         else if($response->failed() == true){
 
-            return $result = ['status' => false,'message'=> 'Response Failed','data'=>null,'accessToken' =>null];
+            return $result = ['status' => false,'message'=> 'فشل العملية','data'=>null,'accessToken' =>null];
         }
         else{
             return $result = ['status' => false,'message'=> 'Failed','data'=>null,'accessToken' =>null];
