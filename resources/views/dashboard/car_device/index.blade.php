@@ -68,6 +68,18 @@
                 })
         </script>
     @endif
+    @if(session()->has('failed'))
+    <script>
+            $.toast({
+                heading: 'فشلت العملية',
+                text: "<span>{{ session()->get('failed') }}</span>",
+                showHideTransition: 'slide',
+                icon: 'error',
+                textAlign:'right'
+
+            })
+    </script>
+ @endif
     @if(count($rows) > 0)
         <script>
             $(document).ready(function(){
