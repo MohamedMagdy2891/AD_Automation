@@ -47,7 +47,7 @@ class CarDeviceController extends Controller
         ],$this->Message());
 
         $row =  $this->carDeviceDataResource->createOne($request->car_id,$request->iemi,$request->vin);
-        $row['status'] == true ?Session::flash('success', 'تم اضافة جهاز التتبع الى السيارة  '):Session::flash('error', 'نأسف لعدم إتمام العملية');
+        $row['status'] == true ?Session::flash('success', 'تم اضافة جهاز التتبع الى السيارة  '):Session::flash('failed', 'نأسف لعدم إتمام العملية');
         //Session::flash('success', 'تم اضافة جهاز التتبع الى السيارة  ');
         return redirect()->route('dashboard.device.index');
 
