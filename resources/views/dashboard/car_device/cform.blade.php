@@ -9,7 +9,7 @@
     <div class="col-xl-4 col-lglg-4 col-md-4 col-sm-4 col-4">
         <div class="form-group">
             <label for="iemi">iemi لجهاز تتبع السيارة</label>
-            <input type="text" value="{{ old('iemi') }}" name="block" class="form-control" id="iemi" placeholder=" iemi لجهاز تتبع السيارة">
+            <input type="text" value="{{ old('iemi') }}" name="iemi" class="form-control" id="iemi" placeholder=" iemi لجهاز تتبع السيارة">
         </div>
     </div>
 
