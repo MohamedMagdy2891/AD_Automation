@@ -26,20 +26,16 @@ $unblock=false;
             </form>
 
             <div class="row gutters">
-                <form class="card-body" action="{{ URL::route('dashboard.device.updateType',[$row['data']['vin'],$row['data']['commandId'] ]) }}" method="POST">
+
+                <form class="card-body " action="{{ URL::route('dashboard.device.updateType',[$row['data']['vin']]) }}" method="POST">
                     @csrf
                     @method('PUT')
-
                     <input name="name" type="hidden" value="{{ $name}}">
                     @include('dashboard.car_device.form2')
                 </form>
-                <form class="card-body" action="{{ URL::route('dashboard.device.updateType',[$row['data']['vin'],$row['data']['commandId'] ]) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <input name="name" type="hidden" value="{{ $name}}">
-                    @include('dashboard.car_device.form3')
-                </form>
+
         </div>
+
             @else
             <div class="row gutters " id="message">
                 لا يوجد بيانات لهذا الجهاز

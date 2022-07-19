@@ -58,7 +58,7 @@ Route::prefix('/dashboard')->middleware('checkAuthLogin')->name('dashboard.')->n
     Route::get('/device/{name}/{vin}','CarDeviceController@show')->name('device.show');
     Route::get('/device/create','CarDeviceController@create')->name('device.create');
     Route::post('/device/store','CarDeviceController@store')->name('device.store');
-    Route::put('/device/updateType/{vin}/{commandId}','CarDeviceController@update')->name('device.updateType');
+    Route::put('/device/updateType/{vin}','CarDeviceController@update')->name('device.updateType');
 
     Route::resource('/category','CarDeviceController');
 
