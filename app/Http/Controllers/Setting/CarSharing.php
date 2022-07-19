@@ -67,7 +67,7 @@ class CarSharing{
             return $result = ['status' => false,'message'=> 'Failed','data'=>null,'accessToken' =>null];
         }
     }
-    public function getSingleCarDevice($vin){
+    public function getSingleCarDeviceCommand($vin){
         // $car_commandID=$car->commandID;
         $response = Http::withToken($this->login())->get("https://carsharing.ruptela.com/fleets/vehicles/$vin/commands/test-command-0019?version=1");
 

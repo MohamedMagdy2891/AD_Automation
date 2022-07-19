@@ -36,11 +36,10 @@ class CarDeviceDataResource{
         return $data;
     }
 
-    public function getOne($vin)
+    public function getOneCarDeviceCommand($vin)
     {
         $carSharing = new CarSharing();
-        $data= $carSharing->getSingleCarDevice($vin);
-
+        $data= $carSharing->getSingleCarDeviceCommand($vin);
         return $data;
 
     }

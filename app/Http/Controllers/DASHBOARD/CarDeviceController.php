@@ -53,16 +53,16 @@ class CarDeviceController extends Controller
     }
     public function show($name,$vin)
     {
-        $row =  $this->carDeviceDataResource->getOne($vin);
+        $row =  $this->carDeviceDataResource->getOneCarDeviceCommand($vin);
         return view('dashboard.car_device.show',compact(['row','name']));
     }
 
-    public function update($vin,$commandID)
+    public function update(Request $request,$vin,$commandID)
     {
-
         $row=$this->carDeviceDataResource->updateOne($vin,$commandID);
+        $name =  $request->name;
         $row != null ? Session::flash('success', 'تم تعديل بيانات جهاز التتبع سيارة '):Session::flash('failed', 'لم يتم تعديل بيانات جهاز التتبع لعدم التغيير فى البيانات');
-        return redirect()->route('dashboard.device.show',$vin);
+        return redirect()->route('dashboard.device.show',compact(['vin','name']));
 
     }
 
