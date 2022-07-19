@@ -40,8 +40,8 @@ class CarDeviceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'iemi' => 'required|unique:car_devices,iemi',
-            'vin' => 'required|unique:car_devices,vin',
+            'iemi' => 'required',
+            'vin' => 'required',
             'car_id' => 'required',
 
         ],$this->Message());
