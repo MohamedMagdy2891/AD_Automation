@@ -51,10 +51,10 @@ class CarDeviceController extends Controller
         return redirect()->route('dashboard.device.index');
 
     }
-    public function show($vin)
+    public function show($name,$vin)
     {
         $row =  $this->carDeviceDataResource->getOne($vin);
-        return view('dashboard.car_device.show',compact('row'));
+        return view('dashboard.car_device.show',compact(['row','name']));
     }
 
     public function update($vin,$commandID)
@@ -65,24 +65,5 @@ class CarDeviceController extends Controller
         return redirect()->route('dashboard.device.show',$vin);
 
     }
-    public function destroy($id)
-    {
-        $row =  $this->carDeviceDataResource->deleteOne($id);
-        Session::flash('success','تم حذف بيانات بيانات جهاز التتبع سيارة '.$row);
-        return redirect()->route('dashboard.device.index');
-    }
-    public function deleteAll()
-    {
-        $row =  $this->carDeviceDataResource->deleteAllData();
-        Session::flash('success','تم حذف بيانات كل بيانات أجهزة تتبع السيارات');
-        return redirect()->route('dashboard.device.index');
-    }
 
-    public function search(Request $request)
-    {
-        $rows = $this->carDeviceDataResource->CarDeviceSearch($request->search);
-        Session::flash('search','search');
-        Session::flash('search_name',$request->search);
-        return view('dashboard.car_device.index',compact('rows'));
-    }
 }

@@ -53,26 +53,6 @@ class CarDeviceDataResource{
 
     }
 
-    public function deleteOne($id)
-    {
-        $row = CarDevice::findOrFail($id);
-        $carName = $row->getCar->ar_name;
-        $row->delete();
-        return $carName;
-    }
 
-    public function deleteAllData()
-    {
-        $rows = CarDevice::get()->all();
-        foreach($rows as $row){
-            $row->delete();
-        }
-    }
-
-    public function CarDeviceSearch($vin)
-    {
-        $rows = CarDevice::query()->where('vin','LIKE','%'.$vin.'%')->paginate(15);
-        return $rows;
-    }
 
 }

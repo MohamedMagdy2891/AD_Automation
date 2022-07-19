@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.main')
-{{-- @push('title') عرض بيانات جهاز تتبع سيارة {{ $row->vin }}@endpush --}}
-{{-- @push('header') عرض بيانات جهاز تتبع سيارة {{ $row->getCar->ar_name }}@endpush --}}
+@push('title') عرض بيانات جهاز تتبع سيارة {{ $name }}@endpush
+@push('header') عرض بيانات جهاز تتبع سيارة {{ $name }}@endpush
 @section('content')
 @php
 $lock=true;

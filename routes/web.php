@@ -54,10 +54,11 @@ Route::prefix('/dashboard')->middleware('checkAuthLogin')->name('dashboard.')->n
     Route::post('/car/{id}/create','CarImageController@store')->name('car.image.store');
     Route::delete('/car/{id}/destroy','CarImageController@destroy')->name('car.image.destroy');
 
-    Route::resource('/device','CarDeviceController');
+    Route::get('/device','CarDeviceController@index')->name('device.index');
+    Route::get('/device/{name}/{vin}','CarDeviceController@show')->name('device.show');
+    Route::get('/device/create','CarDeviceController@create')->name('device.create');
+    Route::post('/device/store','CarDeviceController@store')->name('device.store');
     Route::put('/device/updateType/{vin}/{commandId}','CarDeviceController@update')->name('device.updateType');
-    Route::get('/device/delete/all','CarDeviceController@deleteAll')->name('device.delete.all');
-    Route::post('/device/search','CarDeviceController@search')->name('device.search');
 
     Route::resource('/category','CarDeviceController');
 

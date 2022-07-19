@@ -30,7 +30,7 @@
                                             <td>{{ $row['vin'] }}</td>
                                             <td>{{ $row['plateNumber'] }}</td>
                                             <td>{{ $row['name'] }}</td>
-                                            <td><a  href="{{ URL::route('dashboard.device.show',$row['vin']) }}" class="btn btn-primary text-light">المزيد من المعلومات</a></td>
+                                            <td><a  href="{{ URL::route('dashboard.device.show',[$row['name'],$row['vin']]) }}" class="btn btn-primary text-light">المزيد من المعلومات</a></td>
 
                                         </tr>
 
