@@ -67,7 +67,7 @@ class ClientAuthResource{
             'phone' => $this->client->phone,
             'photo'  => $client_find->photo != null ? env('DOMAIN').$client_find->photo : null,
             'license_id' => $this->client->license_id,
-            'license_image' => env('DOMAIN').$this->client->license_image,
+            'license_image' => $this->client->license_image,
             'nationality' => 'ss',
             'verification_code' => $this->client->verification_code,
             'verification_status' => $client_find->verification_status,
@@ -102,16 +102,17 @@ class ClientAuthResource{
 
             $data = [
                 'id' => $client_find->id,
-                'fn_name'  => $client_find->fn_name,
-                'ln_name'  => $client_find->ln_name,
-                'phone' => $client_find->phone,
-                'address' => $client_find->address,
-                'date_of_birth' => $client_find->date_of_birth,
+                'full_name'  => $client_find->full_name,
                 'email' => $client_find->email,
+                'phone' => $client_find->phone,
+                'photo'  => $client_find->photo != null ? env('DOMAIN').$client_find->photo : null,
+                'license_id' => $client_find->license_id,
+                'license_image' => $client_find->license_image,
+                'nationality' => 'ss',
                 'verification_code' => $client_find->verification_code,
                 'verification_status' => $client_find->verification_status,
-                'image'  => env('DOMAIN').$client_find->image,
-                'token' => $token,
+                'token' => $token
+
             ];
         }
         $collection = [
