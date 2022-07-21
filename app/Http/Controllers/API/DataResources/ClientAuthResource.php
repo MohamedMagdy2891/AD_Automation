@@ -3,6 +3,7 @@ namespace App\Http\Controllers\API\DataResources;
 use App\Models\Client;
 use App\Http\Controllers\API\Traits\LicenseImageTrait;
 use App\Http\Controllers\API\Traits\PhotoTrait;
+use App\Models\Country;
 use Illuminate\Support\Facades\Hash;
 
 class ClientAuthResource{
@@ -12,6 +13,12 @@ class ClientAuthResource{
     public function __construct()
     {
         $this->client = new Client();
+    }
+
+    public function getAllCountries()
+    {
+        $rows = Country::latest();
+        return $rows;
     }
 
 

@@ -20,6 +20,13 @@ class ClientAuthController extends Controller
         $this->clientAuth = new ClientAuthResource();
     }
 
+
+    public function countries()
+    {
+        $rows = $this->clientAuth->getAllCountries();
+        return $this->Data($rows,'Success To Get All Countries',true,200);
+    }
+
     public function register(Request $request){
 
         $rules = [
