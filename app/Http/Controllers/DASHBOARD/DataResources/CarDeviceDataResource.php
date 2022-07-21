@@ -44,13 +44,14 @@ class CarDeviceDataResource{
 
     }
 
-    public function updateOne($vin,$commandID)
+    public function updateOne($vin,$type,$commandId)
     {
         $carSharing = new CarSharing();
-        $data= $carSharing->updateCarDeviceCommandStatus($vin,$commandID);
-        return $data;
+        $data= $carSharing->updateCarDeviceCommandStatus($vin,$type,$commandId);
 
+        return $data;
     }
+
 
 
 

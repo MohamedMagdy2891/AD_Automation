@@ -48,7 +48,7 @@ class CarDeviceController extends Controller
 
         $row =  $this->carDeviceDataResource->createOne($request->car_id,$request->iemi,$request->vin);
         $row['status'] == true ?Session::flash('success', 'تم اضافة جهاز التتبع الى السيارة  '):Session::flash('failed', 'نأسف لعدم إتمام العملية');
-        //Session::flash('success', 'تم اضافة جهاز التتبع الى السيارة  ');
+
         return redirect()->route('dashboard.device.index');
 
     }
@@ -58,11 +58,38 @@ class CarDeviceController extends Controller
         return view('dashboard.car_device.show',compact(['row','name']));
     }
 
-    public function update(Request $request,$vin,$commandID)
+    public function update(Request $request,$vin)
     {
-        $row=$this->carDeviceDataResource->updateOne($vin,$commandID);
+        switch($request->lockAndBlockReverse) {
+        case 'lock':
+            $type="lock";
+            $commandId="test-command-0030";
+        break;
+        case 'unlock':
+            $type="unlock";
+            $commandId="test-command-0031";
+        break;
+        case 'block':
+            $type="block";
+            $commandId="test-command-0033";
+        break;
+        case 'unblock':
+            $type="unblock";
+            $commandId="test-command-0034";
+        break;
+        case 'lockAndBlock':
+            $type="lockAndBlock";
+            $commandId="test-command-0036";
+        break;
+        case 'unlockAndUnblock':
+            $type="unlockAndUnblock";
+            $commandId="test-command-0037";
+        break;
+    }
+        $row=$this->carDeviceDataResource->updateOne($vin,$type,$commandId);
         $name =  $request->name;
-        $row != null ? Session::flash('success', 'تم تعديل بيانات جهاز التتبع سيارة '):Session::flash('failed', 'لم يتم تعديل بيانات جهاز التتبع لعدم التغيير فى البيانات');
+        $row['status'] == true ? Session::flash('success', 'تم تعديل بيانات جهاز التتبع سيارة '):Session::flash('failed',$row['message'].  'لم يتم تعديل بيانات جهاز التتبع ');
+
         return redirect()->route('dashboard.device.show',compact(['vin','name']));
 
     }

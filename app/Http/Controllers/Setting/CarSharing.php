@@ -29,7 +29,6 @@ class CarSharing{
             'vin'=>$vin,
             'plateNumber'=>$plateNumber
         ]);
-
         if(($response->status() == 200 ||$response->status() == 201  ) && $response->ok() == true &&$response->successful() == true){
             return $result = ['status' => true,'message'=> 'Done'];
         }
@@ -92,30 +91,29 @@ class CarSharing{
             return $result = ['status' => false,'message'=> 'Failed','data'=>null,'accessToken' =>null];
         }
     }
-    public function updateCarDeviceCommandStatus($vin,$commandID){
+    public function updateCarDeviceCommandStatus($vin,$type,$commandId){
 
         $response = Http::withToken($this->login())
-        ->post("https://carsharing.ruptela.com/fleets/vehicles/LS5A2ASE9ND916864/commands/unblock?version=1", [
-            'commandId' =>$commandID
+        ->post("https://carsharing.ruptela.com/fleets/vehicles/$vin/commands/$type?version=1", [
+            'commandId' =>$commandId
         ]);
         if(($response->status() == 200 ||$response->status() == 201  ) && $response->ok() == true &&$response->successful() == true){
 
             return $result = ['status' => true,'message'=> 'Done','data'=> $response,'accessToken' => $this->login()];
         }
         else if ($response->serverError() == true){
-            return "server";
-            return $result = ['status' => false,'message'=> 'Server Error','data'=>null,'accessToken' =>null];
+
+            return $result = ['status' => false,'message'=> 'مشكلة في السيرفر','data'=>null,'accessToken' =>null];
         }
         else if($response->clientError() == true){
 
-            return $result = ['status' => false,'message'=> 'Client Error','data'=>null,'accessToken' =>null];
+            return $result = ['status' => false,'message'=> '  مشكلة في البيانات  ' ,'data'=>null,'accessToken' =>null];
         }
         else if($response->failed() == true){
-            return "failed";
-            return $result = ['status' => false,'message'=> 'Response Failed','data'=>null,'accessToken' =>null];
+
+            return $result = ['status' => false,'message'=> 'فشل العملية','data'=>null,'accessToken' =>null];
         }
         else{
-            return "other";
             return $result = ['status' => false,'message'=> 'Failed','data'=>null,'accessToken' =>null];
         }
     }
