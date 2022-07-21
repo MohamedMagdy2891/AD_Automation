@@ -15,10 +15,25 @@ class ClientAuthResource{
         $this->client = new Client();
     }
 
-    public function getAllCountries()
+    public function getAllCountries($lang = null)
     {
         $rows = Country::get()->all();
-        return $rows;
+        $data = [];
+        foreach($rows as $row){
+            if($lang == "ar"){
+
+                array_push($data , [
+                    'id' => $row->id,
+                    'nationality' =>  $row->country_ar_nationality
+                ]);
+            }else{
+                array_push($data , [
+                    'id' => $row->id,
+                    'nationality' => $row->country_en_nationality
+                ]);
+            }
+        }
+        return $data;
     }
 
 

@@ -23,7 +23,8 @@ class ClientAuthController extends Controller
 
     public function countries()
     {
-        $rows = $this->clientAuth->getAllCountries();
+        array_key_exists('lang', $_GET) == true ? $lang = $_GET['lang'] : $lang = null;
+        $rows = $this->clientAuth->getAllCountries($lang);
         return $this->Data($rows,'Success To Get All Countries',true,200);
     }
 
