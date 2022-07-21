@@ -21,9 +21,9 @@ class ClientAuthController extends Controller
     }
 
 
-    public function countries()
+    public function countries(Request $request)
     {
-        array_key_exists('lang', $_GET) == true ? $lang = $_GET['lang'] : $lang = null;
+        array_key_exists('HTTP_CONFIG_LANG', $_SERVER) == true ? $lang = $_SERVER['HTTP_CONFIG_LANG'] : $lang = null;
         $rows = $this->clientAuth->getAllCountries($lang);
         return $this->Data($rows,'Success To Get All Countries',true,200);
     }
