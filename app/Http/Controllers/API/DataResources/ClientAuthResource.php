@@ -37,10 +37,7 @@ class ClientAuthResource{
     }
 
 
-    public function register($full_name,$email,$phone,$password,$license_id,$license_image,$photo=null){
-
-        $photo != null ? $photo = $this->photo($this->client,'Clients',$photo) : $photo = null;
-
+    public function register($full_name,$email,$phone,$password,$license_id,$license_image,$country,$lang = null,$photo=null){
 
         $this->client->full_name  = $full_name;
         $this->client->email = $email;
@@ -48,7 +45,9 @@ class ClientAuthResource{
         $this->client->password = Hash::make($password);
         $this->client->photo  = $photo;
         $this->client->license_id  = $license_id;
-        $this->client->license_image  = $this->LicenseImage($this->client,'Clients_Licenses',$license_image);
+        $this->client->license_image  = $this->LicenseImage($this->client,'/Clients_Licenses',$license_image);
+        $this->client->license_image = null;
+        $this->client->country_id  = $country;
         $this->client->verification_code = str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
         $this->client->saveOrFail();
 
@@ -56,7 +55,11 @@ class ClientAuthResource{
         $token = $this->client->createToken('Automation - client Token')->accessToken;
 
         $client_find = $this->client::find($this->client->id);
-
+        // if($lang == "ar"){
+        //     $nationality =  $this->client->country()->country_ar_nationality;
+        // }else{
+        //     $nationality =  $this->client->country()->country_en_nationality;
+        // }
         $data = [
             'id' => $this->client->id,
             'full_name'  => $this->client->full_name,
@@ -65,6 +68,7 @@ class ClientAuthResource{
             'photo'  => $client_find->photo != null ? env('DOMAIN').$client_find->photo : null,
             'license_id' => $this->client->license_id,
             'license_image' => env('DOMAIN').$this->client->license_image,
+            'nationality' => 'ss',
             'verification_code' => $this->client->verification_code,
             'verification_status' => $client_find->verification_status,
             'token' => $token

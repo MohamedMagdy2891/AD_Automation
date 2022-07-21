@@ -21,7 +21,7 @@ class ClientAuthController extends Controller
     }
 
 
-    public function countries(Request $request)
+    public function countries()
     {
         array_key_exists('HTTP_CONFIG_LANG', $_SERVER) == true ? $lang = $_SERVER['HTTP_CONFIG_LANG'] : $lang = null;
         $rows = $this->clientAuth->getAllCountries($lang);
@@ -29,7 +29,7 @@ class ClientAuthController extends Controller
     }
 
     public function register(Request $request){
-
+        array_key_exists('HTTP_CONFIG_LANG', $_SERVER) == true ? $lang = $_SERVER['HTTP_CONFIG_LANG'] : $lang = null;
         $rules = [
             'full_name'  => 'required|min:2|max:20',
             'email' => 'required|regex:/(.+)@(.+)\.(.+)/i|email|unique:clients',
@@ -37,29 +37,29 @@ class ClientAuthController extends Controller
             'password' => 'required|min:8|max:30',
             'license_id'  => 'required|numeric',
             'license_image'  => 'required|image|mimes:jpeg,jpg,png,gif|max:2048',
+            'country' => 'required|numeric',
             'photo'  => 'nullable|mimes:jpeg,jpg,png,gif|max:2048'
         ];
 
         $validation = Validator::make($request->all(),$rules);
-
-        try{
+        //try{
             if($validation->fails()){
                 return $this->Data($validation->errors(),'Failed To Register',false,400);
             }
             else{
                 DB::beginTransaction();
                 $data = $this->clientAuth->register($request->full_name,$request->email,$request->phone,$request->password,
-                $request->license_id,$request->license_image);
+                $request->license_id,$request->license_image,$request->country,$lang);
                 DB::commit();
 
                 return $this->Data($data,'User Register Successfuly',true,200);
             }
 
-        }
-        catch(Exception $ex){
-            DB::rollBack();
-            return $this->Data('',$ex);
-        }
+        // }
+        // catch(Exception $ex){
+        //     DB::rollBack();
+        //     return $this->Data('',$ex);
+        // }
 
 
 

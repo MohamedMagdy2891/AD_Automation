@@ -19,10 +19,10 @@ class Client extends Authenticatable
         'full_name',
         'email',
         'phone',
-        'idCardNumber',
         'photo',
         'licenese_id',
         'licenese_image',
+        'country_id',
         'password',
         'verification_code',
         'verification_status'
@@ -46,6 +46,11 @@ class Client extends Authenticatable
     public function visas()
     {
         return $this->hasMany(Visa::class);
+    }
+
+    public function country()
+    {
+        return $this->hasOne(Country::class,'id','client_id');
     }
 
 }
