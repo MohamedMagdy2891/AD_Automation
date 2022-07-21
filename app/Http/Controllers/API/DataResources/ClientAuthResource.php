@@ -17,7 +17,7 @@ class ClientAuthResource{
 
     public function getAllCountries()
     {
-        $rows = Country::latest();
+        $rows = Country::get()->all();
         return $rows;
     }
 
