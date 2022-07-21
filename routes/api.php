@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/countries','CountryController@index')->name('countries.index');
+Route::get('/countries','ClientAuthController@index')->name('countries.index');
 Route::post('/register','ClientAuthController@register')->name('client.register');
 Route::post('/login','ClientAuthController@login')->name('client.login');
