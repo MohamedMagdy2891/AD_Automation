@@ -37,38 +37,38 @@ class ClientAuthResource{
     }
 
 
-    public function register($full_name,$email,$phone,$password,$license_id,$license_image,$country,$lang = null,$photo=null){
+    public function register($full_name,$email,$phone,$password,$license_id,$license_image,$country,$lang = null){
 
         $this->client->full_name  = $full_name;
         $this->client->email = $email;
         $this->client->phone = $phone;
         $this->client->password = Hash::make($password);
-        $this->client->photo  = $photo;
         $this->client->license_id  = $license_id;
         $this->client->license_image  = $this->LicenseImage($this->client,'/Clients_Licenses',$license_image);
-        $this->client->license_image = null;
         $this->client->country_id  = $country;
         $this->client->verification_code = str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        $this->client->photo = null;
         $this->client->saveOrFail();
 
 
         $token = $this->client->createToken('Automation - client Token')->accessToken;
 
         $client_find = $this->client::find($this->client->id);
-        // if($lang == "ar"){
-        //     $nationality =  $this->client->country()->country_ar_nationality;
-        // }else{
-        //     $nationality =  $this->client->country()->country_en_nationality;
-        // }
+        $country_row = Country::find($country);
+        if($lang == "ar"){
+            $nationality =  $country_row->country_ar_nationality;
+        }else{
+            $nationality =  $country_row->country_en_nationality;
+        }
         $data = [
             'id' => $this->client->id,
             'full_name'  => $this->client->full_name,
             'email' => $this->client->email,
             'phone' => $this->client->phone,
-            'photo'  => $client_find->photo != null ? env('DOMAIN').$client_find->photo : null,
+            'photo'  => $client_find->photo == null ? null : env('APP_URL').$client_find->photo ,
             'license_id' => $this->client->license_id,
-            'license_image' => $this->client->license_image,
-            'nationality' => 'ss',
+            'license_image' => env('APP_URL').$this->client->license_image,
+            'nationality' => $nationality,
             'verification_code' => $this->client->verification_code,
             'verification_status' => $client_find->verification_status,
             'token' => $token
@@ -105,9 +105,9 @@ class ClientAuthResource{
                 'full_name'  => $client_find->full_name,
                 'email' => $client_find->email,
                 'phone' => $client_find->phone,
-                'photo'  => $client_find->photo != null ? env('DOMAIN').$client_find->photo : null,
+                'photo'  => $client_find->photo != null ? env('APP_URL').$client_find->photo : null,
                 'license_id' => $client_find->license_id,
-                'license_image' => $client_find->license_image,
+                'license_image' => env('APP_URL').$client_find->license_image,
                 'nationality' => 'ss',
                 'verification_code' => $client_find->verification_code,
                 'verification_status' => $client_find->verification_status,

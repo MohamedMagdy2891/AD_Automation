@@ -35,10 +35,9 @@ class ClientAuthController extends Controller
             'email' => 'required|regex:/(.+)@(.+)\.(.+)/i|email|unique:clients',
             'phone' => 'required|numeric|unique:clients',
             'password' => 'required|min:8|max:30',
-            'license_id'  => 'required|numeric',
+            'license_id'  => 'required|numeric|unique:clients',
             'license_image'  => 'required|image|mimes:jpeg,jpg,png,gif|max:2048',
             'country' => 'required|numeric',
-            'photo'  => 'nullable|mimes:jpeg,jpg,png,gif|max:2048'
         ];
 
         $validation = Validator::make($request->all(),$rules);
